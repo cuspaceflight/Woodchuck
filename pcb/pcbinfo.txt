@@ -4,8 +4,12 @@ Modules-
 	Power - battery + passives
 		-- use a similar design/schematic to Joey? LDO vs switching regulator
 
-	GPS - uBlox CAM-MAQ
-		-- talk to this over SPI
+	GPS - uBlox CAM-M8Q (2.7 to 3.6 V, 29mA max current and 7mA running current at 3V)
+		-- talk to this over SPI (also supports UART and I2C)
+		--https://www.u-blox.com/en/product/cam-m8-series
+		--comes with chip antenna
+		--Supports UBX, NMEA or RTCM(for sending correctional data to GPS only) protocols
+		
 
 	Radio - Radiometrix MTX2 transmitter + antenna
 		-- talk using general GPIO pin
