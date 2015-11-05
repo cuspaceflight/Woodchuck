@@ -1,1 +1,22 @@
 Folder for PCB stuff
+
+Modules- 
+	Power - battery + passives
+		-- use a similar design/schematic to Joey? LDO vs switching regulator
+
+	GPS - uBlox CAM-MAQ
+		-- talk to this over SPI
+
+	Radio - Radiometrix MTX2 transmitter + antenna
+		-- talk using general GPIO pin
+		-- enable pin connected to a serial port so we can configure the frequency.
+
+	MCU - http://www.st.com/web/en/resource/technical/document/datasheet/DM00090510.pdf 
+		stm32f072cbt6	
+		-- need a new module on KiCad
+		-- USART for science module - 4 pins JSTPA family of connectors http://www.farnell.com/datasheets/1759149.pdf
+		-- think about concurrency/using the radio module  - no problem
+		-- use USB on here, can utilize ChibiOS Shell (serial port) 
+		-- SWD for programming
+		-- switch on BOOT0 pin to enable programming over USB (boots into on-chip bootloader)
+		-- libopencm3 for HAL. Lightweight, can utilize instead of ChibiOS HAL. Wrapper for stuff
