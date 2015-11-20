@@ -1,4 +1,4 @@
-update=05.11.2015 17:00:31
+update=20/11/2015 15:35:37
 version=1
 last_client=kicad
 [pcbnew]
@@ -23,6 +23,8 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
+[general]
+version=1
 [eeschema]
 version=1
 LibDir=
@@ -56,5 +58,24 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-[general]
-version=1
+LibName30=library/a2235-h
+LibName31=library/adp3335
+LibName32=library/adxl345
+LibName33=library/alpha_trx433s
+LibName34=library/buzzer
+LibName35=library/FDN304P
+LibName36=library/FG6943010R
+LibName37=library/hmc5883l
+LibName38=library/irf7910
+LibName39=library/l3g4200d
+LibName40=library/max-7q
+LibName41=library/ms5611-01ba03
+LibName42=library/quarter_wave_ant
+LibName43=library/resistor
+LibName44=library/rfm69w
+LibName45=library/sma
+LibName46=library/stm32f405vgt
+LibName47=library/swd
+LibName48=library/tvsd
+LibName49=library/u-blox_cam-m8q
+LibName50=library/uSD_holder
