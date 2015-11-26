@@ -64,27 +64,4 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L u-blox_CAM-M8Q IC?
-U 1 1 564F4DEF
-P 4750 2450
-F 0 "IC?" H 4300 3000 60  0000 C CNN
-F 1 "u-blox_CAM-M8Q" H 4650 950 60  0000 C CNN
-F 2 "" H 4950 1550 60  0000 C CNN
-F 3 "" H 4950 1550 60  0000 C CNN
-	1    4750 2450
-	1    0    0    -1  
-$EndComp
-$Sheet
-S 7000 1800 2050 2450
-U 56573A76
-F0 "GPS" 60
-F1 "file56573A75.sch" 60
-$EndSheet
-$Sheet
-S 1400 4100 2550 3250
-U 56573D42
-F0 "Radio" 60
-F1 "file56573D41.sch" 60
-$EndSheet
 $EndSCHEMATC
