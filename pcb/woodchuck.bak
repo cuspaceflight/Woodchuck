@@ -54,7 +54,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 3
+Sheet 1 5
 Title ""
 Date ""
 Rev ""
@@ -64,27 +64,34 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L u-blox_CAM-M8Q IC?
-U 1 1 564F4DEF
-P 4750 2450
-F 0 "IC?" H 4300 3000 60  0000 C CNN
-F 1 "u-blox_CAM-M8Q" H 4650 950 60  0000 C CNN
-F 2 "" H 4950 1550 60  0000 C CNN
-F 3 "" H 4950 1550 60  0000 C CNN
-	1    4750 2450
-	1    0    0    -1  
-$EndComp
 $Sheet
-S 7000 1800 2050 2450
-U 56573A76
+S 1150 1050 2450 2800
+U 56574088
 F0 "GPS" 60
-F1 "file56573A75.sch" 60
+F1 "GPS_Ublox.sch" 60
 $EndSheet
 $Sheet
-S 1400 4100 2550 3250
-U 56573D42
+S 1150 4700 2450 2550
+U 5657408B
 F0 "Radio" 60
-F1 "file56573D41.sch" 60
+F1 "Radio.sch" 60
+$EndSheet
+$Sheet
+S 4200 1150 2100 5100
+U 56574098
+F0 "microcontroller" 60
+F1 "microcontroller.sch" 60
+$EndSheet
+$Sheet
+S 7400 1300 2950 2200
+U 5657409B
+F0 "connectors" 60
+F1 "connectors.sch" 60
+$EndSheet
+$Sheet
+S 7400 4000 3050 1950
+U 5657409E
+F0 "barometer" 60
+F1 "barometer.sch" 60
 $EndSheet
 $EndSCHEMATC

@@ -1,4 +1,4 @@
-update=20/11/2015 15:35:37
+update=27/11/2015 21:13:03
 version=1
 last_client=kicad
 [pcbnew]
@@ -79,3 +79,4 @@ LibName47=library/swd
 LibName48=library/tvsd
 LibName49=library/u-blox_cam-m8q
 LibName50=library/uSD_holder
+LibName51=library/radiometrix_mtx2

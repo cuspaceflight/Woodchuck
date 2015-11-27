@@ -49,12 +49,13 @@ LIBS:swd
 LIBS:tvsd
 LIBS:u-blox_cam-m8q
 LIBS:uSD_holder
+LIBS:radiometrix_mtx2
 LIBS:woodchuck-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 5
+Sheet 1 6
 Title ""
 Date ""
 Rev ""
