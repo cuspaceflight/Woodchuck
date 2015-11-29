@@ -305,13 +305,9 @@ Wire Wire Line
 Wire Wire Line
 	6000 2500 6000 2400
 Wire Wire Line
-	4850 4700 4350 4700
+	4650 4700 4850 4700
 Wire Wire Line
-	4850 4800 4350 4800
-Text GLabel 4350 4700 0    60   Input ~ 0
-USB_D-
-Text GLabel 4350 4800 0    60   Input ~ 0
-USB_D+
+	4850 4800 4650 4800
 Text Notes 6250 2500 0    60   ~ 0
 NOTE: VDD supply needs 4.7uF across it\nVAA supply needs 1uF across it
 $Comp
@@ -410,7 +406,7 @@ Wire Notes Line
 	3250 4000 3250 2900
 Wire Notes Line
 	3250 2900 1550 2900
-Text Notes 2750 3950 0    60   ~ 0
+Text Notes 3250 4000 2    60   ~ 0
 SWD PORT
 Wire Notes Line
 	1300 2700 3600 2700
@@ -420,7 +416,7 @@ Wire Notes Line
 	3600 1200 1300 1200
 Wire Notes Line
 	1300 1200 1300 2700
-Text Notes 2950 2650 0    60   ~ 0
+Text Notes 3600 2700 2    60   ~ 0
 SUPPLY CAPS
 Wire Wire Line
 	4850 4600 4650 4600
@@ -469,13 +465,74 @@ F 3 "" H 2200 4500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Notes Line
-	1850 4300 2850 4300
+	1850 4300 2750 4300
 Wire Notes Line
-	2850 4300 2850 5250
+	2750 4300 2750 5250
 Wire Notes Line
-	2850 5250 1850 5250
+	2750 5250 1850 5250
 Wire Notes Line
 	1850 5250 1850 4300
-Text Notes 2400 5200 0    60   ~ 0
+Text Notes 2750 5250 2    60   ~ 0
 EXT PORT
+$Comp
+L USB_B P?
+U 1 1 565B7F67
+P 2700 5850
+F 0 "P?" H 2900 5650 50  0000 C CNN
+F 1 "USB_B" H 2650 6050 50  0000 C CNN
+F 2 "" V 2650 5750 60  0000 C CNN
+F 3 "" V 2650 5750 60  0000 C CNN
+	1    2700 5850
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 565B80EF
+P 2300 6050
+F 0 "#PWR?" H 2300 5800 50  0001 C CNN
+F 1 "GND" H 2300 5900 50  0000 C CNN
+F 2 "" H 2300 6050 60  0000 C CNN
+F 3 "" H 2300 6050 60  0000 C CNN
+	1    2300 6050
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 565B8112
+P 2800 6250
+F 0 "#PWR?" H 2800 6000 50  0001 C CNN
+F 1 "GND" H 2800 6100 50  0000 C CNN
+F 2 "" H 2800 6250 60  0000 C CNN
+F 3 "" H 2800 6250 60  0000 C CNN
+	1    2800 6250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 6150 2800 6250
+Wire Wire Line
+	2400 5950 2300 5950
+Wire Wire Line
+	2300 5950 2300 6050
+Wire Wire Line
+	2400 5850 2200 5850
+Wire Wire Line
+	2400 5750 2200 5750
+Text Label 4650 4700 2    60   ~ 0
+USB_D-
+Text Label 4650 4800 2    60   ~ 0
+USB_D+
+Text Label 2200 5750 2    60   ~ 0
+USB_D-
+Text Label 2200 5850 2    60   ~ 0
+USB_D+
+Wire Notes Line
+	1800 5550 3000 5550
+Wire Notes Line
+	3000 5550 3000 6550
+Wire Notes Line
+	3000 6550 1800 6550
+Wire Notes Line
+	1800 6550 1800 5550
+Text Notes 3000 6550 2    60   ~ 0
+USB PORT
 $EndSCHEMATC
