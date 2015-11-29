@@ -1,4 +1,4 @@
-update=29/11/2015 15:50:11
+update=29/11/2015 16:57:20
 version=1
 last_client=kicad
 [pcbnew]
@@ -81,3 +81,4 @@ LibName49=library/u-blox_cam-m8q
 LibName50=library/uSD_holder
 LibName51=library/radiometrix_mtx2
 LibName52=library/stm32f072cbt6
+LibName53=library/jsta
