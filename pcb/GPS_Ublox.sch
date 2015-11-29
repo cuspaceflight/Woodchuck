@@ -50,6 +50,7 @@ LIBS:tvsd
 LIBS:u-blox_cam-m8q
 LIBS:uSD_holder
 LIBS:radiometrix_mtx2
+LIBS:stm32f072cbt6
 LIBS:woodchuck-cache
 EELAYER 25 0
 EELAYER END

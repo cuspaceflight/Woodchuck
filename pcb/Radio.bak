@@ -49,12 +49,14 @@ LIBS:swd
 LIBS:tvsd
 LIBS:u-blox_cam-m8q
 LIBS:uSD_holder
+LIBS:radiometrix_mtx2
+LIBS:stm32f072cbt6
 LIBS:woodchuck-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 5
+Sheet 3 6
 Title ""
 Date ""
 Rev ""
@@ -64,4 +66,15 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+$Comp
+L Radiometrix_MTX2 U?
+U 1 1 5658C80F
+P 5850 3700
+F 0 "U?" H 5050 3900 60  0000 C CNN
+F 1 "Radiometrix_MTX2" H 5450 3000 60  0000 C CNN
+F 2 "" H 5850 3700 60  0000 C CNN
+F 3 "" H 5850 3700 60  0000 C CNN
+	1    5850 3700
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
