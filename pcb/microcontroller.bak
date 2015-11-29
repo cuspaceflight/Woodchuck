@@ -102,13 +102,9 @@ $EndComp
 Wire Wire Line
 	5500 5400 5500 5500
 Wire Wire Line
-	5500 5500 5600 5500
+	5500 5500 5700 5500
 Wire Wire Line
-	5600 5500 5700 5500
-Wire Wire Line
-	5600 5400 5600 5500
-Wire Wire Line
-	5600 5500 5600 5600
+	5600 5400 5600 5600
 Connection ~ 5600 5500
 Wire Wire Line
 	5700 5500 5700 5400
@@ -165,9 +161,7 @@ Wire Wire Line
 Wire Wire Line
 	5700 2500 5600 2500
 Wire Wire Line
-	5600 2400 5600 2500
-Wire Wire Line
-	5600 2500 5600 2600
+	5600 2400 5600 2600
 Connection ~ 5600 2500
 $Comp
 L +BATT #PWR06
@@ -198,9 +192,7 @@ F 3 "" H 4300 1950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4300 1950 4300 2050
-Wire Wire Line
-	4300 2050 4300 2150
+	4300 1950 4300 2150
 $Comp
 L GND #PWR09
 U 1 1 565B2D06
@@ -213,9 +205,7 @@ F 3 "" H 4300 2650 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4300 2450 4300 2550
-Wire Wire Line
-	4300 2550 4300 2650
+	4300 2450 4300 2650
 $Comp
 L C C?
 U 1 1 565B2D3B
@@ -236,13 +226,9 @@ Connection ~ 4300 2050
 Text Notes 3900 2800 1    60   ~ 0
 NOTE: Place one near each\nVDD pin (24, 48) and one\nnear VDDIO2 (36)
 Wire Wire Line
-	4050 2550 4300 2550
+	4050 2550 4550 2550
 Wire Wire Line
-	4300 2550 4550 2550
-Wire Wire Line
-	4050 2050 4300 2050
-Wire Wire Line
-	4300 2050 4550 2050
+	4050 2050 4550 2050
 $Comp
 L C C?
 U 1 1 565B339D
@@ -303,4 +289,14 @@ Wire Wire Line
 	5900 2500 6000 2500
 Wire Wire Line
 	6000 2500 6000 2400
+Wire Wire Line
+	4850 4700 4400 4700
+Wire Wire Line
+	4850 4800 4400 4800
+Text GLabel 4400 4700 0    60   Input ~ 0
+USB_D-
+Text GLabel 4400 4800 0    60   Input ~ 0
+USB_D+
+Text Notes 6250 2500 0    60   ~ 0
+NOTE: VDD supply needs 4.7uF across it\nVAA supply needs 1uF across it
 $EndSCHEMATC
