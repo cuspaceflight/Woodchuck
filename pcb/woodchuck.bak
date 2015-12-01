@@ -57,7 +57,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 7
+Sheet 1 6
 Title ""
 Date ""
 Rev ""
@@ -78,7 +78,10 @@ S 1150 4700 2450 2550
 U 5657408B
 F0 "Radio" 60
 F1 "Radio.sch" 60
-F2 "MTX2_P0" I R 3600 5150 60 
+F2 "MTX2_P0" I R 3600 5050 60 
+F3 "MTX2_P1" I R 3600 5200 60 
+F4 "MTX2_TXD" I R 3600 5350 60 
+F5 "MTX2_EN/PGM" I R 3600 5500 60 
 $EndSheet
 $Sheet
 S 4200 1150 2100 4050
@@ -98,10 +101,119 @@ U 5657409E
 F0 "barometer" 60
 F1 "barometer.sch" 60
 $EndSheet
-$Sheet
-S 4200 5600 2450 1700
-U 565D06C2
-F0 "Power Supply" 60
-F1 "Power_supply.sch" 60
-$EndSheet
+$Comp
+L ADP3335 IC?
+U 1 1 565E3BA6
+P 5200 6550
+F 0 "IC?" H 5000 6250 60  0000 C CNN
+F 1 "ADP3335" H 5150 6750 60  0000 C CNN
+F 2 "" H 5600 6150 60  0000 C CNN
+F 3 "" H 5600 6150 60  0000 C CNN
+	1    5200 6550
+	1    0    0    -1  
+$EndComp
+Text Notes 5450 5850 0    60   ~ 0
+Power regulator
+$Comp
+L C C?
+U 1 1 565E43E2
+P 4550 6700
+F 0 "C?" H 4575 6800 50  0000 L CNN
+F 1 "1u" H 4575 6600 50  0000 L CNN
+F 2 "" H 4588 6550 30  0000 C CNN
+F 3 "" H 4550 6700 60  0000 C CNN
+	1    4550 6700
+	-1   0    0    1   
+$EndComp
+$Comp
+L C C?
+U 1 1 565E4A3A
+P 5850 6700
+F 0 "C?" H 5875 6800 50  0000 L CNN
+F 1 "Cnr" H 5875 6600 50  0000 L CNN
+F 2 "" H 5888 6550 30  0000 C CNN
+F 3 "" H 5850 6700 60  0000 C CNN
+	1    5850 6700
+	1    0    0    -1  
+$EndComp
+Text Label 6100 6550 0    60   ~ 0
+VDD
+$Comp
+L Earth #PWR?
+U 1 1 565E4C8C
+P 4600 6900
+F 0 "#PWR?" H 4600 6650 50  0001 C CNN
+F 1 "Earth" H 4600 6750 50  0001 C CNN
+F 2 "" H 4600 6900 60  0000 C CNN
+F 3 "" H 4600 6900 60  0000 C CNN
+	1    4600 6900
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 565E50FD
+P 5850 6300
+F 0 "C?" H 5875 6400 50  0000 L CNN
+F 1 "Cnr" H 5875 6200 50  0000 L CNN
+F 2 "" H 5888 6150 30  0000 C CNN
+F 3 "" H 5850 6300 60  0000 C CNN
+	1    5850 6300
+	-1   0    0    1   
+$EndComp
+Wire Notes Line
+	3850 7250 6450 7250
+Wire Notes Line
+	6450 7250 6450 5900
+Wire Notes Line
+	6450 5900 3850 5900
+Wire Wire Line
+	4350 6550 4850 6550
+Wire Notes Line
+	3850 5900 3850 7250
+Wire Wire Line
+	5550 6450 5700 6450
+Wire Wire Line
+	5700 6450 5700 6650
+Wire Wire Line
+	5700 6650 5550 6650
+Connection ~ 5700 6550
+Wire Wire Line
+	5550 6750 5650 6750
+Wire Wire Line
+	5650 6750 5650 6850
+Wire Wire Line
+	5650 6850 5850 6850
+Connection ~ 5850 6550
+Wire Wire Line
+	4850 6750 4750 6750
+Wire Wire Line
+	4750 6750 4750 6850
+Wire Wire Line
+	4750 6850 4550 6850
+Wire Wire Line
+	4600 6850 4600 6900
+Connection ~ 4600 6850
+Wire Wire Line
+	5850 6550 5850 6450
+Wire Wire Line
+	5550 6550 6100 6550
+Wire Wire Line
+	5850 6150 5900 6150
+Wire Wire Line
+	4850 6650 4750 6650
+Wire Wire Line
+	4750 6650 4750 6550
+Connection ~ 4750 6550
+Connection ~ 4550 6550
+$Comp
+L GND #PWR?
+U 1 1 565E565A
+P 5900 6150
+F 0 "#PWR?" H 5900 5900 50  0001 C CNN
+F 1 "GND" H 5900 6000 50  0000 C CNN
+F 2 "" H 5900 6150 60  0000 C CNN
+F 3 "" H 5900 6150 60  0000 C CNN
+	1    5900 6150
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

@@ -1,6 +1,10 @@
-update=01.12.2015 17:24:01
+update=22/05/2015 07:44:53
 version=1
 last_client=kicad
+[general]
+version=1
+RootSch=
+BoardNm=
 [pcbnew]
 version=1
 LastNetListRead=
@@ -23,11 +27,9 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [eeschema]
 version=1
-LibDir=../../../avionics14/pcb/avionics14.pretty
+LibDir=
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -58,27 +60,3 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=library/a2235-h
-LibName31=library/adp3335
-LibName32=library/adxl345
-LibName33=library/alpha_trx433s
-LibName34=library/buzzer
-LibName35=library/FDN304P
-LibName36=library/FG6943010R
-LibName37=library/hmc5883l
-LibName38=library/irf7910
-LibName39=library/l3g4200d
-LibName40=library/max-7q
-LibName41=library/ms5611-01ba03
-LibName42=library/resistor
-LibName43=library/rfm69w
-LibName44=library/stm32f405vgt
-LibName45=library/swd
-LibName46=library/tvsd
-LibName47=library/u-blox_cam-m8q
-LibName48=library/uSD_holder
-LibName49=library/radiometrix_mtx2
-LibName50=library/stm32f072cbt6
-LibName51=library/jsta
-LibName52=library/sma
-LibName53=library/cga0402mlc-12g
