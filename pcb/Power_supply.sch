@@ -57,7 +57,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 7
+Sheet 7 7
 Title ""
 Date ""
 Rev ""
@@ -67,15 +67,4 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L u-blox_CAM-M8Q IC?
-U 1 1 565D0659
-P 5350 2900
-F 0 "IC?" H 4900 3450 60  0000 C CNN
-F 1 "u-blox_CAM-M8Q" H 5250 1400 60  0000 C CNN
-F 2 "" H 5550 2000 60  0000 C CNN
-F 3 "" H 5550 2000 60  0000 C CNN
-	1    5350 2900
-	1    0    0    -1  
-$EndComp
 $EndSCHEMATC

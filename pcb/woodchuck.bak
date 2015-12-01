@@ -40,10 +40,8 @@ LIBS:irf7910
 LIBS:l3g4200d
 LIBS:max-7q
 LIBS:ms5611-01ba03
-LIBS:quarter_wave_ant
 LIBS:resistor
 LIBS:rfm69w
-LIBS:sma
 LIBS:stm32f405vgt
 LIBS:swd
 LIBS:tvsd
@@ -52,12 +50,14 @@ LIBS:uSD_holder
 LIBS:radiometrix_mtx2
 LIBS:stm32f072cbt6
 LIBS:jsta
+LIBS:sma
+LIBS:cga0402mlc-12g
 LIBS:woodchuck-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 6
+Sheet 1 7
 Title ""
 Date ""
 Rev ""
@@ -78,9 +78,10 @@ S 1150 4700 2450 2550
 U 5657408B
 F0 "Radio" 60
 F1 "Radio.sch" 60
+F2 "MTX2_P0" I R 3600 5150 60 
 $EndSheet
 $Sheet
-S 4200 1150 2100 5100
+S 4200 1150 2100 4050
 U 56574098
 F0 "microcontroller" 60
 F1 "microcontroller.sch" 60
@@ -96,5 +97,11 @@ S 7400 4000 3050 1950
 U 5657409E
 F0 "barometer" 60
 F1 "barometer.sch" 60
+$EndSheet
+$Sheet
+S 4200 5600 2450 1700
+U 565D06C2
+F0 "Power Supply" 60
+F1 "Power_supply.sch" 60
 $EndSheet
 $EndSCHEMATC

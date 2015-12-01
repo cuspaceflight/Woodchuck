@@ -40,10 +40,8 @@ LIBS:irf7910
 LIBS:l3g4200d
 LIBS:max-7q
 LIBS:ms5611-01ba03
-LIBS:quarter_wave_ant
 LIBS:resistor
 LIBS:rfm69w
-LIBS:sma
 LIBS:stm32f405vgt
 LIBS:swd
 LIBS:tvsd
@@ -52,12 +50,14 @@ LIBS:uSD_holder
 LIBS:radiometrix_mtx2
 LIBS:stm32f072cbt6
 LIBS:jsta
+LIBS:sma
+LIBS:cga0402mlc-12g
 LIBS:woodchuck-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 6
+Sheet 5 7
 Title ""
 Date ""
 Rev ""

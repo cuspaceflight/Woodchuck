@@ -40,24 +40,22 @@ LIBS:irf7910
 LIBS:l3g4200d
 LIBS:max-7q
 LIBS:ms5611-01ba03
+LIBS:quarter_wave_ant
 LIBS:resistor
 LIBS:rfm69w
+LIBS:sma
 LIBS:stm32f405vgt
 LIBS:swd
 LIBS:tvsd
 LIBS:u-blox_cam-m8q
 LIBS:uSD_holder
 LIBS:radiometrix_mtx2
-LIBS:stm32f072cbt6
-LIBS:jsta
-LIBS:sma
-LIBS:cga0402mlc-12g
 LIBS:woodchuck-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 7
+Sheet 1 6
 Title ""
 Date ""
 Rev ""
@@ -67,15 +65,34 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L u-blox_CAM-M8Q IC?
-U 1 1 565D0659
-P 5350 2900
-F 0 "IC?" H 4900 3450 60  0000 C CNN
-F 1 "u-blox_CAM-M8Q" H 5250 1400 60  0000 C CNN
-F 2 "" H 5550 2000 60  0000 C CNN
-F 3 "" H 5550 2000 60  0000 C CNN
-	1    5350 2900
-	1    0    0    -1  
-$EndComp
+$Sheet
+S 1150 1050 2450 2800
+U 56574088
+F0 "GPS" 60
+F1 "GPS_Ublox.sch" 60
+$EndSheet
+$Sheet
+S 1150 4700 2450 2550
+U 5657408B
+F0 "Radio" 60
+F1 "Radio.sch" 60
+$EndSheet
+$Sheet
+S 4200 1150 2100 5100
+U 56574098
+F0 "microcontroller" 60
+F1 "microcontroller.sch" 60
+$EndSheet
+$Sheet
+S 7400 1300 2950 2200
+U 5657409B
+F0 "connectors" 60
+F1 "connectors.sch" 60
+$EndSheet
+$Sheet
+S 7400 4000 3050 1950
+U 5657409E
+F0 "barometer" 60
+F1 "barometer.sch" 60
+$EndSheet
 $EndSCHEMATC
