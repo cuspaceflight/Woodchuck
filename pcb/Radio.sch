@@ -73,7 +73,7 @@ U 1 1 5658C80F
 P 5550 2900
 F 0 "U?" H 4750 3100 60  0000 C CNN
 F 1 "Radiometrix_MTX2" H 5150 2200 60  0000 C CNN
-F 2 "" H 5550 2900 60  0000 C CNN
+F 2 "Woodchuck:MTX2" H 5550 2900 60  0001 C CNN
 F 3 "http://www.radiometrix.com/files/additional/mtx2.pdf" H 5550 2900 60  0001 C CNN
 F 4 "Value" H 5550 2900 60  0001 C CNN "Digikey"
 F 5 "Value" H 5550 2900 60  0001 C CNN "Farnell"
@@ -112,7 +112,7 @@ F 1 "SMA" H 4200 3625 60  0000 C CNN
 F 2 "Woodchuck:SMA-142-0701-801" H 4200 3625 60  0001 C CNN
 F 3 "" H 4200 3625 60  0000 C CNN
 F 4 "Value" H 3900 3300 60  0001 C CNN "Digikey"
-F 5 "1342651" H 3900 3300 60  0001 C CNN "Farnell"
+F 5 "1608592" H 3900 3300 60  0001 C CNN "Farnell"
 F 6 "Value" H 3900 3300 60  0001 C CNN "Fieldname"
 	1    3900 3300
 	-1   0    0    1   
