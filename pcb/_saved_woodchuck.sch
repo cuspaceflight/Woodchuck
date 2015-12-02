@@ -1,0 +1,251 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:a2235-h
+LIBS:adp3335
+LIBS:adxl345
+LIBS:alpha_trx433s
+LIBS:buzzer
+LIBS:FDN304P
+LIBS:FG6943010R
+LIBS:hmc5883l
+LIBS:irf7910
+LIBS:l3g4200d
+LIBS:max-7q
+LIBS:ms5611-01ba03
+LIBS:resistor
+LIBS:rfm69w
+LIBS:stm32f405vgt
+LIBS:swd
+LIBS:tvsd
+LIBS:u-blox_cam-m8q
+LIBS:uSD_holder
+LIBS:radiometrix_mtx2
+LIBS:stm32f072cbt6
+LIBS:jsta
+LIBS:sma
+LIBS:cga0402mlc-12g
+LIBS:woodchuck-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 6
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Sheet
+S 1150 1050 2450 2800
+U 56574088
+F0 "GPS" 60
+F1 "GPS_Ublox.sch" 60
+$EndSheet
+$Sheet
+S 1150 4700 2450 2550
+U 5657408B
+F0 "Radio" 60
+F1 "Radio.sch" 60
+F2 "MTX2_P0" I R 3600 5050 60 
+F3 "MTX2_P1" I R 3600 5200 60 
+F4 "MTX2_TXD" I R 3600 5350 60 
+F5 "MTX2_EN/PGM" I R 3600 5500 60 
+$EndSheet
+$Sheet
+S 4200 1150 2100 4050
+U 56574098
+F0 "microcontroller" 60
+F1 "microcontroller.sch" 60
+$EndSheet
+$Sheet
+S 7400 1300 2950 2200
+U 5657409B
+F0 "connectors" 60
+F1 "connectors.sch" 60
+$EndSheet
+$Sheet
+S 7400 4000 3050 1950
+U 5657409E
+F0 "barometer" 60
+F1 "barometer.sch" 60
+$EndSheet
+$Comp
+L ADP3335 IC?
+U 1 1 565E3BA6
+P 5200 6550
+F 0 "IC?" H 5000 6250 60  0000 C CNN
+F 1 "ADP3335" H 5150 6750 60  0000 C CNN
+F 2 "" H 5600 6150 60  0000 C CNN
+F 3 "" H 5600 6150 60  0000 C CNN
+	1    5200 6550
+	1    0    0    -1  
+$EndComp
+Text Notes 5450 5850 0    60   ~ 0
+Power regulator
+$Comp
+L C C?
+U 1 1 565E4A3A
+P 5850 6700
+F 0 "C?" H 5875 6800 50  0000 L CNN
+F 1 "1n" H 5875 6600 50  0000 L CNN
+F 2 "" H 5888 6550 30  0000 C CNN
+F 3 "" H 5850 6700 60  0000 C CNN
+	1    5850 6700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Earth #PWR?
+U 1 1 565E4C8C
+P 4200 6900
+F 0 "#PWR?" H 4200 6650 50  0001 C CNN
+F 1 "Earth" H 4200 6750 50  0001 C CNN
+F 2 "" H 4200 6900 60  0000 C CNN
+F 3 "" H 4200 6900 60  0000 C CNN
+	1    4200 6900
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 565E50FD
+P 6100 6700
+F 0 "C?" H 6125 6800 50  0000 L CNN
+F 1 "2u2" H 6125 6600 50  0000 L CNN
+F 2 "" H 6138 6550 30  0000 C CNN
+F 3 "" H 6100 6700 60  0000 C CNN
+	1    6100 6700
+	1    0    0    -1  
+$EndComp
+Wire Notes Line
+	3850 7250 6450 7250
+Wire Notes Line
+	6450 7250 6450 5900
+Wire Notes Line
+	6450 5900 3850 5900
+Wire Wire Line
+	4200 6550 4850 6550
+Wire Notes Line
+	3850 5900 3850 7250
+Wire Wire Line
+	5550 6450 5700 6450
+Wire Wire Line
+	5700 6450 5700 6650
+Wire Wire Line
+	5700 6650 5550 6650
+Connection ~ 5700 6550
+Wire Wire Line
+	5550 6750 5650 6750
+Wire Wire Line
+	5650 6750 5650 6850
+Wire Wire Line
+	5650 6850 5850 6850
+Connection ~ 5850 6550
+Wire Wire Line
+	4850 6750 4750 6750
+Wire Wire Line
+	4750 6750 4750 6850
+Wire Wire Line
+	4750 6850 4200 6850
+Wire Wire Line
+	5850 6550 5850 6450
+Wire Wire Line
+	5550 6550 6100 6550
+Wire Wire Line
+	4750 6650 4850 6650
+Wire Wire Line
+	4750 6450 4750 6650
+Connection ~ 4750 6550
+$Comp
+L GND #PWR?
+U 1 1 565E565A
+P 6100 6850
+F 0 "#PWR?" H 6100 6600 50  0001 C CNN
+F 1 "GND" H 6100 6700 50  0000 C CNN
+F 2 "" H 6100 6850 60  0000 C CNN
+F 3 "" H 6100 6850 60  0000 C CNN
+	1    6100 6850
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 565E43E2
+P 4400 6700
+F 0 "C?" H 4425 6800 50  0000 L CNN
+F 1 "2u2" H 4425 6600 50  0000 L CNN
+F 2 "" H 4438 6550 30  0000 C CNN
+F 3 "" H 4400 6700 60  0000 C CNN
+	1    4400 6700
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X02 P?
+U 1 1 565EBDD9
+P 4000 6700
+F 0 "P?" H 4000 6850 50  0000 C CNN
+F 1 "CONN_01X02" V 4100 6700 50  0000 C CNN
+F 2 "" H 4000 6700 60  0000 C CNN
+F 3 "" H 4000 6700 60  0000 C CNN
+	1    4000 6700
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4200 6750 4200 6900
+Wire Wire Line
+	4200 6650 4200 6550
+$Comp
+L +BATT #PWR?
+U 1 1 565EBEEE
+P 4200 6550
+F 0 "#PWR?" H 4200 6400 50  0001 C CNN
+F 1 "+BATT" H 4200 6690 50  0000 C CNN
+F 2 "" H 4200 6550 60  0000 C CNN
+F 3 "" H 4200 6550 60  0000 C CNN
+	1    4200 6550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4750 6450 4850 6450
+Connection ~ 4200 6850
+$Comp
+L +3V3 #PWR?
+U 1 1 565EC163
+P 5850 6450
+F 0 "#PWR?" H 5850 6300 50  0001 C CNN
+F 1 "+3V3" H 5850 6590 50  0000 C CNN
+F 2 "" H 5850 6450 60  0000 C CNN
+F 3 "" H 5850 6450 60  0000 C CNN
+	1    5850 6450
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
