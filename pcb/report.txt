@@ -1,0 +1,322 @@
+Info: Reading netlist file "C:\Users\grego\Documents\OneDrive for Business\OneDrive for Business\CUSF\Woodchuck\pcb\woodchuck.net".
+
+Info: Using references to match components and footprints.
+
+Error: Component 'C4' footprint 'C0603' was not found in any libraries in the footprint library table.
+
+Error: No footprint defined for component 'IC1'.
+
+Error: No footprint defined for component 'P2'.
+
+Error: No footprint defined for component 'J1'.
+
+Error: No footprint defined for component 'P3'.
+
+Error: No footprint defined for component 'SW1'.
+
+Error: No footprint defined for component 'D2'.
+
+Error: No footprint defined for component 'IC2'.
+
+Error: No footprint defined for component 'R4'.
+
+Error: No footprint defined for component 'P1'.
+
+Info: Checking netlist component footprint "A1:/5657408B/565CF9AA:Woodchuck:SMA-142-0701-801".
+
+Adding new component "A1:/5657408B/565CF9AA" footprint "Woodchuck:SMA-142-0701-801".
+
+Changing component "A1:/5657408B/565CF9AA" pin "1" net name from "" to "Net-(A1-Pad1)".
+
+Changing component "A1:/5657408B/565CF9AA" pin "2" net name from "" to "GND".
+
+Changing component "A1:/5657408B/565CF9AA" pin "3" net name from "" to "GND".
+
+Changing component "A1:/5657408B/565CF9AA" pin "4" net name from "" to "GND".
+
+Changing component "A1:/5657408B/565CF9AA" pin "5" net name from "" to "GND".
+
+Info: Checking netlist component footprint "C1:/565E43E2:Woodchuck:0603".
+
+Adding new component "C1:/565E43E2" footprint "Woodchuck:0603".
+
+Changing component "C1:/565E43E2" pin "1" net name from "" to "Earth".
+
+Changing component "C1:/565E43E2" pin "2" net name from "" to "+BATT".
+
+Info: Checking netlist component footprint "C2:/565E4A3A:Woodchuck:0603".
+
+Adding new component "C2:/565E4A3A" footprint "Woodchuck:0603".
+
+Changing component "C2:/565E4A3A" pin "1" net name from "" to "+3V3".
+
+Changing component "C2:/565E4A3A" pin "2" net name from "" to "Net-(C2-Pad2)".
+
+Info: Checking netlist component footprint "C3:/565E50FD:Woodchuck:0603".
+
+Adding new component "C3:/565E50FD" footprint "Woodchuck:0603".
+
+Changing component "C3:/565E50FD" pin "1" net name from "" to "+3V3".
+
+Changing component "C3:/565E50FD" pin "2" net name from "" to "GND".
+
+Info: Checking netlist component footprint "C4:/5657408B/565D1347:Woodchuck:C0603".
+
+Error: Cannot add new component "C4:/5657408B/565D1347" due to missing footprint "Woodchuck:C0603".
+
+Info: Checking netlist component footprint "C5:/56574098/565B339D:Woodchuck:0603".
+
+Adding new component "C5:/56574098/565B339D" footprint "Woodchuck:0603".
+
+Changing component "C5:/56574098/565B339D" pin "1" net name from "" to "+3V3".
+
+Changing component "C5:/56574098/565B339D" pin "2" net name from "" to "GND".
+
+Info: Checking netlist component footprint "C6:/56574098/565B2D3B:Woodchuck:0603".
+
+Adding new component "C6:/56574098/565B2D3B" footprint "Woodchuck:0603".
+
+Changing component "C6:/56574098/565B2D3B" pin "1" net name from "" to "+3V3".
+
+Changing component "C6:/56574098/565B2D3B" pin "2" net name from "" to "GND".
+
+Info: Checking netlist component footprint "C7:/56574098/565B2484:Woodchuck:0603".
+
+Adding new component "C7:/56574098/565B2484" footprint "Woodchuck:0603".
+
+Changing component "C7:/56574098/565B2484" pin "1" net name from "" to "+3V3".
+
+Changing component "C7:/56574098/565B2484" pin "2" net name from "" to "GND".
+
+Info: Checking netlist component footprint "C8:/56574098/565B3429:Woodchuck:0603".
+
+Adding new component "C8:/56574098/565B3429" footprint "Woodchuck:0603".
+
+Changing component "C8:/56574098/565B3429" pin "1" net name from "" to "+3V3".
+
+Changing component "C8:/56574098/565B3429" pin "2" net name from "" to "GND".
+
+Info: Checking netlist component footprint "C708:/5657409E/565D7512:Woodchuck:0603".
+
+Adding new component "C708:/5657409E/565D7512" footprint "Woodchuck:0603".
+
+Changing component "C708:/5657409E/565D7512" pin "1" net name from "" to "+3V3".
+
+Changing component "C708:/5657409E/565D7512" pin "2" net name from "" to "GND".
+
+Info: Checking netlist component footprint "D1:/5657408B/565D14D2:Woodchuck:R0402".
+
+Adding new component "D1:/5657408B/565D14D2" footprint "Woodchuck:R0402".
+
+Changing component "D1:/5657408B/565D14D2" pin "1" net name from "" to "Net-(A1-Pad1)".
+
+Changing component "D1:/5657408B/565D14D2" pin "2" net name from "" to "GND".
+
+Info: Checking netlist component footprint "D2:/56574098/569D292A:".
+
+Error: Cannot add new component "D2:/56574098/569D292A" due to missing footprint "".
+
+Info: Checking netlist component footprint "IC1:/565E3BA6:".
+
+Error: Cannot add new component "IC1:/565E3BA6" due to missing footprint "".
+
+Info: Checking netlist component footprint "IC2:/56574088/565D0659:".
+
+Error: Cannot add new component "IC2:/56574088/565D0659" due to missing footprint "".
+
+Info: Checking netlist component footprint "IC703:/5657409E/565CC16E:Woodchuck:MS5611-01BA".
+
+Adding new component "IC703:/5657409E/565CC16E" footprint "Woodchuck:MS5611-01BA".
+
+Changing component "IC703:/5657409E/565CC16E" pin "1" net name from "" to "+3V3".
+
+Changing component "IC703:/5657409E/565CC16E" pin "2" net name from "" to "GND".
+
+Changing component "IC703:/5657409E/565CC16E" pin "3" net name from "" to "GND".
+
+Changing component "IC703:/5657409E/565CC16E" pin "6" net name from "" to "/barometer/BARO_MISO".
+
+Changing component "IC703:/5657409E/565CC16E" pin "7" net name from "" to "/barometer/BARO_MOSI".
+
+Changing component "IC703:/5657409E/565CC16E" pin "8" net name from "" to "/barometer/BARO_SCK".
+
+Changing component "IC703:/5657409E/565CC16E" pin "4" net name from "" to "/barometer/BARO_CS".
+
+Changing component "IC703:/5657409E/565CC16E" pin "5" net name from "" to "/barometer/BARO_CS".
+
+Info: Checking netlist component footprint "J1:/56574098/565B5A63:".
+
+Error: Cannot add new component "J1:/56574098/565B5A63" due to missing footprint "".
+
+Info: Checking netlist component footprint "P1:/565EBDD9:".
+
+Error: Cannot add new component "P1:/565EBDD9" due to missing footprint "".
+
+Info: Checking netlist component footprint "P2:/56574098/565B3F04:".
+
+Error: Cannot add new component "P2:/56574098/565B3F04" due to missing footprint "".
+
+Info: Checking netlist component footprint "P3:/56574098/565B7F67:".
+
+Error: Cannot add new component "P3:/56574098/565B7F67" due to missing footprint "".
+
+Info: Checking netlist component footprint "R1:/56574098/565BA71B:Woodchuck:0603".
+
+Adding new component "R1:/56574098/565BA71B" footprint "Woodchuck:0603".
+
+Changing component "R1:/56574098/565BA71B" pin "1" net name from "" to "/microcontroller/BOOT0".
+
+Changing component "R1:/56574098/565BA71B" pin "2" net name from "" to "GND".
+
+Info: Checking netlist component footprint "R2:/56574098/569D2BC0:Woodchuck:0603".
+
+Adding new component "R2:/56574098/569D2BC0" footprint "Woodchuck:0603".
+
+Changing component "R2:/56574098/569D2BC0" pin "1" net name from "" to "Net-(D2-Pad1)".
+
+Changing component "R2:/56574098/569D2BC0" pin "2" net name from "" to "Net-(R2-Pad2)".
+
+Info: Checking netlist component footprint "R3:/56574098/569D2C37:Woodchuck:0603".
+
+Adding new component "R3:/56574098/569D2C37" footprint "Woodchuck:0603".
+
+Changing component "R3:/56574098/569D2C37" pin "1" net name from "" to "Net-(D2-Pad4)".
+
+Changing component "R3:/56574098/569D2C37" pin "2" net name from "" to "Net-(R3-Pad2)".
+
+Info: Checking netlist component footprint "R4:/56574098/569D2C6E:".
+
+Error: Cannot add new component "R4:/56574098/569D2C6E" due to missing footprint "".
+
+Info: Checking netlist component footprint "R706:/5657409E/565D7136:Woodchuck:0603".
+
+Adding new component "R706:/5657409E/565D7136" footprint "Woodchuck:0603".
+
+Changing component "R706:/5657409E/565D7136" pin "1" net name from "" to "+3V3".
+
+Changing component "R706:/5657409E/565D7136" pin "2" net name from "" to "/barometer/BARO_CS".
+
+Info: Checking netlist component footprint "SW1:/56574098/565B9D59:".
+
+Error: Cannot add new component "SW1:/56574098/565B9D59" due to missing footprint "".
+
+Info: Checking netlist component footprint "U1:/5657408B/5658C80F:Woodchuck:MTX2".
+
+Adding new component "U1:/5657408B/5658C80F" footprint "Woodchuck:MTX2".
+
+Changing component "U1:/5657408B/5658C80F" pin "1" net name from "" to "Net-(A1-Pad1)".
+
+Changing component "U1:/5657408B/5658C80F" pin "2" net name from "" to "GND".
+
+Changing component "U1:/5657408B/5658C80F" pin "3" net name from "" to "+3V3".
+
+Changing component "U1:/5657408B/5658C80F" pin "4" net name from "" to "/Radio/MTX2_EN/PGM".
+
+Changing component "U1:/5657408B/5658C80F" pin "5" net name from "" to "/Radio/MTX2_TXD".
+
+Changing component "U1:/5657408B/5658C80F" pin "6" net name from "" to "/Radio/MTX2_P1".
+
+Changing component "U1:/5657408B/5658C80F" pin "7" net name from "" to "/Radio/MTX2_P0".
+
+Changing component "U1:/5657408B/5658C80F" pin "8" net name from "" to "GND".
+
+Info: Checking netlist component footprint "U2:/56574098/565B237E:Woodchuck:LQFP48".
+
+Adding new component "U2:/56574098/565B237E" footprint "Woodchuck:LQFP48".
+
+Changing component "U2:/56574098/565B237E" pin "1" net name from "" to "Net-(U2-Pad1)".
+
+Changing component "U2:/56574098/565B237E" pin "2" net name from "" to "Net-(U2-Pad2)".
+
+Changing component "U2:/56574098/565B237E" pin "3" net name from "" to "Net-(U2-Pad3)".
+
+Changing component "U2:/56574098/565B237E" pin "4" net name from "" to "Net-(U2-Pad4)".
+
+Changing component "U2:/56574098/565B237E" pin "5" net name from "" to "Net-(U2-Pad5)".
+
+Changing component "U2:/56574098/565B237E" pin "6" net name from "" to "Net-(U2-Pad6)".
+
+Changing component "U2:/56574098/565B237E" pin "7" net name from "" to "/microcontroller/nRST".
+
+Changing component "U2:/56574098/565B237E" pin "8" net name from "" to "GND".
+
+Changing component "U2:/56574098/565B237E" pin "9" net name from "" to "+3V3".
+
+Changing component "U2:/56574098/565B237E" pin "10" net name from "" to "Net-(U2-Pad10)".
+
+Changing component "U2:/56574098/565B237E" pin "11" net name from "" to "Net-(U2-Pad11)".
+
+Changing component "U2:/56574098/565B237E" pin "12" net name from "" to "/microcontroller/GPS_FROM_MCU".
+
+Changing component "U2:/56574098/565B237E" pin "13" net name from "" to "/microcontroller/GPS_TO_MCU".
+
+Changing component "U2:/56574098/565B237E" pin "14" net name from "" to "Net-(R2-Pad2)".
+
+Changing component "U2:/56574098/565B237E" pin "15" net name from "" to "Net-(R3-Pad2)".
+
+Changing component "U2:/56574098/565B237E" pin "16" net name from "" to "Net-(R4-Pad2)".
+
+Changing component "U2:/56574098/565B237E" pin "17" net name from "" to "Net-(U2-Pad17)".
+
+Changing component "U2:/56574098/565B237E" pin "18" net name from "" to "Net-(U2-Pad18)".
+
+Changing component "U2:/56574098/565B237E" pin "19" net name from "" to "Net-(U2-Pad19)".
+
+Changing component "U2:/56574098/565B237E" pin "20" net name from "" to "Net-(U2-Pad20)".
+
+Changing component "U2:/56574098/565B237E" pin "21" net name from "" to "/microcontroller/EXT_TX".
+
+Changing component "U2:/56574098/565B237E" pin "22" net name from "" to "/microcontroller/EXT_RX".
+
+Changing component "U2:/56574098/565B237E" pin "23" net name from "" to "GND".
+
+Changing component "U2:/56574098/565B237E" pin "24" net name from "" to "+3V3".
+
+Changing component "U2:/56574098/565B237E" pin "25" net name from "" to "Net-(U2-Pad25)".
+
+Changing component "U2:/56574098/565B237E" pin "26" net name from "" to "Net-(U2-Pad26)".
+
+Changing component "U2:/56574098/565B237E" pin "27" net name from "" to "Net-(U2-Pad27)".
+
+Changing component "U2:/56574098/565B237E" pin "28" net name from "" to "/microcontroller/RADIO_EN".
+
+Changing component "U2:/56574098/565B237E" pin "29" net name from "" to "Net-(U2-Pad29)".
+
+Changing component "U2:/56574098/565B237E" pin "30" net name from "" to "/microcontroller/RADIO_TX".
+
+Changing component "U2:/56574098/565B237E" pin "31" net name from "" to "Net-(U2-Pad31)".
+
+Changing component "U2:/56574098/565B237E" pin "32" net name from "" to "/microcontroller/USB_D-".
+
+Changing component "U2:/56574098/565B237E" pin "33" net name from "" to "/microcontroller/USB_D+".
+
+Changing component "U2:/56574098/565B237E" pin "34" net name from "" to "/microcontroller/SWDIO".
+
+Changing component "U2:/56574098/565B237E" pin "35" net name from "" to "GND".
+
+Changing component "U2:/56574098/565B237E" pin "36" net name from "" to "+3V3".
+
+Changing component "U2:/56574098/565B237E" pin "37" net name from "" to "/microcontroller/SWCLK".
+
+Changing component "U2:/56574098/565B237E" pin "38" net name from "" to "/microcontroller/BARO_CS_N".
+
+Changing component "U2:/56574098/565B237E" pin "39" net name from "" to "/microcontroller/BARO_CLK".
+
+Changing component "U2:/56574098/565B237E" pin "40" net name from "" to "/microcontroller/BARO_MISO".
+
+Changing component "U2:/56574098/565B237E" pin "41" net name from "" to "/microcontroller/BARO_MOSI".
+
+Changing component "U2:/56574098/565B237E" pin "42" net name from "" to "Net-(U2-Pad42)".
+
+Changing component "U2:/56574098/565B237E" pin "43" net name from "" to "Net-(U2-Pad43)".
+
+Changing component "U2:/56574098/565B237E" pin "44" net name from "" to "/microcontroller/BOOT0".
+
+Changing component "U2:/56574098/565B237E" pin "45" net name from "" to "Net-(U2-Pad45)".
+
+Changing component "U2:/56574098/565B237E" pin "46" net name from "" to "Net-(U2-Pad46)".
+
+Changing component "U2:/56574098/565B237E" pin "47" net name from "" to "GND".
+
+Changing component "U2:/56574098/565B237E" pin "48" net name from "" to "+3V3".
+
