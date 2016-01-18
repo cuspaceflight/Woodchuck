@@ -390,9 +390,9 @@ BARO_MISO
 Text HLabel 6900 4100 2    60   Input ~ 0
 BARO_MOSI
 Text HLabel 4650 4500 0    60   Input ~ 0
-RADIO_TX
-Text HLabel 6900 5100 2    60   Input ~ 0
 RADIO_EN
+Text HLabel 6900 5100 2    60   Input ~ 0
+RADIO_TX
 NoConn ~ 6700 3600
 NoConn ~ 6700 3700
 NoConn ~ 6700 3800
