@@ -381,9 +381,9 @@ Text HLabel 4650 3800 0    60   Output ~ 0
 GPS_FROM_MCU
 Text HLabel 4650 3900 0    60   Input ~ 0
 GPS_TO_MCU
-Text HLabel 4650 5100 0    60   Input ~ 0
+Text HLabel 4650 5100 0    60   Output ~ 0
 BARO_CS_N
-Text HLabel 6900 3900 2    60   Input ~ 0
+Text HLabel 6900 3900 2    60   Output ~ 0
 BARO_CLK
 Text HLabel 6900 4000 2    60   Input ~ 0
 BARO_MISO

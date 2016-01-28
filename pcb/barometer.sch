@@ -86,7 +86,7 @@ Text HLabel 3850 1950 2    60   Input ~ 0
 BARO_SCK
 Text HLabel 3850 2050 2    60   Input ~ 0
 BARO_MOSI
-Text HLabel 3850 2150 2    60   Input ~ 0
+Text HLabel 3850 2150 2    60   Output ~ 0
 BARO_MISO
 Wire Wire Line
 	3700 2150 3850 2150
