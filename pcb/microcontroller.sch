@@ -377,7 +377,7 @@ Text Label 6900 4600 0    60   ~ 0
 EXT_TX
 Text Label 6900 4700 0    60   ~ 0
 EXT_RX
-Text HLabel 4650 3800 0    60   Input ~ 0
+Text HLabel 4650 3800 0    60   Output ~ 0
 GPS_FROM_MCU
 Text HLabel 4650 3900 0    60   Input ~ 0
 GPS_TO_MCU
@@ -387,11 +387,11 @@ Text HLabel 6900 3900 2    60   Input ~ 0
 BARO_CLK
 Text HLabel 6900 4000 2    60   Input ~ 0
 BARO_MISO
-Text HLabel 6900 4100 2    60   Input ~ 0
+Text HLabel 6900 4100 2    60   Output ~ 0
 BARO_MOSI
-Text HLabel 4650 4500 0    60   Input ~ 0
+Text HLabel 4650 4500 0    60   Output ~ 0
 RADIO_EN
-Text HLabel 6900 5100 2    60   Input ~ 0
+Text HLabel 6900 5100 2    60   Output ~ 0
 RADIO_TX
 NoConn ~ 6700 3600
 NoConn ~ 6700 3700
