@@ -151,9 +151,9 @@ Wire Wire Line
 	4550 2600 4650 2600
 Connection ~ 4550 2500
 NoConn ~ 4650 2700
-Text HLabel 6400 3000 2    60   Input ~ 0
+Text HLabel 6700 3000 2    60   Input ~ 0
 GPS_FROM_MCU
-Text HLabel 6400 2900 2    60   Output ~ 0
+Text HLabel 6700 2900 2    60   Output ~ 0
 GPS_TO_MCU
 Text Notes 3950 1800 0    60   ~ 0
 The data manual seems to suggest that VCbkup should be connected to 3.3V as well
@@ -183,10 +183,6 @@ F 3 "" H 4050 2650 60  0000 C CNN
 	1    4050 2650
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6050 3000 6400 3000
-Wire Wire Line
-	6050 2900 6400 2900
 $Comp
 L SMA P?
 U 1 1 56ACB5C4
@@ -228,4 +224,41 @@ F 3 "" H 6600 2750 60  0000 C CNN
 	1    6600 2750
 	0    1    1    0   
 $EndComp
+NoConn ~ 6050 2600
+NoConn ~ 6050 2700
+$Comp
+L R R?
+U 1 1 56ACBA41
+P 6300 3000
+F 0 "R?" V 6380 3000 50  0000 C CNN
+F 1 "220" V 6300 3000 50  0000 C CNN
+F 2 "" V 6230 3000 30  0000 C CNN
+F 3 "" H 6300 3000 30  0000 C CNN
+	1    6300 3000
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 56ACBA86
+P 6300 2900
+F 0 "R?" V 6380 2900 50  0000 C CNN
+F 1 "220" V 6300 2900 50  0000 C CNN
+F 2 "" V 6230 2900 30  0000 C CNN
+F 3 "" H 6300 2900 30  0000 C CNN
+	1    6300 2900
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6150 2900 6050 2900
+Wire Wire Line
+	6050 3000 6150 3000
+Wire Wire Line
+	6450 2900 6700 2900
+Wire Wire Line
+	6450 3000 6700 3000
+NoConn ~ 6050 3600
+NoConn ~ 6050 3500
+NoConn ~ 6050 3400
+NoConn ~ 6050 3300
+NoConn ~ 6050 3200
 $EndSCHEMATC

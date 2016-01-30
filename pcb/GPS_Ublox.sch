@@ -144,27 +144,29 @@ F 3 "" H 4550 2400 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4550 2400 4550 2600
+	4550 2400 4550 2700
 Wire Wire Line
 	4450 2500 4650 2500
 Wire Wire Line
 	4550 2600 4650 2600
 Connection ~ 4550 2500
-NoConn ~ 4650 2700
 Text HLabel 6700 3000 2    60   Input ~ 0
 GPS_FROM_MCU
 Text HLabel 6700 2900 2    60   Output ~ 0
 GPS_TO_MCU
 Text Notes 3950 1800 0    60   ~ 0
-The data manual seems to suggest that VCbkup should be connected to 3.3V as well
+-How are we interfacing to the MCU? DSEL may have to be grounded\n-Embedded antenna?
 $Comp
 L C C?
 U 1 1 56ACB00C
 P 4300 2500
 F 0 "C?" H 4325 2600 50  0000 L CNN
-F 1 "4.7u" H 4325 2400 50  0000 L CNN
-F 2 "" H 4338 2350 30  0000 C CNN
+F 1 "100n" H 4325 2400 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 4338 2350 30  0001 C CNN
 F 3 "" H 4300 2500 60  0000 C CNN
+F 4 "Value" H 4300 2500 60  0001 C CNN "Digikey"
+F 5 "9406140" H 4300 2500 60  0001 C CNN "Farnell"
+F 6 "Value" H 4300 2500 60  0001 C CNN "Fieldname"
 	1    4300 2500
 	0    -1   -1   0   
 $EndComp
@@ -261,4 +263,7 @@ NoConn ~ 6050 3500
 NoConn ~ 6050 3400
 NoConn ~ 6050 3300
 NoConn ~ 6050 3200
+Wire Wire Line
+	4550 2700 4650 2700
+Connection ~ 4550 2600
 $EndSCHEMATC
