@@ -6,20 +6,21 @@
  * It is an adapted version of the JOEY-M version by Jon Sowman
  *
  * Jon Sowman 2012
- * Eivind Roson Eide 2016
+ * Jamie Wood 2016
  */
 
 //#include <avr/io.h>
 #include <stdio.h>
 #include <util/delay.h>
 //#include <avr/eeprom.h>
-//#include <avr/interrupt.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
 #include <libopencm3/stm32/usart.h>
+#include <libopencm3/stm32/iwdg.h>
 
+#include "interrupts.h"
 #include "led.h"
 #include "radio.h"
 #include "gps.h"
@@ -32,12 +33,12 @@ uint32_t EEMEM ticks = 0;
 int main()
 {
     // Disable, configure, and start the watchdog timer
-    wdt_disable();
-    wdt_reset();
-    wdt_enable(WDTO_8S);
+    iwdg_reset();
+    iwdg_set_period_ms(8000);
+    iwdg_start();
 
     // Start and configure all hardware peripherals
-    sei();
+    enable_interrupts();
     led_init();
     radio_init();
     gps_init();
@@ -53,7 +54,7 @@ int main()
     for(uint8_t i = 0; i < 5; i++)
     {
         radio_chatter();
-        wdt_reset();
+        iwdg_reset();
     }
     
     int32_t lat = 0, lon = 0, alt = 0;
@@ -93,7 +94,7 @@ int main()
 
         led_set(LED_RED, 0);
         eeprom_update_dword(&ticks, tick);
-        wdt_reset();
+        iwdg_reset();
         _delay_ms(500);
     }
 
