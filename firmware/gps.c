@@ -11,7 +11,7 @@
  * Jamie Wood 2016
  */
 
- #include <libopencm3/stm32/usart.h>
+#include <libopencm3/stm32/usart.h>
 #include "gps.h"
 #include "led.h"
 #include "radio.h"
