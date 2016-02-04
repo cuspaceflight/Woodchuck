@@ -123,6 +123,9 @@ F 0 "IC101" H 5000 6250 60  0000 C CNN
 F 1 "ADP3335" H 5150 6750 60  0000 C CNN
 F 2 "Woodchuck:MSOP8" H 5200 6850 60  0000 C CNN
 F 3 "" H 5600 6150 60  0000 C CNN
+F 4 "Value" H 5200 6550 60  0001 C CNN "Digikey"
+F 5 "2067775" H 5200 6550 60  0001 C CNN "Farnell"
+F 6 "Value" H 5200 6550 60  0001 C CNN "Fieldname"
 	1    5200 6550
 	1    0    0    -1  
 $EndComp
@@ -137,7 +140,7 @@ F 1 "1n" H 5875 6600 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 5888 6550 30  0000 C CNN
 F 3 "" H 5850 6700 60  0000 C CNN
 F 4 "Value" H 5850 6700 60  0001 C CNN "Digikey"
-F 5 "Value" H 5850 6700 60  0001 C CNN "Farnell"
+F 5 "1759088" H 5850 6700 60  0001 C CNN "Farnell"
 F 6 "Value" H 5850 6700 60  0001 C CNN "Fieldname"
 	1    5850 6700
 	1    0    0    -1  
@@ -162,7 +165,7 @@ F 1 "2u2" H 6125 6600 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 6138 6550 30  0000 C CNN
 F 3 "" H 6100 6700 60  0000 C CNN
 F 4 "Value" H 6100 6700 60  0001 C CNN "Digikey"
-F 5 "Value" H 6100 6700 60  0001 C CNN "Farnell"
+F 5 "2211185" H 6100 6700 60  0001 C CNN "Farnell"
 F 6 "Value" H 6100 6700 60  0001 C CNN "Fieldname"
 	1    6100 6700
 	1    0    0    -1  
@@ -187,7 +190,7 @@ F 1 "2u2" H 4425 6600 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 4438 6550 30  0000 C CNN
 F 3 "" H 4400 6700 60  0000 C CNN
 F 4 "Value" H 4400 6700 60  0001 C CNN "Digikey"
-F 5 "Value" H 4400 6700 60  0001 C CNN "Farnell"
+F 5 "2211185" H 4400 6700 60  0001 C CNN "Farnell"
 F 6 "Value" H 4400 6700 60  0001 C CNN "Fieldname"
 	1    4400 6700
 	-1   0    0    1   
@@ -200,6 +203,9 @@ F 0 "P101" H 4000 6850 50  0000 C CNN
 F 1 "CONN_01X02" V 4100 6700 50  0000 C CNN
 F 2 "Woodchuck:S02B-PASK-2" V 4250 6650 60  0000 C CNN
 F 3 "" H 4000 6700 60  0000 C CNN
+F 4 "Value" H 4000 6700 60  0001 C CNN "Digikey"
+F 5 "1830747" H 4000 6700 60  0001 C CNN "Farnell"
+F 6 "Value" H 4000 6700 60  0001 C CNN "Fieldname"
 	1    4000 6700
 	-1   0    0    1   
 $EndComp
@@ -339,11 +345,11 @@ Wire Wire Line
 Wire Wire Line
 	7400 4600 7250 4600
 Text Label 7250 4300 2    60   ~ 0
-BARO_SCK
+BARO_CLK
 Text Label 7250 4400 2    60   ~ 0
 BARO_MOSI
 Text Label 7250 4500 2    60   ~ 0
 BARO_MISO
 Text Label 7250 4600 2    60   ~ 0
-BARO_CS
+BARO_CS_N
 $EndSCHEMATC

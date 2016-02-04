@@ -339,11 +339,11 @@ Wire Wire Line
 Wire Wire Line
 	7400 4600 7250 4600
 Text Label 7250 4300 2    60   ~ 0
-BARO_SCK
+BARO_CLK
 Text Label 7250 4400 2    60   ~ 0
 BARO_MOSI
 Text Label 7250 4500 2    60   ~ 0
 BARO_MISO
 Text Label 7250 4600 2    60   ~ 0
-BARO_CS
+BARO_CS_N
 $EndSCHEMATC
