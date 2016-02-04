@@ -327,9 +327,9 @@ MTX2_P0
 Text Label 3550 5150 0    60   ~ 0
 MTX2_P1
 Text Label 3550 5300 0    60   ~ 0
-MTX2_TXD
+RADIO_TX
 Text Label 3550 5450 0    60   ~ 0
-MTX2_EN/PGM
+RADIO_EN
 Wire Wire Line
 	7400 4300 7250 4300
 Wire Wire Line
