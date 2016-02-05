@@ -404,8 +404,6 @@ NoConn ~ 6700 4300
 NoConn ~ 6700 4400
 NoConn ~ 6700 4500
 NoConn ~ 6700 4800
-NoConn ~ 6700 4900
-NoConn ~ 6700 5000
 NoConn ~ 4850 4600
 NoConn ~ 4850 4400
 NoConn ~ 4850 4300
@@ -703,4 +701,12 @@ F 3 "" H 3700 3300 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	3700 3350 3700 3300
+Wire Wire Line
+	6700 4900 6900 4900
+Wire Wire Line
+	6700 5000 6900 5000
+Text HLabel 6900 5000 2    60   Output ~ 0
+MTX2_P1
+Text HLabel 6900 4900 2    60   Output ~ 0
+MTX2_P0
 $EndSCHEMATC
