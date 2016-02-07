@@ -297,8 +297,6 @@ void tim6_isr()
     }
     else
     {
-    	if ()
-    	radio_write(0,)	
         if( _txptr < 11 )
         {
             _radio_transmit_bit(_txbyte, _txptr);
