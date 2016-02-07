@@ -272,9 +272,9 @@ static void _radio_transmit_bit(uint8_t data, uint8_t ptr)
     //for the data bits. TODO Check logic!
     else if(ptr >= 1 && ptr <= 8)
         if(data)
-            radio_write(0,LOGICAL_ONE)
+            radio_write(0,LOGICAL_ONE);
         else
-            radio_write(0,LOGICAL_ZERO)
+            radio_write(0,LOGICAL_ZERO);
     else
     	//we're at the end of a message- send two stop bits
     {
