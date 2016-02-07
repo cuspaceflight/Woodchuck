@@ -7,6 +7,7 @@
  *
  * Jon Sowman 2012
  * Jamie Wood 2016
+ * Aniruddh Raghu 2016
  */
 
 //#include <avr/io.h>
@@ -43,12 +44,6 @@ int main()
     radio_init();
     gps_init();
     radio_enable();
-
-    // Set the radio shift and baud rate
-    _radio_dac_write(RADIO_COARSE, RADIO_CENTER_FREQ);
-    _radio_dac_write(RADIO_FINE, 0);
-    radio_set_shift(RADIO_SHIFT_425);
-    radio_set_baud(RADIO_BAUD_50);
 
     // Radio chatter
     for(uint8_t i = 0; i < 5; i++)
