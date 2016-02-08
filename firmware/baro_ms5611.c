@@ -22,9 +22,10 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/rcc.h>
 
+#include "baro_ms5611.h"
 #include "gps.h"
-#include "led.h"
-#include "radio.h"
+//#include "led.h"
+//#include "radio.h"
 
 /*
  * The microcontroller talks to the barometer using SPI,
@@ -40,6 +41,9 @@
 #define MS5611_SPI_MISO     GPIO4       //Checked with datasheet PB4
 #define MS5611_SPI_MOSI     GPIO5       //Checked with datasheet PB5
 #define GPIOB_SPI_AF_NUM    0           //Checked: Table 15: AF for GPIOB
+
+//This definition appears to be missing in the header file:
+ #define SPI_CR1_DFF_8BIT (0 << 11)
 
 static void ms5611_reset(void);
 static void ms5611_read_u16(uint8_t adr, uint16_t* c);
@@ -63,6 +67,7 @@ static int32_t temperature, pressure;
 static void ms5611_reset()
 {
     uint8_t adr = 0x1E;         // Wgat is stored here?
+    uint16_t i = 0;
     spi_enable(MS5611_SPID);    // The SPI peripheral is enabled. // CHIBIOS spiSelect(&MS5611_SPID);
     spi_send8(MS5611_SPID, adr); // Data is written to the SPI interface after the previous write transfer has finished.
                                 // Note that in chibios an adress is sent, while here the origenal data is sent?? 
@@ -186,7 +191,7 @@ static void ms5611_pin_setup()
     gpio_set_af(GPIOB, GPIOB_SPI_AF_NUM ,GPIO3 | GPIO4 | GPIO5);
     //gpio_set_af (uint32_t gpioport, uint8_t alt_func_num, uint16_t gpios)
     spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_8, SPI_CR1_CPOL, 
-                    SPI_CR1_CPHA, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST); 
+                        SPI_CR1_CPHA, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST); 
                     //SHOULD EQUAL: SPI_CR1_BR_1 | SPI_CR1_CPOL | SPI_CR1_CPHA in CHiBIOS
     
     // might require spi_enable_ss_output(SPI1); */ /* Required, see NSS, 25.3.1 section. */
