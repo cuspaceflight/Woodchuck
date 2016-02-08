@@ -45,12 +45,12 @@ void eeprom_read(uint8_t addr, uint8_t *data)
 {
     i2c_send_start(I2C); // Send START condition
 
-    _eeprom_send_7bit_address_blocking(I2C, EEPROM_ADDR, EEPROM_WRITE); // send the address
+    _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_WRITE); // send the address
     _eeprom_send_blocking(I2C, addr); // send the read address
 
     i2c_send_start(I2C); // Send RESTART
 
-    _eeprom_send_7bit_address_blocking(I2C, EEPROM_ADDR, EEPROM_READ); // send the address
+    _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_READ); // send the address
     *data = _eeprom_read_blocking(); // read the data
 
     i2c_send_stop(I2C); // Send STOP condition
@@ -65,10 +65,54 @@ void eeprom_write(uint8_t addr, uint8_t data)
     i2c_send_start(I2C); // Send START condition
 
     // send the address
-    _eeprom_send_7bit_address_blocking(I2C, EEPROM_ADDR, EEPROM_WRITE);
+    _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_WRITE);
 
     _eeprom_send_blocking(addr); // send the write address
     _eeprom_send_blocking(data); // send the data
+
+    i2c_send_stop(I2C); // Send STOP condition
+}
+
+/**
+ * Read a 32-bit little-endian dword from the EEPROM, starting at address addr.
+ * 
+ * It should be possible to use a sequential-read to speed this up, but
+ * libopencm3 doesn't seem to support sending ACKs from master midway through
+ * an I2C communication, which is needed to signal the next byte read.
+ */
+void eeprom_read_dword(uint8_t addr, uint32_t *data)
+{
+    uint32_t tmp;
+    uint8_t tmp_byte;
+    eeprom_read(addr, &tmp_byte);
+    tmp = tmp_byte;
+    eeprom_read(addr+1, &tmp_byte);
+    tmp = (tmp << 8) | tmp_byte;
+    eeprom_read(addr+2, &tmp_byte);
+    tmp = (tmp << 8) | tmp_byte;
+    eeprom_read(addr+3, &tmp_byte);
+    tmp = (tmp << 8) | tmp_byte;
+    *data = tmp;
+}
+
+/**
+ * Write a 32-bit dword to the EEPROM, starting at address addr.
+ * The value is stored in little-endian format.
+ *
+ * Note that the address must be a multiple of 4, to align to page boundaries.
+ */
+void eeprom_write_dword(uint8_t addr, uint32_t data)
+{
+    i2c_send_start(I2C); // Send START condition
+
+    // send the address
+    _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_WRITE);
+
+    _eeprom_send_blocking(addr); // send the write address
+    _eeprom_send_blocking(data & 0xff); // send the data
+    _eeprom_send_blocking((data>>8) & 0xff);
+    _eeprom_send_blocking((data>>16) & 0xff);
+    _eeprom_send_blocking((data>>24) & 0xff);
 
     i2c_send_stop(I2C); // Send STOP condition
 }

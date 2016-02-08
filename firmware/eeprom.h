@@ -18,6 +18,8 @@ void eeprom_init(void);
 // Read and write a single byte
 void eeprom_read(uint8_t addr, uint8_t *data);
 void eeprom_write(uint8_t addr, uint8_t data);
+void eeprom_read_dword(uint8_t addr, uint32_t *data);
+void eeprom_write_dword(uint8_t addr, uint32_t data);
 
 /* INTERNAL METHODS */
 
