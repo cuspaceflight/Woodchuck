@@ -5,11 +5,21 @@
  * Adapted from
  * M2FC - 2014 Adam Greig, Cambridge University Spaceflight
  * 
- * Woodchuck - Eivind Roson Eide 2016
+ * Woodchuck - 2016 Eivind Roson Eide, Cambridge University Spaceflight
  */
 
-
+/*
+ * TODO: 
+ * Find correct outputports, 
+ * set gpio to correct configuration, 
+ * create a timer script to time conversions, 
+ * create a Kalmanfilter to estimate the altitude, 
+ * remove old code
+ * 
+ */
+ 
 #include <libopencm3/stm32/spi.h>
+#include <libopencm3/stm32/gpio.h>
 
 #include "gps.h"
 #include "led.h"
@@ -19,26 +29,30 @@
  * The microcontroller talks to the barometer using SPI,
  * The driver uses libopemcm3/spi.h 
  * (documentation: http://libopencm3.github.io/docs/latest/stm32f0/html/group__spi__file.html)
- * 
+ * Ports and pins are defined in: http://www.st.com/web/en/resource/technical/document/datasheet/DM00090510.pdf
  * SPI interface page 9
  */
 
 #define MS5611_SPID          SPI1  //TODO ?? SPID2  //Unsigned int32. SPI peripheral identifier SPI Register base address. 
+
 //#define MS5611_SPI_CS_PORT         //TDOO ?? GPIOB  //
 //#define MS5611_SPI_CS_PIN          //TODO ?? GPIOB_BARO_CS // 
-
-
 
 static void ms5611_reset(void);
 static void ms5611_read_u16(uint8_t adr, uint16_t* c);
 static void ms5611_read_s24(uint8_t adr, int32_t* d);
 static void ms5611_init(MS5611CalData* cal_data);
+static void ms5611_pin_setup()
 static void ms5611_read_cal(MS5611CalData* cal_data);
 static void ms5611_read(MS5611CalData* cal_data,
                         int32_t* temperature, int32_t* pressure);
 
 int32_t global_temperature;
 int32_t global_pressure;
+
+static MS5611CalData cal_data;
+static int32_t temperature, pressure;
+
 
 /*
  * Resets the MS5611. Sends 0x1E, waits 5ms.
@@ -51,6 +65,7 @@ static void ms5611_reset()
     spi_send8(MS5611_SPID, adr); // Data is written to the SPI interface after the previous write transfer has finished.
                                 // Note that in chibios an adress is sent, while here the origenal data is sent?? 
                                 //    spiSend(&MS5611_SPID, 1, (void*)&adr);
+    //TODO: time this instead
     for (i = 0; i < 10000; i++)
     {
         __asm__("nop");  //Not a pretty way of doing this, but will do for now //    chThdSleepMilliseconds(5);
@@ -73,6 +88,8 @@ static void ms5611_read_u16(uint8_t adr, uint16_t* c)
     spi_disable(MS5611_SPID); //    spiUnselect(&MS5611_SPID);
     *c = data_received;
     
+    
+    //OLD CODE: TODO: Remove
 //   uint8_t rx[2];
 //   spiSelect(&MS5611_SPID);
 //   spiSend(&MS5611_SPID, 1, (void*)&adr);
@@ -164,6 +181,36 @@ static void ms5611_read_cal(MS5611CalData* cal_data)
 //    log_u16(CHAN_CAL_BARO2, cal_data->c4, cal_data->c5, cal_data->c6, d7);
 }
 
+/*
+ * Sets the GPIO pins to SPI mode for the MS5611.
+ * 
+ */
+static void ms5611_pin_setup()
+{
+    gpio_mode_setup (uint32_t gpioport, uint8_t mode, uint8_t pull_up_down, uint16_t gpios)
+    gpio_set_af (uint32_t gpioport, uint8_t alt_func_num, uint16_t gpios)
+    
+    
+    /* example code:
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE,
+			GPIO13 | GPIO14 | GPIO15);
+	gpio_set_af(GPIOB, GPIO_AF5, GPIO13 | GPIO14 | GPIO15);
+
+	/* Setup SPI parameters. */
+	/*spi_init_master(SPI2, SPI_CR1_BAUDRATE_FPCLK_DIV_256, SPI_CR1_CPOL,
+			SPI_CR1_CPHA, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST);
+	spi_enable_ss_output(SPI2); */ /* Required, see NSS, 25.3.1 section. */
+    
+	/* Finally enable the SPI. */
+    /*
+	spi_enable(SPI2);
+    */
+    
+    
+
+    return;
+}
+
 
 /*
  * Initialise the MS5611.
@@ -218,6 +265,15 @@ static void ms5611_read(MS5611CalData* cal_data,
 //    log_s32(CHAN_IMU_BARO, *pressure, *temperature);
 }
 
+/* 
+ * Public function to read values and update state estimator
+ */
+void ms5611_run()
+{
+    ms5611_read(&cal_data, &temperature, &pressure);
+    //TODO: Implement state estimator
+    //state_estimation_new_pressure((float)pressure);   
+}
 
 
 /*
@@ -225,14 +281,15 @@ static void ms5611_read(MS5611CalData* cal_data,
  * Resets the MS5611, reads cal data, then reads a pressure and temperature
  * in a loop.
  */
+ 
+ /*
 msg_t ms5611_thread(void *arg)
 {
     (void)arg;
 
     
-    static MS5611CalData cal_data;
-    static int32_t temperature, pressure;
-
+    //TODO: implement this function
+    
     int spi_init_master 	( 	
         uint32_t  	spi,
 		uint32_t  	br,
@@ -265,6 +322,4 @@ msg_t ms5611_thread(void *arg)
     }
 }
 
-
-
-
+*/

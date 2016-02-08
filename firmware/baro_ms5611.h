@@ -21,7 +21,7 @@ extern int32_t global_temperature;
 extern int32_t global_pressure;
 
 
-/* The main thread. Run this. */
-//msg_t ms5611_thread(void *arg);
+/* The main script. Run this. */
+void ms5611_run()
 
 #endif /* MS5611_H */
