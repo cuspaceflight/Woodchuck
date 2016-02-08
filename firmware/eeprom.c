@@ -7,7 +7,7 @@
  * Jamie Wood 2016
  */
 
-#include <libopencm3/stm32/usart.h>
+#include <libopencm3/stm32/i2c.h>
 #include "eeprom.h"
 
 // Choose which I2C peripheral to use
@@ -30,10 +30,10 @@ void eeprom_init(void)
 {
     // Reset the peripheral
     i2c_reset(I2C);
-    
+
     // Set the clock registers to set the peripheral to 400kHz
     _i2c_set_speed(I2C, 1);
-    
+
     // Enable the peripheral
     i2c_peripheral_enable(I2C);
 }
@@ -44,15 +44,15 @@ void eeprom_init(void)
 void eeprom_read(uint8_t addr, uint8_t *data)
 {
     i2c_send_start(I2C); // Send START condition
-    
+
     _eeprom_send_7bit_address_blocking(I2C, EEPROM_ADDR, EEPROM_WRITE); // send the address
     _eeprom_send_blocking(I2C, addr); // send the read address
-    
+
     i2c_send_start(I2C); // Send RESTART
-    
+
     _eeprom_send_7bit_address_blocking(I2C, EEPROM_ADDR, EEPROM_READ); // send the address
     *data = _eeprom_read_blocking(); // read the data
-    
+
     i2c_send_stop(I2C); // Send STOP condition
 }
 
@@ -63,13 +63,13 @@ void eeprom_read(uint8_t addr, uint8_t *data)
 void eeprom_write(uint8_t addr, uint8_t data)
 {
     i2c_send_start(I2C); // Send START condition
-    
+
     // send the address
     _eeprom_send_7bit_address_blocking(I2C, EEPROM_ADDR, EEPROM_WRITE);
-    
+
     _eeprom_send_blocking(addr); // send the write address
     _eeprom_send_blocking(data); // send the data
-    
+
     i2c_send_stop(I2C); // Send STOP condition
 }
 
@@ -124,7 +124,7 @@ void _i2c_set_speed(uint32_t i2c, uint8_t fast)
     } else {
         I2C_CCR(i2c) = (freq * 5) & I2C_CCR_CCRMASK;
     }
-    
+
     /* set rise time to 1000ns */
     reg = (I2C_TRISE(i2c) & ~(I2C_TRISE_MASK)) | ((freq + 1) & I2C_TRISE_MASK);
     I2C_TRISE(i2c) = reg;
