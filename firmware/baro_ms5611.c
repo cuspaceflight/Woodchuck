@@ -13,12 +13,14 @@
  * set gpio to correct configuration, 
  * create a timer script to time conversions, 
  * create a Kalmanfilter to estimate the altitude, 
- * remove old code
+ * remove old code, 
+ * include logging functionality and tweeter functionality
  * 
  */
  
 #include <libopencm3/stm32/spi.h>
 #include <libopencm3/stm32/gpio.h>
+#include <libopencm3/stm32/rcc.h>
 
 #include "gps.h"
 #include "led.h"
@@ -42,8 +44,7 @@
 static void ms5611_reset(void);
 static void ms5611_read_u16(uint8_t adr, uint16_t* c);
 static void ms5611_read_s24(uint8_t adr, int32_t* d);
-//static void ms5611_init(MS5611CalData* cal_data);
-static void ms5611_pin_setup()
+static void ms5611_pin_setup();
 static void ms5611_read_cal(MS5611CalData* cal_data);
 static void ms5611_read(MS5611CalData* cal_data,
                         int32_t* temperature, int32_t* pressure);
@@ -88,15 +89,6 @@ static void ms5611_read_u16(uint8_t adr, uint16_t* c)
     data_received = spi_read(MS5611_SPID); //A PROM read returns a 2 byte result
     spi_disable(MS5611_SPID); //    spiUnselect(&MS5611_SPID);
     *c = data_received;
-    
-    
-    //OLD CODE: TODO: Remove
-//   uint8_t rx[2];
-//   spiSelect(&MS5611_SPID);
-//   spiSend(&MS5611_SPID, 1, (void*)&adr);
-//   spiReceive(&MS5611_SPID, 2, (void*)rx);
-//   spiUnselect(&MS5611_SPID);
-//   *c = rx[0] << 8 | rx[1];
 }
 
 
@@ -188,6 +180,7 @@ static void ms5611_read_cal(MS5611CalData* cal_data)
  */
 static void ms5611_pin_setup()
 {
+    rcc_periph_clock_enable(RCC_SPI1); //Probably required
     gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3 | GPIO4 | GPIO5);
     //gpio_mode_setup (uint32_t gpioport, uint8_t mode, uint8_t pull_up_down, uint16_t gpios)
     gpio_set_af(GPIOB, GPIOB_SPI_AF_NUM ,GPIO3 | GPIO4 | GPIO5);
@@ -195,42 +188,15 @@ static void ms5611_pin_setup()
     spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_8, SPI_CR1_CPOL, 
                     SPI_CR1_CPHA, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST); 
                     //SHOULD EQUAL: SPI_CR1_BR_1 | SPI_CR1_CPOL | SPI_CR1_CPHA in CHiBIOS
-    /*
-    int spi_init_master 	( 	
-        uint32_t  	spi,
-		uint32_t  	br,
-		uint32_t  	cpol,
-		uint32_t  	cpha,
-		uint32_t  	crcl,
-		uint32_t  	lsbfirst 
-	) */
     
-    // In chibios : #define  SPI_CR1_BR_1     ((uint16_t)0x0010)       /*!<Bit 1 */
-    // #define  SPI_CR1_CPHA             ((uint16_t)0x0001)            /*!<Clock Phase      */
-    // #define  SPI_CR1_CPOL           ((uint16_t)0x0002)      /*!<Clock Polarity   */
-    /* example code:
-	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE,
-			GPIO13 | GPIO14 | GPIO15);
-	gpio_set_af(GPIOB, GPIO_AF5, GPIO13 | GPIO14 | GPIO15);
-
-	/* Setup SPI parameters. */
-	/*spi_init_master(SPI2, SPI_CR1_BAUDRATE_FPCLK_DIV_256, SPI_CR1_CPOL,
-			SPI_CR1_CPHA, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST);
-	spi_enable_ss_output(SPI2); */ /* Required, see NSS, 25.3.1 section. */
-    
-	/* Finally enable the SPI. */
-    /*
-	spi_enable(SPI2);
-    */
-    
-    
-
-    return;
+    // might require spi_enable_ss_output(SPI1); */ /* Required, see NSS, 25.3.1 section. */
 }
 
 
 /*
  * Initialise the MS5611.
+ * (Public)
+ * 
  * Sends a RESET and then reads in the calibration data.
  *
  * Call this once system startup, before attempting ms5611_read.
@@ -278,12 +244,16 @@ static void ms5611_read(MS5611CalData* cal_data,
 
     //TODO: Check what the tweeter is supposed to output + log
 //    tweeter_set_error(ERROR_BARO, *pressure < 1000 || *pressure > 120000);
-
 //    log_s32(CHAN_IMU_BARO, *pressure, *temperature);
 }
 
 /* 
- * Public function to read values and update state estimator
+ * Public function to read values and update state estimator for ms5611
+ * 
+ * Calls ms5611_read function and stores data in temperature and
+ *  preassure variables
+ * 
+ * Calls state estimation function to convert reading to altitude
  */
 void ms5611_run()
 {
@@ -293,43 +263,3 @@ void ms5611_run()
 }
 
 
-/*
- * MS5611 main thread.
- * Resets the MS5611, reads cal data, then reads a pressure and temperature
- * in a loop.
- */
- 
- /*
-msg_t ms5611_thread(void *arg)
-{
-    (void)arg;
-
-    
-    //TODO: implement this function
-    
-
-    
-    //OLD CODE:
-
-    static const SPIConfig spi_cfg = {
-        NULL,
-        MS5611_SPI_CS_PORT,
-        MS5611_SPI_CS_PIN,
-        SPI_CR1_BR_1 | SPI_CR1_CPOL | SPI_CR1_CPHA
-    };
-
-    static MS5611CalData cal_data;
-    static int32_t temperature, pressure;
-
-    chRegSetThreadName("MS5611");
-
-    spiStart(&MS5611_SPID, &spi_cfg);
-    ms5611_init(&cal_data);
-
-    while (TRUE) {
-        ms5611_read(&cal_data, &temperature, &pressure);
-        state_estimation_new_pressure((float)pressure);
-    }
-}
-
-*/
