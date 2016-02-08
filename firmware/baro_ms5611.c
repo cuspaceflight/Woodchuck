@@ -10,8 +10,6 @@
 
 /*
  * TODO: 
- * set gpio to correct configuration, 
- * create a timer script to time conversions, 
  * create a Kalmanfilter to estimate the altitude, 
  * remove old code, 
  * include logging functionality and tweeter functionality
@@ -24,6 +22,7 @@
 
 #include "baro_ms5611.h"
 #include "gps.h"
+#include "clock.h"
 //#include "led.h"
 //#include "radio.h"
 
@@ -72,12 +71,7 @@ static void ms5611_reset()
     spi_send8(MS5611_SPID, adr); // Data is written to the SPI interface after the previous write transfer has finished.
                                 // Note that in chibios an adress is sent, while here the origenal data is sent?? 
                                 //    spiSend(&MS5611_SPID, 1, (void*)&adr);
-    //TODO: time this instead
-    for (i = 0; i < 10000; i++)
-    {
-        __asm__("nop");  //Not a pretty way of doing this, but will do for now //    chThdSleepMilliseconds(5);
-    }
-    
+    delay_ms(5);
     spi_disable(MS5611_SPID); //    spiUnselect(&MS5611_SPID);
 }
 
@@ -108,7 +102,7 @@ static void ms5611_read_s24(uint8_t adr, int32_t* d)
     spi_enable(MS5611_SPID);    // The SPI peripheral is enabled. // CHIBIOS spiSelect(&MS5611_SPID);
     spi_send8(MS5611_SPID, adr); // Data is written to the SPI interface after the previous write transfer has finished.
     
-    //TODO: Sleep for 1 ms
+    delay_ms(1);
     /*
      * Wait for conversion to complete. There doesn't appear to be any way
      * to do this without timing it, unfortunately.
@@ -122,41 +116,6 @@ static void ms5611_read_s24(uint8_t adr, int32_t* d)
     data_received = spi_read(MS5611_SPID); //A ADC_READ command returns a 3 byte result
 
     *d = data_received;
-    
-    /*
-    //OLD CODE:
-    uint8_t adc_adr = 0x00, rx[3];
-    int32_t t0;
-    
-    */
-    /* Start conversion */
-    //spiSelect(&MS5611_SPID);
-    //spiSend(&MS5611_SPID, 1, (void*)&adr);
-    
-    /*
-     * Wait for conversion to complete. There doesn't appear to be any way
-     * to do this without timing it, unfortunately.
-     *
-     * If we just watch the clock we'll consume enormous CPU time for little
-     * gain. Instead we'll sleep for "roughly" 1ms and then wait until at least
-     * the desired 0.6ms have passed.
-     */
-   // t0 = halGetCounterValue();
-    //chThdSleepMilliseconds(1);
-    //while(halGetCounterValue() - t0 < US2RTT(600)) {
-   //     chThdYield();
-    //}
-
-    /* Deassert CS */
-    //spiUnselect(&MS5611_SPID);
-
-    /* Read ADC result */
-//    spiSelect(&MS5611_SPID);
-  //  spiSend(&MS5611_SPID, 1, (void*)&adc_adr);
-   // spiReceive(&MS5611_SPID, 3, (void*)rx);
-    //spiUnselect(&MS5611_SPID);
-
-   // *d = rx[0] << 16 | rx[1] << 8 | rx[2];
 }
 
 /*
