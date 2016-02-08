@@ -1,13 +1,23 @@
-#ifndef UTILS_H
-#define UTILS_H
+/*
+ * Timer Driver
+ * Woodchuck
+ * 
+ * Adapted from
+ * OKGO 2 - 2014 David Turner, Cambridge University Spaceflight
+ * 
+ * Woodchuck - 2016 Eivind Roson Eide, Cambridge University Spaceflight
+ */
+
+#ifndef CLOCK_H
+#define CLOCK_H
 
 #include <stdint.h>
 #include <stdbool.h>
 
 
 /**
- * Delay for approximately a millisecond. Very roughly calibrated by eye to
- * within about 20% precision.
+ * Delay for a number of milliseconds, based off the systick timer
+ * Delays around a small number of milliseconds may be inaccurate
  * @param delay Number of milliseconds to delay.
  */
 void delay_ms(const uint32_t delay);

@@ -1,10 +1,20 @@
+/*
+ * Timer Driver
+ * Woodchuck
+ * 
+ * Adapted from
+ * OKGO 2 - 2014 David Turner, Cambridge University Spaceflight
+ * 
+ * Woodchuck - 2016 Eivind Roson Eide, Cambridge University Spaceflight
+ */
+
 #include <stdint.h>
 
 #include <libopencm3/cm3/cortex.h>
 #include <libopencm3/cm3/systick.h>
 #include <libopencm3/cm3/nvic.h>
 
-#include "utils.h"
+#include "clock.h"
 
 /* Millisecond timer driven by systick interrupt, read atomically by get_millis
  */
