@@ -10,7 +10,6 @@
 
 /*
  * TODO: 
- * Find correct outputports, 
  * set gpio to correct configuration, 
  * create a timer script to time conversions, 
  * create a Kalmanfilter to estimate the altitude, 
@@ -33,15 +32,17 @@
  * SPI interface page 9
  */
 
-#define MS5611_SPID          SPI1  //TODO ?? SPID2  //Unsigned int32. SPI peripheral identifier SPI Register base address. 
-
-//#define MS5611_SPI_CS_PORT         //TDOO ?? GPIOB  //
-//#define MS5611_SPI_CS_PIN          //TODO ?? GPIOB_BARO_CS // 
+#define MS5611_SPID         SPI1        //Checked with datasheet 
+#define MS5611_SPI_PORT     GPIOB       //Checked with datasheet
+#define MS5611_SPI_CLK      GPIO3       //Checked with datasheet PB3
+#define MS5611_SPI_MISO     GPIO4       //Checked with datasheet PB4
+#define MS5611_SPI_MOSI     GPIO5       //Checked with datasheet PB5
+#define GPIOB_SPI_AF_NUM    0           //Checked: Table 15: AF for GPIOB
 
 static void ms5611_reset(void);
 static void ms5611_read_u16(uint8_t adr, uint16_t* c);
 static void ms5611_read_s24(uint8_t adr, int32_t* d);
-static void ms5611_init(MS5611CalData* cal_data);
+//static void ms5611_init(MS5611CalData* cal_data);
 static void ms5611_pin_setup()
 static void ms5611_read_cal(MS5611CalData* cal_data);
 static void ms5611_read(MS5611CalData* cal_data,
@@ -187,10 +188,26 @@ static void ms5611_read_cal(MS5611CalData* cal_data)
  */
 static void ms5611_pin_setup()
 {
-    gpio_mode_setup (uint32_t gpioport, uint8_t mode, uint8_t pull_up_down, uint16_t gpios)
-    gpio_set_af (uint32_t gpioport, uint8_t alt_func_num, uint16_t gpios)
+    gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3 | GPIO4 | GPIO5);
+    //gpio_mode_setup (uint32_t gpioport, uint8_t mode, uint8_t pull_up_down, uint16_t gpios)
+    gpio_set_af(GPIOB, GPIOB_SPI_AF_NUM ,GPIO3 | GPIO4 | GPIO5);
+    //gpio_set_af (uint32_t gpioport, uint8_t alt_func_num, uint16_t gpios)
+    spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_8, SPI_CR1_CPOL, 
+                    SPI_CR1_CPHA, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST); 
+                    //SHOULD EQUAL: SPI_CR1_BR_1 | SPI_CR1_CPOL | SPI_CR1_CPHA in CHiBIOS
+    /*
+    int spi_init_master 	( 	
+        uint32_t  	spi,
+		uint32_t  	br,
+		uint32_t  	cpol,
+		uint32_t  	cpha,
+		uint32_t  	crcl,
+		uint32_t  	lsbfirst 
+	) */
     
-    
+    // In chibios : #define  SPI_CR1_BR_1     ((uint16_t)0x0010)       /*!<Bit 1 */
+    // #define  SPI_CR1_CPHA             ((uint16_t)0x0001)            /*!<Clock Phase      */
+    // #define  SPI_CR1_CPOL           ((uint16_t)0x0002)      /*!<Clock Polarity   */
     /* example code:
 	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE,
 			GPIO13 | GPIO14 | GPIO15);
@@ -220,7 +237,7 @@ static void ms5611_pin_setup()
  *
  * cal_data should be a pointer to some memory to store the calibration in.
  */
-static void ms5611_init(MS5611CalData* cal_data)
+void ms5611_init(MS5611CalData* cal_data)
 {
     ms5611_reset();
     ms5611_read_cal(cal_data);
@@ -290,14 +307,7 @@ msg_t ms5611_thread(void *arg)
     
     //TODO: implement this function
     
-    int spi_init_master 	( 	
-        uint32_t  	spi,
-		uint32_t  	br,
-		uint32_t  	cpol,
-		uint32_t  	cpha,
-		uint32_t  	crcl,
-		uint32_t  	lsbfirst 
-	) 	
+
     
     //OLD CODE:
 

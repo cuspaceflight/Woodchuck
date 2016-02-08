@@ -23,5 +23,6 @@ extern int32_t global_pressure;
 
 /* The main script. Run this. */
 void ms5611_run()
+void ms5611_init(MS5611CalData* cal_data)
 
 #endif /* MS5611_H */
