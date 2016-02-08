@@ -49,9 +49,11 @@ void delay_us(const uint32_t delay)
 {
 	uint32_t i, j;
 
-    for( i = 0; i < delay; i++ )
-        for( j = 0; j < 9; j++)
+    for(i = 0; i < delay; i++ ){
+        for( j = 0; j < 9; j++) {
             __asm__("nop");
+        }
+    }
 }
 
 /* Setup systick */
@@ -71,6 +73,7 @@ void systick_init(void)
 uint32_t get_millis(void)
 {
     uint32_t value;
+        
     /* Atomically read the millis_timer value to protect against the weird
      * hypothetical case where a 32-bit read is non-atomic and the systick
      * interrupt updates the millis timer during it */
