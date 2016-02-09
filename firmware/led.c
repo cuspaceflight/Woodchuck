@@ -21,6 +21,8 @@
 #define PIN_RED GPIO6
 #define PIN_GREEN GPIO5
 #define PIN_BLUE GPIO4
+uint16_t pins[3] = {PIN_RED, PIN_GREEN, PIN_BLUE};
+
 
 
 volatile bool error_states[ERROR_MAX];
@@ -71,55 +73,35 @@ void led_init()
 /**
  * Set the given LED to the given state.
  */
-void led_set(int led, int status) {
-	//status is 0 (off), 1(on), 2(blinking), 3(toggle)
-	int pin;
-	/*TO DO:
-	-
-	*/
-	if (led == LED_RED || led == LED_GREEN || led == LED_BLUE) {
-		
-		switch (led)
-		{
-		case LED_RED:
-			pin = PIN_RED;
-			break;
-		case LED_GREEN:
-			pin = PIN_GREEN;
-			break;
-		case LED_BLUE:
-			pin = PIN_BLUE
-			break;
+void led_set(led_colours led, int status) {
+	//see status enum for possible values of status
+
+	switch (status)
+	{
+	case LED_OFF:
+		gpio_set(PORT_LED, pins[led]);//high on current sink output = led off
+		statuses[led] = LED_OFF;
+		break;
+	case LED_ON:
+		gpio_clear(PORT_LED, pins[led]);//low on current sink output = led off
+		statuses[led] = LED_ON;
+		break;
+	case LED_BLINKING:
+		statuses[led] = LED_BLINKING;
+		//LED has been added to blinking queue
+		//setting it to any other state removes it from queue
+		break;
+	case LED_TOGGLE:
+		gpio_toggle(PORT_LED, pins[led]);//toggle
+		if (statuses[led] == LED_OFF) {
+			statuses[led] == LED_ON;
 		}
-
-
-		switch (status)
-		{
-		case LED_OFF:
-			gpio_set(PORT_LED, pin);//high on current sink output = led off
-			statuses[led] = LED_OFF;
-			break;
-		case LED_ON:
-			gpio_clear(PORT_LED, pin);//low on current sink output = led off
-			statuses[led] = LED_ON;
-			break;
-		case LED_BLINKING:
-			statuses[led] = LED_BLINKING;
-			//LED has been added to blinking queue
-			//setting it to any other state removes it from queue
-			break;
-		case LED_TOGGLE:
-			gpio_toggle(PORT_LED, pin);//toggle
-			if (statuses[led] == LED_OFF) {
-				statuses[led] == LED_ON;
-			}
-			else if (statuses[led] == LED_ON) {
-				statuses[led] == LED_OFF;
-			}
-		default:
-			//do nothing
-
+		else if (statuses[led] == LED_ON) {
+			statuses[led] == LED_OFF;
 		}
+	default:
+		//do nothing
+
 	}
 }
 

@@ -37,6 +37,7 @@ typedef enum {
 	LED_ON,
 	LED_BLINKING,
 	LED_TOGGLE
+	MODES_SIZE
 } led_modes;
 
 typedef enum {//backwards compatibility with joey function calls
@@ -45,6 +46,7 @@ typedef enum {//backwards compatibility with joey function calls
 	LED_BLUE
 } led_colours;
 
+/*
 #define LED_RED       0
 #define LED_GREEN     1
 #define LED_BLUE      2
@@ -58,8 +60,10 @@ typedef enum {//backwards compatibility with joey function calls
 
 
 void led_init();
-void led_set(int led, int status);
+void led_set(led_colours led, int status);
 void led_reset();//turn them all off incl. blink timers
+//Add other functions
+
 
 /* Set a specific error.
 * If `set` is true then the error is occurring.
