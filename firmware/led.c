@@ -3,70 +3,43 @@
 *
 * This file is part of the Woodchuck project by Cambridge University Spaceflight.
 *
-* It is an adapted version of the JOEY-M version by Jon Sowman
+* It is an adapted version of the JOEY-M version by Jon Sowman 
+* 
 *
 * Jon Sowman 2012
+*
 * Gregory Brooks 2016
 *
 #include <avr/io.h>
 */
 #include <libopencm3/stm32/gpio.h>
-#include <libopencm3/stm32/rcc.h>
-#include <libopencm3/stm32/timer.h>
-#include <libopencm3/cm3/nvic.h>
-
 #include "led.h"
+#include "clock.h"
 
 #define PORT_LED GPIOA
 #define PIN_RED GPIO6
 #define PIN_GREEN GPIO5
 #define PIN_BLUE GPIO4
-uint16_t pins[3] = {PIN_RED, PIN_GREEN, PIN_BLUE};
-
-
+#define PIN_RG PIN_RED | PIN_GREEN
+#define PIN_RB PIN_RED | PIN_BLUE
+#define PIN_GB PIN_GREEN | PIN_BLUE
+#define PIN_RGB PIN_RED | PIN_GREEN | PIN_BLUE
+uint16_t pins[COLOURS_SIZE] = {PIN_RED, PIN_GREEN, PIN_BLUE, 
+PIN_RG, PIN_RB, PIN_GB, PIN_RGB};
 
 volatile bool error_states[ERROR_MAX];
-volatile led_modes statuses[3];//red, green, blue
-int status_index = 0; //use this to record the current position in the led blinking queue
+volatile led_modes statuses[COLOURS_SIZE];
+int status_index = COLOURS_SIZE; //use this to record the current position in the led blinking queue
+//must start as COLOURS_SIZE(index after index of last led) for blink queue to work
 
-
-//variables to describe the current status
-//!!! create class with led states to be read if necessary
-//don't forget to set these state variables in the relevant led_set cases
-//led_set  is not included in this class for backwards compatibility
 void led_init()
 {   
     //LED_DDR |= _BV(LED_RED) | _BV(LED_GREEN);
 
 	//Set led pins as output, no internal pullup/down
-	gpio_mode_setup(PORT_LED, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, PIN_RED | PIN_GREEN | PIN_BLUE);
+	gpio_mode_setup(PORT_LED, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, PIN_RGB);
 	//set output options: open drain output,slow output (2MHz)
-	gpio_output_options(PORT_LED, GPIO_OTYPE_OD, GPIO_OSPEED_2MHZ, PIN_RED | PIN_GREEN | PIN_BLUE);
-
-	//enable clock for timer interrupts
-	//https://github.com/libopencm3/libopencm3-examples/blob/master/examples/stm32/l1/stm32l-discovery/button-irq-printf-lowpower/main.c
-	//https://github.com/libopencm3/libopencm3-examples/blob/master/examples/stm32/f1/stm32-h103/timer/timer.c
-	
-	
-	//https://github.com/libopencm3/libopencm3-examples/blob/393fe8e449d5334c715a3ca5f538328dbf387182/examples/stm32/f1/other/timer_interrupt/timer.c
-	nvic_enable_irq(NVIC_TIM2_IRQ);
-	nvic_set_priority(NVIC_TIM2_IRQ, 1);
-
-	rcc_periph_clock_enable(RCC_TIM2);
-	/* Set timer start value. */
-	TIM_CNT(TIM2) = 1;
-
-	/* Set timer prescaler. 8MHz/1000Hz*/
-	TIM_PSC(TIM2) = 8000;
-
-	/* End timer value. If this is reached an interrupt is generated. */
-	TIM_ARR(TIM2) = 1000;//interrupt triggered every second
-
-	/* Update interrupt enable. */
-	TIM_DIER(TIM2) |= TIM_DIER_UIE;
-
-	/* Start timer. */
-	TIM_CR1(TIM2) |= TIM_CR1_CEN;
+	gpio_output_options(PORT_LED, GPIO_OTYPE_OD, GPIO_OSPEED_2MHZ, PIN_RGB);
 	
 }
 
@@ -101,49 +74,75 @@ void led_set(led_colours led, int status) {
 		}
 	default:
 		//do nothing
-
 	}
 }
 
-void led_reset()//turn them all off (not blink timers)
+void led_reset()//turn them all off incl. blinking
 {
-	gpio_set(PORT_LED, PIN_RED | PIN_GREEN | PIN_BLUE);
-	for (int x = 0, x < 3; x++) {
+	gpio_set(PORT_LED, PIN_RGB);
+	for (int x = 0, x < COLOURS_SIZE; x++) {
 		statuses[x] = LED_OFF
 	}
 }
 
-void led_set_error(error_enum err, bool set) {
+bool led_read(led_colours led)//check whether red, green or blue is illuminated
+{//true if illuminated, false if not
+ //Output pin must be low to illuminate led
+	if (led == LED_RED || led == LED_GREEN || LED == LED_BLUE)
+	{
+		uint16_t outputreg = gpio_get(PORT_LED, led);
+		if (outputreg == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{//no led specified or wrong enum used, just check whether any leds are illuminated
+		uint16_t outputreg = gpio_port_read(PORT_LED);
+		if (outputreg | PIN_RGB == outputreg)//if all 3 led pins are high
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+}
+
+void led_set_error(error_enum err, bool set) 
+{
 	error_states[err] = set;
 }
 
-
-void tim2_isr(void)
+void led_interrupt()
 {
-	//timer interrupt for led blink
-	
-	/*cycle through the blink queue, this function runs once per second
-
-	e.g.:
-	//Remember: led and pin have different values (0,1,2 vs GPIO4,5,6)
-	1. toggle the led set to blink mode
-	2. increment position in queue
-	3. toggle next one
-	4.Call error response function?
+	/*timer interrupt for led blink
+	cycle through the blink queue, this function runs once per second
 	*/
-	
-	TIM_SR(TIM2) &= ~TIM_SR_UIF; /* Clear interrupt flag. */
+	if (status_index < COLOURS_SIZE) {//there is no pins[COLOURS_SIZE] variable
+		//blinking leds will just be off for status_index == COLOURS_SIZE
+		gpio_toggle(PORT_LED, pins(status_index));
+	}
+
+	do {
+		status_index++;
+		status_index = status_index % (COLOURS_SIZE + 1);//range from 0 to COLOURS_SIZE
+		if (status_index == COLOURS_SIZE)
+		{
+			break;//there is no statuses[COLOURS_SIZE] variable
+		}
+	} while (statuses[status_index] != LED_BLINKING)//only blink leds set to blink
+
+	if (status_index < COLOURS_SIZE) {//there is no pins[COLOURS_SIZE] variable
+		gpio_toggle(PORT_LED, pins(status_index));
+	}
 }
 
-int mod(int a, int b)
-{
-	if (b < 0) //you can check for b == 0 separately and do what you want
-		return mod(-a, -b);
-	int ret = a % b;
-	if (ret < 0)
-		ret += b;
-	return ret;
-}
 
 
 void error_response()
@@ -153,6 +152,32 @@ void error_response()
 		if (error_states[x])
 		{
 			//switch case for each errors_enum enumerator
+			switch (x)
+			{
+			case ERROR_CONFIG:
+				//do something e.g. blink red
+				led_set(LED_RED, LED_BLINKING);
+				break;
+			case ERROR_RADIO:
+				//do something e.g. blink green
+				led_set(LED_GREEN, LED_BLINKING);
+				break;
+			case ERROR_GPS:
+				//do something e.g. blink blue
+				led_set(LED_BLUE, LED_BLINKING)
+				break;
+			case ERROR_BARO:
+				//do something e.g. blink cyan
+				led_set(LED_GB, LED_BLINKING)
+				break;
+			default:
+				//do nothing
+
+			}
 		}
 	}
 }
+
+
+
+

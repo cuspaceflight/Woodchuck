@@ -30,7 +30,7 @@ typedef enum {
 } errors_enum;
 
 extern volatile bool error_states[ERROR_MAX];
-extern voltatile led_modes statuses[3];
+extern voltatile led_modes statuses[COLOURS_SIZE];
 
 typedef enum {
 	LED_OFF = 0,
@@ -43,7 +43,12 @@ typedef enum {
 typedef enum {//backwards compatibility with joey function calls
 	LED_RED = 0,
 	LED_GREEN,
-	LED_BLUE
+	LED_BLUE,
+	LED_RG,//yellow
+	LED_RB,//magenta
+	LED_GB,//cyan
+	LED_RGB,//white
+	COLOURS_SIZE
 } led_colours;
 
 /*
@@ -62,7 +67,12 @@ typedef enum {//backwards compatibility with joey function calls
 void led_init();
 void led_set(led_colours led, int status);
 void led_reset();//turn them all off incl. blink timers
-//Add other functions
+bool led_read(led_colours led);//check whether red, green or blue (or any) is illuminated
+//true if illuminated, false if not
+void led_set_error(error_enum err, bool set);
+void led_interrupt();
+void led_interrupt();
+void error_response();
 
 
 /* Set a specific error.
