@@ -12,7 +12,6 @@
 //#include <avr/io.h>
 #include <stdio.h>
 #include <util/delay.h>
-//#include <avr/eeprom.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -20,6 +19,7 @@
 #include <libopencm3/stm32/usart.h>
 #include <libopencm3/stm32/iwdg.h>
 
+#include "eeprom.h"
 #include "interrupts.h"
 #include "led.h"
 #include "radio.h"
@@ -28,7 +28,7 @@
 // 30kHz range on COARSE, 3kHz on FINE
 
 char s[100];
-uint32_t EEMEM ticks = 0;
+uint8_t ticks_addr = 0x00;
 
 int main()
 {
@@ -42,6 +42,7 @@ int main()
     led_init();
     radio_init();
     gps_init();
+    eeprom_init();
     radio_enable();
 
     // Set the radio shift and baud rate
@@ -65,7 +66,9 @@ int main()
         led_set(LED_GREEN, 1);
 
         // Get the current system tick and increment
-        uint32_t tick = eeprom_read_dword(&ticks) + 1;
+        uint32_t tick;
+        eeprom_read_dword(ticks_addr, &tick);
+        tick += 1;
 
         // Check that we're in airborne <1g mode
         if( gps_check_nav() != 0x06 ) led_set(LED_RED, 1);
@@ -93,7 +96,7 @@ int main()
         radio_chatter();
 
         led_set(LED_RED, 0);
-        eeprom_update_dword(&ticks, tick);
+        eeprom_write_dword(tick_addr, tick);
         iwdg_reset();
         _delay_ms(500);
     }
