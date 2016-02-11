@@ -98,6 +98,8 @@ F6 "BARO_MISO" I R 6300 1700 60
 F7 "BARO_MOSI" O R 6300 1800 60 
 F8 "RADIO_TX" O R 6300 1900 60 
 F9 "RADIO_EN" O R 6300 2000 60 
+F10 "MTX2_P1" O R 6300 2200 60 
+F11 "MTX2_P0" O R 6300 2100 60 
 $EndSheet
 $Sheet
 S 7400 1300 2950 2200
@@ -231,6 +233,42 @@ F 3 "" H 5850 6450 60  0000 C CNN
 	1    5850 6450
 	1    0    0    -1  
 $EndComp
+Text Label 3550 1500 0    60   ~ 0
+GPS_FROM_MCU
+Text Label 3550 1600 0    60   ~ 0
+GPS_TO_MCU
+Text Label 6450 1300 0    60   ~ 0
+GPS_FROM_MCU
+Text Label 6450 1400 0    60   ~ 0
+GPS_TO_MCU
+Text Label 6450 1500 0    60   ~ 0
+BARO_CS_N
+Text Label 6450 1600 0    60   ~ 0
+BARO_CLK
+Text Label 6450 1700 0    60   ~ 0
+BARO_MISO
+Text Label 6450 1800 0    60   ~ 0
+BARO_MOSI
+Text Label 6450 1900 0    60   ~ 0
+RADIO_TX
+Text Label 6450 2000 0    60   ~ 0
+RADIO_EN
+Text Label 3550 5000 0    60   ~ 0
+MTX2_P0
+Text Label 3550 5150 0    60   ~ 0
+MTX2_P1
+Text Label 3550 5300 0    60   ~ 0
+RADIO_TX
+Text Label 3550 5450 0    60   ~ 0
+RADIO_EN
+Text Label 7250 4300 2    60   ~ 0
+BARO_CLK
+Text Label 7250 4400 2    60   ~ 0
+BARO_MOSI
+Text Label 7250 4500 2    60   ~ 0
+BARO_MISO
+Text Label 7250 4600 2    60   ~ 0
+BARO_CS_N
 Wire Notes Line
 	3850 7250 6450 7250
 Wire Notes Line
@@ -284,10 +322,6 @@ Wire Wire Line
 	3400 1500 3550 1500
 Wire Wire Line
 	3400 1600 3550 1600
-Text Label 3550 1500 0    60   ~ 0
-GPS_FROM_MCU
-Text Label 3550 1600 0    60   ~ 0
-GPS_TO_MCU
 Wire Wire Line
 	6300 1300 6450 1300
 Wire Wire Line
@@ -304,22 +338,6 @@ Wire Wire Line
 	6300 1900 6450 1900
 Wire Wire Line
 	6300 2000 6450 2000
-Text Label 6450 1300 0    60   ~ 0
-GPS_FROM_MCU
-Text Label 6450 1400 0    60   ~ 0
-GPS_TO_MCU
-Text Label 6450 1500 0    60   ~ 0
-BARO_CS_N
-Text Label 6450 1600 0    60   ~ 0
-BARO_CLK
-Text Label 6450 1700 0    60   ~ 0
-BARO_MISO
-Text Label 6450 1800 0    60   ~ 0
-BARO_MOSI
-Text Label 6450 1900 0    60   ~ 0
-RADIO_TX
-Text Label 6450 2000 0    60   ~ 0
-RADIO_EN
 Wire Wire Line
 	3400 5000 3550 5000
 Wire Wire Line
@@ -328,14 +346,6 @@ Wire Wire Line
 	3400 5300 3550 5300
 Wire Wire Line
 	3400 5450 3550 5450
-Text Label 3550 5000 0    60   ~ 0
-MTX2_P0
-Text Label 3550 5150 0    60   ~ 0
-MTX2_P1
-Text Label 3550 5300 0    60   ~ 0
-RADIO_TX
-Text Label 3550 5450 0    60   ~ 0
-RADIO_EN
 Wire Wire Line
 	7400 4300 7250 4300
 Wire Wire Line
@@ -344,12 +354,12 @@ Wire Wire Line
 	7400 4500 7250 4500
 Wire Wire Line
 	7400 4600 7250 4600
-Text Label 7250 4300 2    60   ~ 0
-BARO_CLK
-Text Label 7250 4400 2    60   ~ 0
-BARO_MOSI
-Text Label 7250 4500 2    60   ~ 0
-BARO_MISO
-Text Label 7250 4600 2    60   ~ 0
-BARO_CS_N
+Wire Wire Line
+	6300 2100 6450 2100
+Wire Wire Line
+	6300 2200 6450 2200
+Text Label 6450 2100 0    60   ~ 0
+MTX2_P0
+Text Label 6450 2200 0    60   ~ 0
+MTX2_P1
 $EndSCHEMATC
