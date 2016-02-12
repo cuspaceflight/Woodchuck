@@ -8,6 +8,7 @@
  */
 
 #include <libopencm3/stm32/i2c.h>
+#include <libopencm3/stm32/rcc.h>
 #include "eeprom.h"
 
 // Choose which I2C peripheral to use
@@ -22,6 +23,10 @@
 #define I2C_CR2_FREQ_MASK   0x3ff
 #define I2C_CCR_CCRMASK     0xfff
 #define I2C_TRISE_MASK      0x3f
+// Should be included by i2c.h (found in i2c_common_all.h), but aren't :(
+#define I2C_CCR(i2c_base)       MMIO32((i2c_base) + 0x1c)
+#define I2C_TRISE(i2c_base)     MMIO32((i2c_base) + 0x20)
+#define I2C_CCR_FS              (1<<15)
 
 /**
  * Set up I2C communication at 400kHz.
@@ -46,7 +51,7 @@ void eeprom_read(uint8_t addr, uint8_t *data)
     i2c_send_start(I2C); // Send START condition
 
     _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_WRITE); // send the address
-    _eeprom_send_blocking(I2C, addr); // send the read address
+    _eeprom_send_blocking(addr); // send the read address
 
     i2c_send_start(I2C); // Send RESTART
 
@@ -140,7 +145,7 @@ void _eeprom_send_blocking(uint8_t data)
  */
 uint8_t _eeprom_read_blocking(void)
 {
-    while( (I2C_ISR(i2c) & I2C_ISR_RXNE) != 0 );
+    while( (I2C_ISR(I2C) & I2C_ISR_RXNE) != 0 );
     return i2c_get_data(I2C);
 }
 
