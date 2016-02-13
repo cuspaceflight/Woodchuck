@@ -276,8 +276,6 @@ Wire Notes Line
 	6450 7250 6450 5900
 Wire Notes Line
 	6450 5900 3850 5900
-Wire Wire Line
-	4200 6550 4850 6550
 Wire Notes Line
 	3850 5900 3850 7250
 Wire Wire Line
@@ -305,16 +303,12 @@ Wire Wire Line
 Wire Wire Line
 	5550 6550 6100 6550
 Wire Wire Line
-	4750 6650 4850 6650
-Wire Wire Line
 	4750 6450 4750 6650
 Connection ~ 4750 6550
 Wire Wire Line
 	4200 6750 4200 6900
 Wire Wire Line
 	4200 6650 4200 6550
-Wire Wire Line
-	4750 6450 4850 6450
 Connection ~ 4200 6850
 Connection ~ 4400 6850
 Connection ~ 4400 6550
@@ -363,4 +357,10 @@ Text Label 6450 2100 0    60   ~ 0
 MTX2_P0
 Text Label 6450 2200 0    60   ~ 0
 MTX2_P1
+Wire Wire Line
+	4850 6450 4750 6450
+Wire Wire Line
+	4200 6550 4850 6550
+Wire Wire Line
+	4750 6650 4850 6650
 $EndSCHEMATC
