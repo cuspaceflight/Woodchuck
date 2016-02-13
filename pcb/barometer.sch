@@ -58,7 +58,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 6
+Sheet 5 5
 Title ""
 Date ""
 Rev ""
@@ -175,7 +175,7 @@ F 1 "100n" H 2525 1700 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 2200 1800 30  0000 C CNN
 F 3 "" H 2500 1800 60  0000 C CNN
 F 4 "Value" H 2500 1800 60  0001 C CNN "Digikey"
-F 5 "9406140" H 2500 1800 60  0001 C CNN "Farnell"
+F 5 "1759037" H 2500 1800 60  0001 C CNN "Farnell"
 F 6 "Value" H 2500 1800 60  0001 C CNN "Fieldname"
 	1    2500 1800
 	1    0    0    -1  
