@@ -52,6 +52,7 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
+LIBS:agg-kicad
 LIBS:woodchuck-cache
 EELAYER 25 0
 EELAYER END

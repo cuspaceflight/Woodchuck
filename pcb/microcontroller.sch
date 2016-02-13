@@ -52,6 +52,7 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
+LIBS:agg-kicad
 LIBS:woodchuck-cache
 EELAYER 25 0
 EELAYER END
@@ -709,4 +710,73 @@ Text HLabel 6900 5000 2    60   Output ~ 0
 MTX2_P1
 Text HLabel 6900 4900 2    60   Output ~ 0
 MTX2_P0
+$Comp
+L 24AA01 IC?
+U 1 1 56BF54E5
+P 8200 3500
+F 0 "IC?" H 8000 3700 50  0000 L CNN
+F 1 "24AA01" H 8000 3300 50  0000 L CNN
+F 2 "agg:SOT-23-5" H 8000 3200 50  0001 L CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21711c.pdf" H 8000 3100 50  0001 L CNN
+F 4 "1331269" H 8000 3000 50  0001 L CNN "Farnell"
+	1    8200 3500
+	-1   0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 56BF5C75
+P 8850 3500
+F 0 "C?" H 8875 3600 50  0000 L CNN
+F 1 "0.1uF" H 8875 3400 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 8888 3350 30  0000 C CNN
+F 3 "" H 8850 3500 60  0000 C CNN
+F 4 "Value" H 8850 3500 60  0001 C CNN "Digikey"
+F 5 "9406140" H 8850 3500 60  0001 C CNN "Farnell"
+F 6 "Value" H 8850 3500 60  0001 C CNN "Fieldname"
+	1    8850 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8500 3400 8700 3400
+Wire Wire Line
+	8700 3400 8700 3350
+Wire Wire Line
+	8700 3350 8850 3350
+Wire Wire Line
+	8500 3600 8650 3600
+Wire Wire Line
+	8650 3600 8650 3650
+Wire Wire Line
+	8650 3650 8850 3650
+$Comp
+L GND #PWR?
+U 1 1 56BF61FD
+P 8850 3800
+F 0 "#PWR?" H 8850 3550 50  0001 C CNN
+F 1 "GND" H 8850 3650 50  0000 C CNN
+F 2 "" H 8850 3800 60  0000 C CNN
+F 3 "" H 8850 3800 60  0000 C CNN
+	1    8850 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8850 3650 8850 3800
+$Comp
+L +3.3V #PWR?
+U 1 1 56BF6515
+P 8850 3250
+F 0 "#PWR?" H 8850 3100 50  0001 C CNN
+F 1 "+3.3V" H 8850 3390 50  0000 C CNN
+F 2 "" H 8850 3250 50  0000 C CNN
+F 3 "" H 8850 3250 50  0000 C CNN
+	1    8850 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8850 3350 8850 3250
+Wire Wire Line
+	8850 3750 7900 3750
+Wire Wire Line
+	7900 3750 7900 3600
+Connection ~ 8850 3750
 $EndSCHEMATC

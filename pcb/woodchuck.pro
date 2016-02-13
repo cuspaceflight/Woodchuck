@@ -1,4 +1,4 @@
-update=01/02/2016 17:24:08
+update=13/02/2016 14:43:56
 version=1
 last_client=kicad
 [pcbnew]
@@ -27,7 +27,7 @@ NetIExt=net
 version=1
 [eeschema]
 version=1
-LibDir=../../../avionics14/pcb/avionics14.pretty
+LibDir=../agg-kicad
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -82,3 +82,4 @@ LibName50=library/stm32f072cbt6
 LibName51=library/jsta
 LibName52=library/sma
 LibName53=library/cga0402mlc-12g
+LibName54=agg-kicad
