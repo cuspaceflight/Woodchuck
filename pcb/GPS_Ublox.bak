@@ -109,8 +109,6 @@ Connection ~ 4550 3200
 Wire Wire Line
 	4650 3300 4550 3300
 Connection ~ 4550 3300
-Wire Wire Line
-	4650 3400 4550 3400
 Connection ~ 4550 3400
 Wire Wire Line
 	4650 3500 4550 3500
@@ -234,4 +232,6 @@ Connection ~ 4550 2600
 NoConn ~ 6050 3700
 Wire Wire Line
 	6050 2600 6050 2500
+Wire Wire Line
+	4650 3400 4550 3400
 $EndSCHEMATC
