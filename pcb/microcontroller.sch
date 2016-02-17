@@ -118,7 +118,7 @@ F 6 "Value" H 2750 2000 60  0001 C CNN "Fieldname"
 	1    2750 2000
 	1    0    0    -1  
 $EndComp
-Text Notes 2600 2500 1    60   ~ 0
+Text Notes 3500 1450 2    60   ~ 0
 NOTE: Place one near each\nVDD pin (24, 48) and one\nnear VDDIO2 (36)
 $Comp
 L C C401
@@ -395,7 +395,7 @@ Text HLabel 6900 4100 2    60   Output ~ 0
 BARO_MOSI
 Text HLabel 4650 4500 0    60   Output ~ 0
 RADIO_EN
-Text HLabel 6900 5100 2    60   Output ~ 0
+Text HLabel 4650 4000 0    60   Output ~ 0
 RADIO_TX
 NoConn ~ 6700 3600
 NoConn ~ 6700 3700
@@ -406,7 +406,6 @@ NoConn ~ 6700 4800
 NoConn ~ 4850 4600
 NoConn ~ 4850 4400
 NoConn ~ 4850 4300
-NoConn ~ 4850 3700
 NoConn ~ 4850 3600
 NoConn ~ 4850 3400
 NoConn ~ 4850 3300
@@ -525,9 +524,9 @@ Wire Wire Line
 	2750 1850 2750 1750
 Connection ~ 3000 1750
 Wire Wire Line
-	2750 2250 3250 2250
+	2750 2250 3500 2250
 Wire Wire Line
-	2750 1750 3250 1750
+	2750 1750 3500 1750
 Wire Wire Line
 	1650 1750 1650 1850
 Wire Wire Line
@@ -656,12 +655,8 @@ Wire Wire Line
 Wire Wire Line
 	4850 4500 4650 4500
 Wire Wire Line
-	6700 5100 6900 5100
-Wire Wire Line
 	6100 5500 6100 5400
 Connection ~ 6000 5500
-Wire Wire Line
-	4450 4000 4850 4000
 Wire Wire Line
 	4250 4100 4850 4100
 Wire Wire Line
@@ -846,7 +841,7 @@ Wire Wire Line
 Wire Wire Line
 	3500 4200 3950 4200
 Wire Wire Line
-	4450 4200 4450 4000
+	4450 3700 4450 4200
 Wire Wire Line
 	3700 4100 3750 4100
 Wire Wire Line
@@ -855,4 +850,47 @@ Wire Wire Line
 	4400 4300 4650 4300
 Wire Wire Line
 	4650 4300 4650 4200
+Wire Wire Line
+	4850 3700 4450 3700
+Wire Wire Line
+	4650 4000 4850 4000
+NoConn ~ 6700 5100
+$Comp
+L C C?
+U 1 1 56C45ED5
+P 3500 2000
+F 0 "C?" H 3525 2100 50  0000 L CNN
+F 1 "4u7" H 3525 1900 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 3500 1700 50  0000 C CNN
+F 3 "" H 3500 2000 50  0000 C CNN
+	1    3500 2000
+	1    0    0    -1  
+$EndComp
+Connection ~ 1650 1800
+Connection ~ 1650 2200
+$Comp
+L C C?
+U 1 1 56C46154
+P 2050 2000
+F 0 "C?" H 2075 2100 50  0000 L CNN
+F 1 "1u" H 2075 1900 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 2050 1750 50  0000 C CNN
+F 3 "" H 2050 2000 50  0000 C CNN
+	1    2050 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3500 1750 3500 1850
+Connection ~ 3250 1750
+Wire Wire Line
+	3500 2250 3500 2150
+Connection ~ 3250 2250
+Wire Wire Line
+	1650 1800 2050 1800
+Wire Wire Line
+	2050 1800 2050 1850
+Wire Wire Line
+	2050 2150 2050 2200
+Wire Wire Line
+	2050 2200 1650 2200
 $EndSCHEMATC
