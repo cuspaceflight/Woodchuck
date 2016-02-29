@@ -75,7 +75,7 @@ P 5350 2900
 F 0 "IC201" H 4900 3450 60  0000 C CNN
 F 1 "u-blox_CAM-M8Q" H 5250 1400 60  0000 C CNN
 F 2 "Woodchuck:UBLOX_CAM_M8Q" H 5400 3550 60  0000 C CNN
-F 3 "" H 5550 2000 60  0000 C CNN
+F 3 "https://www2.u-blox.com/images/downloads/Product_Docs/CAM-M8Q_DataSheet_%28UBX-13004081%29.pdf" H 5550 2000 60  0001 C CNN
 	1    5350 2900
 	1    0    0    -1  
 $EndComp

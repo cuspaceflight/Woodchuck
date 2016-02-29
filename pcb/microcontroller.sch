@@ -278,7 +278,8 @@ P 8550 4750
 F 0 "SW401" H 8550 4850 50  0000 C CNN
 F 1 "SPST" H 8550 4650 50  0000 C CNN
 F 2 "Woodchuck:B3U-1000P_switch" H 8550 4950 60  0000 C CNN
-F 3 "" H 8550 4750 60  0000 C CNN
+F 3 "http://www.farnell.com/datasheets/1685550.pdf" H 8550 4750 60  0000 C CNN
+F 4 "1333652" H 8550 4750 60  0001 C CNN "Farnell"
 	1    8550 4750
 	1    0    0    -1  
 $EndComp
@@ -476,9 +477,9 @@ P 5050 2800
 F 0 "U401" H 5100 2850 60  0000 C CNN
 F 1 "STM32F072CBT6" H 6300 2850 60  0000 C CNN
 F 2 "Woodchuck:LQFP48" H 5400 2900 60  0001 C CNN
-F 3 "" H 5400 2900 60  0000 C CNN
+F 3 "http://www.farnell.com/datasheets/2006534.pdf" H 5400 2900 60  0000 C CNN
 F 4 "Value" H 5050 2800 60  0001 C CNN "Digikey"
-F 5 "Value" H 5050 2800 60  0001 C CNN "Farnell"
+F 5 "2432094" H 5050 2800 60  0001 C CNN "Farnell"
 F 6 "Value" H 5050 2800 60  0001 C CNN "Fieldname"
 	1    5050 2800
 	1    0    0    -1  
