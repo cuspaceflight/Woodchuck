@@ -1,0 +1,1130 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:a2235-h
+LIBS:adp3335
+LIBS:adxl345
+LIBS:alpha_trx433s
+LIBS:buzzer
+LIBS:cga0402mlc-12g
+LIBS:FDN304P
+LIBS:FG6943010R
+LIBS:hmc5883l
+LIBS:irf7910
+LIBS:jsta
+LIBS:l3g4200d
+LIBS:ms5611-01ba03
+LIBS:quarter_wave_ant
+LIBS:radiometrix_mtx2
+LIBS:resistor
+LIBS:rfm69w
+LIBS:sma
+LIBS:stm32f072cbt6
+LIBS:stm32f405vgt
+LIBS:swd
+LIBS:tvsd
+LIBS:u-blox_cam-m8q
+LIBS:uSD_holder
+LIBS:agg-kicad
+LIBS:woodchuck_2-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ADP3335 IC?
+U 1 1 56D6307F
+P 2800 6850
+F 0 "IC?" H 2600 6550 60  0000 C CNN
+F 1 "ADP3335" H 2750 7050 60  0000 C CNN
+F 2 "Woodchuck:MSOP8" H 2800 7150 60  0000 C CNN
+F 3 "" H 3200 6450 60  0000 C CNN
+F 4 "Value" H 2800 6850 60  0001 C CNN "Digikey"
+F 5 "2067775" H 2800 6850 60  0001 C CNN "Farnell"
+F 6 "Value" H 2800 6850 60  0001 C CNN "Fieldname"
+	1    2800 6850
+	1    0    0    -1  
+$EndComp
+Text Notes 3050 6150 0    60   ~ 0
+Power regulator
+$Comp
+L C C?
+U 1 1 56D6308A
+P 3450 7000
+F 0 "C?" H 3475 7100 50  0000 L CNN
+F 1 "1n" H 3475 6900 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 3450 6800 30  0000 C CNN
+F 3 "" H 3450 7000 60  0000 C CNN
+F 4 "Value" H 3450 7000 60  0001 C CNN "Digikey"
+F 5 "1759088" H 3450 7000 60  0001 C CNN "Farnell"
+F 6 "Value" H 3450 7000 60  0001 C CNN "Fieldname"
+	1    3450 7000
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 56D63094
+P 3700 7000
+F 0 "C?" H 3725 7100 50  0000 L CNN
+F 1 "2u2" H 3725 6900 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 3738 6850 30  0000 C CNN
+F 3 "" H 3700 7000 60  0000 C CNN
+F 4 "Value" H 3700 7000 60  0001 C CNN "Digikey"
+F 5 "2211185" H 3700 7000 60  0001 C CNN "Farnell"
+F 6 "Value" H 3700 7000 60  0001 C CNN "Fieldname"
+	1    3700 7000
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 56D6309B
+P 3700 7150
+F 0 "#PWR?" H 3700 6900 50  0001 C CNN
+F 1 "GND" H 3700 7000 50  0000 C CNN
+F 2 "" H 3700 7150 60  0000 C CNN
+F 3 "" H 3700 7150 60  0000 C CNN
+	1    3700 7150
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 56D630A4
+P 2000 7000
+F 0 "C?" H 2025 7100 50  0000 L CNN
+F 1 "2u2" H 2025 6900 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 2000 6800 30  0000 C CNN
+F 3 "" H 2000 7000 60  0000 C CNN
+F 4 "Value" H 2000 7000 60  0001 C CNN "Digikey"
+F 5 "2211185" H 2000 7000 60  0001 C CNN "Farnell"
+F 6 "Value" H 2000 7000 60  0001 C CNN "Fieldname"
+	1    2000 7000
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X02 P?
+U 1 1 56D630AE
+P 1600 7000
+F 0 "P?" H 1600 7150 50  0000 C CNN
+F 1 "CONN_01X02" V 1700 7000 50  0000 C CNN
+F 2 "Woodchuck:S02B-PASK-2" V 1850 6950 60  0000 C CNN
+F 3 "" H 1600 7000 60  0000 C CNN
+F 4 "Value" H 1600 7000 60  0001 C CNN "Digikey"
+F 5 "1830747" H 1600 7000 60  0001 C CNN "Farnell"
+F 6 "Value" H 1600 7000 60  0001 C CNN "Fieldname"
+	1    1600 7000
+	-1   0    0    1   
+$EndComp
+$Comp
+L +BATT #PWR?
+U 1 1 56D630B5
+P 1800 6750
+F 0 "#PWR?" H 1800 6600 50  0001 C CNN
+F 1 "+BATT" H 1800 6890 50  0000 C CNN
+F 2 "" H 1800 6750 60  0000 C CNN
+F 3 "" H 1800 6750 60  0000 C CNN
+	1    1800 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3V3 #PWR?
+U 1 1 56D630BB
+P 3450 6750
+F 0 "#PWR?" H 3450 6600 50  0001 C CNN
+F 1 "+3V3" H 3450 6890 50  0000 C CNN
+F 2 "" H 3450 6750 60  0000 C CNN
+F 3 "" H 3450 6750 60  0000 C CNN
+	1    3450 6750
+	1    0    0    -1  
+$EndComp
+Wire Notes Line
+	1450 7550 4050 7550
+Wire Notes Line
+	4050 7550 4050 6200
+Wire Notes Line
+	4050 6200 1450 6200
+Wire Notes Line
+	1450 6200 1450 7550
+Wire Wire Line
+	3300 6750 3300 6950
+Wire Wire Line
+	3300 6950 3150 6950
+Connection ~ 3300 6850
+Wire Wire Line
+	3150 7050 3250 7050
+Wire Wire Line
+	3250 7050 3250 7150
+Wire Wire Line
+	3250 7150 3450 7150
+Connection ~ 3450 6850
+Wire Wire Line
+	2450 7050 2350 7050
+Wire Wire Line
+	2350 7150 2350 7050
+Wire Wire Line
+	1800 7150 2350 7150
+Wire Wire Line
+	3450 6850 3450 6750
+Wire Wire Line
+	3150 6850 3700 6850
+Wire Wire Line
+	2350 6750 2350 6950
+Connection ~ 2350 6850
+Wire Wire Line
+	1800 7050 1800 7200
+Wire Wire Line
+	1800 6750 1800 6950
+Connection ~ 1800 7150
+Connection ~ 2000 7150
+Connection ~ 2000 6850
+Connection ~ 1800 6850
+Wire Wire Line
+	2450 6750 2350 6750
+Wire Wire Line
+	1800 6850 2450 6850
+Wire Wire Line
+	2350 6950 2450 6950
+$Comp
+L GND #PWR?
+U 1 1 56D63104
+P 1800 7200
+F 0 "#PWR?" H 1800 6950 50  0001 C CNN
+F 1 "GND" H 1800 7050 50  0000 C CNN
+F 2 "" H 1800 7200 50  0000 C CNN
+F 3 "" H 1800 7200 50  0000 C CNN
+	1    1800 7200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3150 6750 3300 6750
+$Comp
+L GND #PWR?
+U 1 1 56D64902
+P 5200 5000
+F 0 "#PWR?" H 5200 4750 50  0001 C CNN
+F 1 "GND" H 5200 4850 50  0000 C CNN
+F 2 "" H 5200 5000 60  0000 C CNN
+F 3 "" H 5200 5000 60  0000 C CNN
+	1    5200 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 56D6490B
+P 2300 1400
+F 0 "C?" H 2325 1500 50  0000 L CNN
+F 1 "0.1uF" H 2325 1300 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 2350 1200 30  0000 C CNN
+F 3 "" H 2300 1400 60  0000 C CNN
+F 4 "Value" H 2300 1400 60  0001 C CNN "Digikey"
+F 5 "1759037" H 2300 1400 60  0001 C CNN "Farnell"
+F 6 "Value" H 2300 1400 60  0001 C CNN "Fieldname"
+	1    2300 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 56D64912
+P 2300 1750
+F 0 "#PWR?" H 2300 1500 50  0001 C CNN
+F 1 "GND" H 2300 1600 50  0000 C CNN
+F 2 "" H 2300 1750 60  0000 C CNN
+F 3 "" H 2300 1750 60  0000 C CNN
+	1    2300 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 56D6491B
+P 2050 1400
+F 0 "C?" H 2075 1500 50  0000 L CNN
+F 1 "0.1uF" H 2075 1300 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 2088 1250 30  0000 C CNN
+F 3 "" H 2050 1400 60  0000 C CNN
+F 4 "Value" H 2050 1400 60  0001 C CNN "Digikey"
+F 5 "1759037" H 2050 1400 60  0001 C CNN "Farnell"
+F 6 "Value" H 2050 1400 60  0001 C CNN "Fieldname"
+	1    2050 1400
+	1    0    0    -1  
+$EndComp
+Text Notes 2800 850  2    60   ~ 0
+NOTE: Place one near each\nVDD pin (24, 48) and one\nnear VDDIO2 (36)
+$Comp
+L C C?
+U 1 1 56D64926
+P 950 1400
+F 0 "C?" H 975 1500 50  0000 L CNN
+F 1 "10nF" H 975 1300 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 988 1250 30  0000 C CNN
+F 3 "" H 950 1400 60  0000 C CNN
+F 4 "Value" H 950 1400 60  0001 C CNN "Digikey"
+F 5 "1907314" H 950 1400 60  0001 C CNN "Farnell"
+F 6 "Value" H 950 1400 60  0001 C CNN "Fieldname"
+	1    950  1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 56D6492D
+P 950 1650
+F 0 "#PWR?" H 950 1400 50  0001 C CNN
+F 1 "GND" H 950 1500 50  0000 C CNN
+F 2 "" H 950 1650 60  0000 C CNN
+F 3 "" H 950 1650 60  0000 C CNN
+	1    950  1650
+	1    0    0    -1  
+$EndComp
+Text Notes 750  1900 1    60   ~ 0
+NOTE: Place near VDDA (9)
+$Comp
+L C C?
+U 1 1 56D64937
+P 2550 1400
+F 0 "C?" H 2575 1500 50  0000 L CNN
+F 1 "0.1uF" H 2575 1300 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 2588 1250 30  0000 C CNN
+F 3 "" H 2550 1400 60  0000 C CNN
+F 4 "Value" H 2550 1400 60  0001 C CNN "Digikey"
+F 5 "1759037" H 2550 1400 60  0001 C CNN "Farnell"
+F 6 "Value" H 2550 1400 60  0001 C CNN "Fieldname"
+	1    2550 1400
+	1    0    0    -1  
+$EndComp
+Text Notes 5550 1900 0    60   ~ 0
+NOTE: VDD supply needs 4.7uF across it
+$Comp
+L SWD P?
+U 1 1 56D64942
+P 1600 2850
+F 0 "P?" H 1850 3150 60  0000 C CNN
+F 1 "SWD" H 1300 3150 60  0000 C CNN
+F 2 "Woodchuck:FTSH-105-01-F-D-K" H 1950 2650 60  0001 C CNN
+F 3 "" H 1950 2650 60  0000 C CNN
+F 4 "Value" H 1600 2850 60  0001 C CNN "Digikey"
+F 5 "1865285" H 1600 2850 60  0001 C CNN "Farnell"
+F 6 "Value" H 1600 2850 60  0001 C CNN "Fieldname"
+	1    1600 2850
+	1    0    0    -1  
+$EndComp
+Text Label 6200 2750 0    60   ~ 0
+nRST
+Text Label 2200 3050 0    60   ~ 0
+nRST
+NoConn ~ 2050 2850
+NoConn ~ 2050 2950
+Text Label 2200 2750 0    60   ~ 0
+SWCLK
+Text Label 2200 2650 0    60   ~ 0
+SWDIO
+Text Label 3950 4300 2    60   ~ 0
+SWDIO
+Text Label 3950 4400 2    60   ~ 0
+SWCLK
+$Comp
+L GND #PWR?
+U 1 1 56D64951
+P 1000 3150
+F 0 "#PWR?" H 1000 2900 50  0001 C CNN
+F 1 "GND" H 1000 3000 50  0000 C CNN
+F 2 "" H 1000 3150 60  0000 C CNN
+F 3 "" H 1000 3150 60  0000 C CNN
+	1    1000 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L JSTA-4 J?
+U 1 1 56D6495A
+P 1800 3950
+F 0 "J?" H 1850 3500 60  0000 C CNN
+F 1 "JSTA-4" H 1800 4000 60  0000 C CNN
+F 2 "Woodchuck:S04B-PASK-2" H 1800 4050 60  0001 C CNN
+F 3 "" H 1800 4050 60  0000 C CNN
+F 4 "Value" H 1800 3950 60  0001 C CNN "Digikey"
+F 5 "1830749" H 1800 3950 60  0001 C CNN "Farnell"
+F 6 "Value" H 1800 3950 60  0001 C CNN "Fieldname"
+	1    1800 3950
+	1    0    0    -1  
+$EndComp
+Text Notes 2550 3400 2    60   ~ 0
+SWD PORT
+Text Notes 2900 2100 2    60   ~ 0
+SUPPLY CAPS
+Text Label 1500 4100 2    60   ~ 0
+EXT_TX
+Text Label 1500 4200 2    60   ~ 0
+EXT_RX
+$Comp
+L GND #PWR?
+U 1 1 56D64965
+P 1500 4400
+F 0 "#PWR?" H 1500 4150 50  0001 C CNN
+F 1 "GND" H 1500 4250 50  0000 C CNN
+F 2 "" H 1500 4400 60  0000 C CNN
+F 3 "" H 1500 4400 60  0000 C CNN
+	1    1500 4400
+	1    0    0    -1  
+$EndComp
+Text Notes 2050 4650 2    60   ~ 0
+EXT PORT
+$Comp
+L GND #PWR?
+U 1 1 56D6496C
+P 1700 5500
+F 0 "#PWR?" H 1700 5250 50  0001 C CNN
+F 1 "GND" H 1700 5350 50  0000 C CNN
+F 2 "" H 1700 5500 60  0000 C CNN
+F 3 "" H 1700 5500 60  0000 C CNN
+	1    1700 5500
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 56D64972
+P 2100 5700
+F 0 "#PWR?" H 2100 5450 50  0001 C CNN
+F 1 "GND" H 2100 5550 50  0000 C CNN
+F 2 "" H 2100 5700 60  0000 C CNN
+F 3 "" H 2100 5700 60  0000 C CNN
+	1    2100 5700
+	1    0    0    -1  
+$EndComp
+Text Label 3950 4100 2    60   ~ 0
+USB_D-
+Text Label 3950 4200 2    60   ~ 0
+USB_D+
+Text Label 1500 5150 2    60   ~ 0
+USB_D-
+Text Label 1500 5250 2    60   ~ 0
+USB_D+
+Text Notes 2300 5950 2    60   ~ 0
+USB PORT
+Text Label 6200 2500 0    60   ~ 0
+BOOT0
+$Comp
+L SPST SW?
+U 1 1 56D6497F
+P 7850 4150
+F 0 "SW?" H 7850 4250 50  0000 C CNN
+F 1 "SPST" H 7850 4050 50  0000 C CNN
+F 2 "Woodchuck:B3U-1000P_switch" H 7850 4350 60  0000 C CNN
+F 3 "http://www.farnell.com/datasheets/1685550.pdf" H 7850 4150 60  0000 C CNN
+F 4 "1333652" H 7850 4150 60  0001 C CNN "Farnell"
+	1    7850 4150
+	1    0    0    -1  
+$EndComp
+Text Label 7150 4150 2    60   ~ 0
+BOOT0
+$Comp
+L RESISTOR R?
+U 1 1 56D6498A
+P 7250 4500
+F 0 "R?" H 7370 4590 60  0000 C CNN
+F 1 "10K" H 7250 4350 60  0000 C CNN
+F 2 "Woodchuck:0603" H 7250 4250 60  0000 C CNN
+F 3 "" H 7250 4500 60  0000 C CNN
+F 4 "Value" H 7250 4500 60  0001 C CNN "Digikey"
+F 5 "9331700" H 7250 4500 60  0001 C CNN "Farnell"
+F 6 "Value" H 7250 4500 60  0001 C CNN "Fieldname"
+	1    7250 4500
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 56D64991
+P 7250 4850
+F 0 "#PWR?" H 7250 4600 50  0001 C CNN
+F 1 "GND" H 7250 4700 50  0000 C CNN
+F 2 "" H 7250 4850 60  0000 C CNN
+F 3 "" H 7250 4850 60  0000 C CNN
+	1    7250 4850
+	1    0    0    -1  
+$EndComp
+Text Notes 8550 5050 2    60   ~ 0
+BOOTLOADER SELECT
+$Comp
+L +3.3V #PWR?
+U 1 1 56D64998
+P 8450 4050
+F 0 "#PWR?" H 8450 3900 50  0001 C CNN
+F 1 "+3.3V" H 8450 4190 50  0000 C CNN
+F 2 "" H 8450 4050 50  0000 C CNN
+F 3 "" H 8450 4050 50  0000 C CNN
+	1    8450 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR?
+U 1 1 56D6499E
+P 1500 3900
+F 0 "#PWR?" H 1500 3750 50  0001 C CNN
+F 1 "+3.3V" H 1500 4040 50  0000 C CNN
+F 2 "" H 1500 3900 50  0000 C CNN
+F 3 "" H 1500 3900 50  0000 C CNN
+	1    1500 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR?
+U 1 1 56D649A4
+P 1000 2550
+F 0 "#PWR?" H 1000 2400 50  0001 C CNN
+F 1 "+3.3V" H 1000 2690 50  0000 C CNN
+F 2 "" H 1000 2550 50  0000 C CNN
+F 3 "" H 1000 2550 50  0000 C CNN
+	1    1000 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR?
+U 1 1 56D649AA
+P 2300 1050
+F 0 "#PWR?" H 2300 900 50  0001 C CNN
+F 1 "+3.3V" H 2300 1190 50  0000 C CNN
+F 2 "" H 2300 1050 50  0000 C CNN
+F 3 "" H 2300 1050 50  0000 C CNN
+	1    2300 1050
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR?
+U 1 1 56D649B0
+P 950 1150
+F 0 "#PWR?" H 950 1000 50  0001 C CNN
+F 1 "+3.3V" H 950 1290 50  0000 C CNN
+F 2 "" H 950 1150 50  0000 C CNN
+F 3 "" H 950 1150 50  0000 C CNN
+	1    950  1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR?
+U 1 1 56D649B6
+P 5100 1800
+F 0 "#PWR?" H 5100 1650 50  0001 C CNN
+F 1 "+3.3V" H 5100 1940 50  0000 C CNN
+F 2 "" H 5100 1800 50  0000 C CNN
+F 3 "" H 5100 1800 50  0000 C CNN
+	1    5100 1800
+	1    0    0    -1  
+$EndComp
+Text Label 6200 4000 0    60   ~ 0
+EXT_TX
+Text Label 6200 4100 0    60   ~ 0
+EXT_RX
+Text HLabel 3950 3200 0    60   Output ~ 0
+GPS_FROM_MCU
+Text HLabel 3950 3300 0    60   Input ~ 0
+GPS_TO_MCU
+Text HLabel 3950 4500 0    60   Output ~ 0
+BARO_CS_N
+Text HLabel 6200 3300 2    60   Output ~ 0
+BARO_CLK
+Text HLabel 6200 3400 2    60   Input ~ 0
+BARO_MISO
+Text HLabel 6200 3500 2    60   Output ~ 0
+BARO_MOSI
+Text HLabel 3950 3900 0    60   Output ~ 0
+RADIO_EN
+Text HLabel 3950 3400 0    60   Output ~ 0
+RADIO_TX
+NoConn ~ 6000 3000
+NoConn ~ 6000 3100
+NoConn ~ 6000 3200
+NoConn ~ 6000 3800
+NoConn ~ 6000 3900
+NoConn ~ 6000 4200
+NoConn ~ 4150 4000
+NoConn ~ 4150 3800
+NoConn ~ 4150 3700
+NoConn ~ 4150 3000
+NoConn ~ 4150 2800
+NoConn ~ 4150 2700
+NoConn ~ 4150 2600
+NoConn ~ 4150 2500
+NoConn ~ 4150 2350
+NoConn ~ 4800 2000
+$Comp
+L LED_RABG D?
+U 1 1 56D649D9
+P 3000 2950
+F 0 "D?" H 3000 3300 50  0000 C CNN
+F 1 "LED_RABG" H 3000 2600 50  0001 C CNN
+F 2 "Woodchuck:CREE_RGB_LED" H 2950 3450 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/1965387.pdf" H 2900 3350 50  0001 C CNN
+F 4 "Value" H 3000 2950 60  0001 C CNN "Digikey"
+F 5 "2093940" H 3000 2950 60  0001 C CNN "Farnell"
+F 6 "Value" H 3000 2950 60  0001 C CNN "Fieldname"
+	1    3000 2950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L RESISTOR R?
+U 1 1 56D649E3
+P 3500 3600
+F 0 "R?" H 3500 3450 60  0000 C CNN
+F 1 "510" H 3500 3450 60  0001 C CNN
+F 2 "Woodchuck:0603" H 3500 3600 60  0001 C CNN
+F 3 "" H 3500 3600 60  0000 C CNN
+F 4 "Value" H 3500 3600 60  0001 C CNN "Digikey"
+F 5 "1469826" H 3500 3600 60  0001 C CNN "Farnell"
+F 6 "Value" H 3500 3600 60  0001 C CNN "Fieldname"
+	1    3500 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L RESISTOR R?
+U 1 1 56D649ED
+P 3300 3500
+F 0 "R?" H 3420 3590 60  0000 C CNN
+F 1 "510" H 3300 3350 60  0001 C CNN
+F 2 "Woodchuck:0603" H 3300 3500 60  0001 C CNN
+F 3 "" H 3300 3500 60  0000 C CNN
+F 4 "Value" H 3300 3500 60  0001 C CNN "Digikey"
+F 5 "1469826" H 3300 3500 60  0001 C CNN "Farnell"
+F 6 "Value" H 3300 3500 60  0001 C CNN "Fieldname"
+	1    3300 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L RESISTOR R?
+U 1 1 56D649F7
+P 3450 3400
+F 0 "R?" H 3570 3490 60  0000 C CNN
+F 1 "510" H 3450 3250 60  0001 C CNN
+F 2 "Woodchuck:0603" H 3450 3400 60  0001 C CNN
+F 3 "" H 3450 3400 60  0000 C CNN
+F 4 "Value" H 3450 3400 60  0001 C CNN "Digikey"
+F 5 "1469826" H 3450 3400 60  0001 C CNN "Farnell"
+F 6 "Value" H 3450 3400 60  0001 C CNN "Fieldname"
+	1    3450 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L STM32F072CBT6 U?
+U 1 1 56D64A01
+P 4350 2200
+F 0 "U?" H 4400 2250 60  0000 C CNN
+F 1 "STM32F072CBT6" H 5600 2250 60  0000 C CNN
+F 2 "Woodchuck:LQFP48" H 4700 2300 60  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2006534.pdf" H 4700 2300 60  0000 C CNN
+F 4 "Value" H 4350 2200 60  0001 C CNN "Digikey"
+F 5 "2432094" H 4350 2200 60  0001 C CNN "Farnell"
+F 6 "Value" H 4350 2200 60  0001 C CNN "Fieldname"
+	1    4350 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_OTG P?
+U 1 1 56D64A0B
+P 2000 5250
+F 0 "P?" H 2325 5125 50  0000 C CNN
+F 1 "USB_OTG" H 2000 5450 50  0000 C CNN
+F 2 "Woodchuck:MOLEX_67503_1020_MINI_USB" V 1950 5150 60  0001 C CNN
+F 3 "" V 1950 5150 60  0000 C CNN
+F 4 "Value" H 2000 5250 60  0001 C CNN "Digikey"
+F 5 "2426381" H 2000 5250 60  0001 C CNN "Farnell"
+F 6 "Value" H 2000 5250 60  0001 C CNN "Fieldname"
+	1    2000 5250
+	0    1    1    0   
+$EndComp
+NoConn ~ 1700 5050
+NoConn ~ 1700 5350
+$Comp
+L +3.3V #PWR?
+U 1 1 56D64A14
+P 3000 2550
+F 0 "#PWR?" H 3000 2400 50  0001 C CNN
+F 1 "+3.3V" H 3000 2690 50  0000 C CNN
+F 2 "" H 3000 2550 60  0000 C CNN
+F 3 "" H 3000 2550 60  0000 C CNN
+	1    3000 2550
+	1    0    0    -1  
+$EndComp
+Text HLabel 6200 4400 2    60   Output ~ 0
+MTX2_P1
+Text HLabel 6200 4300 2    60   Output ~ 0
+MTX2_P0
+$Comp
+L 24AA01 IC?
+U 1 1 56D64A1D
+P 7500 2900
+F 0 "IC?" H 7300 3100 50  0000 L CNN
+F 1 "24AA01" H 7300 2700 50  0000 L CNN
+F 2 "agg:SOT-23-5" H 7300 2600 50  0001 L CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21711c.pdf" H 7300 2500 50  0001 L CNN
+F 4 "1331269" H 7300 2400 50  0001 L CNN "Farnell"
+	1    7500 2900
+	-1   0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 56D64A27
+P 8150 2900
+F 0 "C?" H 8175 3000 50  0000 L CNN
+F 1 "0.1uF" H 8175 2800 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 8188 2750 30  0000 C CNN
+F 3 "" H 8150 2900 60  0000 C CNN
+F 4 "Value" H 8150 2900 60  0001 C CNN "Digikey"
+F 5 "1759037" H 8150 2900 60  0001 C CNN "Farnell"
+F 6 "Value" H 8150 2900 60  0001 C CNN "Fieldname"
+	1    8150 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 56D64A2E
+P 8150 3200
+F 0 "#PWR?" H 8150 2950 50  0001 C CNN
+F 1 "GND" H 8150 3050 50  0000 C CNN
+F 2 "" H 8150 3200 60  0000 C CNN
+F 3 "" H 8150 3200 60  0000 C CNN
+	1    8150 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR?
+U 1 1 56D64A34
+P 8150 2650
+F 0 "#PWR?" H 8150 2500 50  0001 C CNN
+F 1 "+3.3V" H 8150 2790 50  0000 C CNN
+F 2 "" H 8150 2650 50  0000 C CNN
+F 3 "" H 8150 2650 50  0000 C CNN
+	1    8150 2650
+	1    0    0    -1  
+$EndComp
+Text Notes 8500 3500 2    60   ~ 0
+EEPROM
+$Comp
+L RESISTOR R?
+U 1 1 56D64A3E
+P 7000 2500
+F 0 "R?" H 7120 2590 60  0000 C CNN
+F 1 "10K" H 7000 2350 60  0001 C CNN
+F 2 "Woodchuck:0603" H 7000 2500 60  0001 C CNN
+F 3 "" H 7000 2500 60  0000 C CNN
+F 4 "Value" H 7000 2500 60  0001 C CNN "Digikey"
+F 5 "9331700" H 7000 2500 60  0001 C CNN "Farnell"
+F 6 "Value" H 7000 2500 60  0001 C CNN "Fieldname"
+	1    7000 2500
+	0    1    1    0   
+$EndComp
+$Comp
+L RESISTOR R?
+U 1 1 56D64A48
+P 6900 2500
+F 0 "R?" H 7020 2590 60  0000 C CNN
+F 1 "10K" H 6900 2350 60  0001 C CNN
+F 2 "Woodchuck:0603" H 6900 2500 60  0001 C CNN
+F 3 "" H 6900 2500 60  0000 C CNN
+F 4 "Value" H 6900 2500 60  0001 C CNN "Digikey"
+F 5 "9331700" H 6900 2500 60  0001 C CNN "Farnell"
+F 6 "Value" H 6900 2500 60  0001 C CNN "Fieldname"
+	1    6900 2500
+	0    1    1    0   
+$EndComp
+$Comp
+L +3.3V #PWR?
+U 1 1 56D64A4F
+P 6950 2150
+F 0 "#PWR?" H 6950 2000 50  0001 C CNN
+F 1 "+3.3V" H 6950 2290 50  0000 C CNN
+F 2 "" H 6950 2150 50  0000 C CNN
+F 3 "" H 6950 2150 50  0000 C CNN
+	1    6950 2150
+	1    0    0    -1  
+$EndComp
+NoConn ~ 6000 4500
+$Comp
+L C C?
+U 1 1 56D64A56
+P 2800 1400
+F 0 "C?" H 2825 1500 50  0000 L CNN
+F 1 "4u7" H 2825 1300 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 2800 1100 50  0000 C CNN
+F 3 "" H 2800 1400 50  0000 C CNN
+	1    2800 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 56D64A5D
+P 1350 1400
+F 0 "C?" H 1375 1500 50  0000 L CNN
+F 1 "1u" H 1375 1300 50  0000 L CNN
+F 2 "Woodchuck:C0603" H 1350 1150 50  0000 C CNN
+F 3 "" H 1350 1400 50  0000 C CNN
+	1    1350 1400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 1600 950  1600
+Wire Wire Line
+	1350 1550 1350 1600
+Wire Wire Line
+	1350 1200 1350 1250
+Wire Wire Line
+	950  1200 1350 1200
+Connection ~ 2550 1650
+Wire Wire Line
+	2800 1650 2800 1550
+Connection ~ 2550 1150
+Wire Wire Line
+	2800 1150 2800 1250
+Connection ~ 950  1600
+Connection ~ 950  1200
+Wire Wire Line
+	3950 3400 4150 3400
+Wire Wire Line
+	4150 3100 3750 3100
+Wire Wire Line
+	3950 3700 3950 3600
+Wire Wire Line
+	3700 3700 3950 3700
+Wire Wire Line
+	3700 3400 3700 3700
+Wire Wire Line
+	3000 3500 3050 3500
+Wire Wire Line
+	3750 3100 3750 3600
+Wire Wire Line
+	2800 3600 3250 3600
+Wire Wire Line
+	3000 2550 3000 2650
+Connection ~ 6950 2200
+Wire Wire Line
+	6950 2150 6950 2200
+Wire Wire Line
+	7000 2200 7000 2250
+Wire Wire Line
+	6900 2200 7000 2200
+Wire Wire Line
+	6900 2250 6900 2200
+Connection ~ 6900 2900
+Connection ~ 7000 2800
+Wire Notes Line
+	7100 3500 7100 2450
+Wire Notes Line
+	8500 3500 7100 3500
+Wire Notes Line
+	8500 2450 8500 3500
+Wire Notes Line
+	7100 2450 8500 2450
+Wire Wire Line
+	7000 3700 6000 3700
+Wire Wire Line
+	7000 2750 7000 3700
+Wire Wire Line
+	7200 2800 7000 2800
+Wire Wire Line
+	6900 2900 7200 2900
+Wire Wire Line
+	6900 2750 6900 3600
+Wire Wire Line
+	6900 3600 6000 3600
+Connection ~ 8150 3150
+Wire Wire Line
+	7200 3150 7200 3000
+Wire Wire Line
+	8150 3150 7200 3150
+Wire Wire Line
+	8150 2750 8150 2650
+Wire Wire Line
+	8150 3050 8150 3200
+Wire Wire Line
+	7950 3050 8150 3050
+Wire Wire Line
+	7950 3000 7950 3050
+Wire Wire Line
+	7800 3000 7950 3000
+Wire Wire Line
+	8000 2750 8150 2750
+Wire Wire Line
+	8000 2800 8000 2750
+Wire Wire Line
+	7800 2800 8000 2800
+Wire Wire Line
+	6000 4400 6200 4400
+Wire Wire Line
+	6000 4300 6200 4300
+Wire Wire Line
+	2800 3250 2800 3600
+Wire Wire Line
+	3000 3250 3000 3500
+Wire Wire Line
+	3200 3250 3200 3400
+Wire Wire Line
+	2100 5650 2100 5700
+Wire Wire Line
+	1700 5500 1700 5450
+Wire Wire Line
+	1500 5250 1700 5250
+Wire Wire Line
+	1700 5150 1500 5150
+Wire Wire Line
+	3950 3600 4150 3600
+Wire Wire Line
+	3550 3500 4150 3500
+Connection ~ 5300 4900
+Wire Wire Line
+	5400 4900 5400 4800
+Wire Wire Line
+	4150 3900 3950 3900
+Wire Wire Line
+	4150 4500 3950 4500
+Wire Wire Line
+	6200 3500 6000 3500
+Wire Wire Line
+	6000 3400 6200 3400
+Wire Wire Line
+	6000 3300 6200 3300
+Wire Wire Line
+	4150 3300 3950 3300
+Wire Wire Line
+	4150 3200 3950 3200
+Connection ~ 5000 1900
+Connection ~ 5100 1900
+Wire Wire Line
+	4900 1900 4900 2000
+Wire Wire Line
+	6200 4000 6000 4000
+Wire Wire Line
+	6000 4100 6200 4100
+Wire Wire Line
+	6200 2500 6000 2500
+Wire Wire Line
+	6000 2750 6200 2750
+Wire Wire Line
+	950  1550 950  1650
+Wire Notes Line
+	8550 5050 8550 3800
+Wire Notes Line
+	6800 5050 8550 5050
+Wire Notes Line
+	6800 3800 6800 5050
+Wire Notes Line
+	8550 3800 6800 3800
+Connection ~ 7250 4150
+Wire Wire Line
+	7250 4250 7250 4150
+Wire Wire Line
+	7250 4850 7250 4750
+Wire Wire Line
+	8450 4150 8450 4050
+Wire Wire Line
+	8350 4150 8450 4150
+Wire Wire Line
+	7150 4150 7350 4150
+Wire Notes Line
+	1100 5950 1100 4950
+Wire Notes Line
+	2300 5950 1100 5950
+Wire Notes Line
+	2300 4950 2300 5950
+Wire Notes Line
+	1100 4950 2300 4950
+Wire Notes Line
+	1150 4650 1150 3700
+Wire Notes Line
+	2050 4650 1150 4650
+Wire Notes Line
+	2050 3700 2050 4650
+Wire Notes Line
+	1150 3700 2050 3700
+Wire Wire Line
+	1500 4000 1500 3900
+Wire Wire Line
+	1600 4000 1500 4000
+Wire Wire Line
+	1500 4300 1500 4400
+Wire Wire Line
+	1600 4300 1500 4300
+Wire Wire Line
+	1600 4200 1500 4200
+Wire Wire Line
+	1600 4100 1500 4100
+Wire Notes Line
+	600  600  600  2100
+Wire Notes Line
+	2900 600  600  600 
+Wire Notes Line
+	2900 2100 2900 600 
+Wire Notes Line
+	600  2100 2900 2100
+Wire Notes Line
+	2550 2300 850  2300
+Wire Notes Line
+	2550 3400 2550 2300
+Wire Notes Line
+	850  3400 2550 3400
+Wire Notes Line
+	850  2300 850  3400
+Connection ~ 1000 2850
+Wire Wire Line
+	1100 2750 1000 2750
+Connection ~ 1000 3050
+Wire Wire Line
+	1100 2850 1000 2850
+Wire Wire Line
+	1000 2750 1000 3150
+Wire Wire Line
+	1000 3050 1100 3050
+Wire Wire Line
+	1000 2650 1000 2550
+Wire Wire Line
+	1100 2650 1000 2650
+Wire Wire Line
+	4150 4400 3950 4400
+Wire Wire Line
+	4150 4300 3950 4300
+Wire Wire Line
+	2050 2650 2200 2650
+Wire Wire Line
+	2050 2750 2200 2750
+Wire Wire Line
+	2050 3050 2200 3050
+Wire Wire Line
+	4150 4200 3950 4200
+Wire Wire Line
+	3950 4100 4150 4100
+Wire Wire Line
+	5200 1900 5200 2000
+Wire Wire Line
+	2550 1650 2550 1550
+Wire Wire Line
+	2550 1150 2550 1250
+Wire Wire Line
+	950  1150 950  1250
+Wire Wire Line
+	2050 1150 2800 1150
+Wire Wire Line
+	2050 1650 2800 1650
+Connection ~ 2300 1150
+Wire Wire Line
+	2050 1250 2050 1150
+Wire Wire Line
+	2050 1550 2050 1650
+Connection ~ 2300 1650
+Wire Wire Line
+	2300 1550 2300 1750
+Wire Wire Line
+	2300 1050 2300 1250
+Wire Wire Line
+	4900 1900 5200 1900
+Wire Wire Line
+	5000 2000 5000 1900
+Wire Wire Line
+	5100 2000 5100 1800
+Wire Wire Line
+	5300 4900 5300 4800
+Connection ~ 5200 4900
+Wire Wire Line
+	5200 4800 5200 5000
+Wire Wire Line
+	5100 4900 5400 4900
+Wire Wire Line
+	5100 4800 5100 4900
+$Comp
+L PART X?
+U 1 1 56D64AF2
+P 4550 5900
+F 0 "X?" H 4600 6000 50  0000 L CNN
+F 1 "Mounting hole" H 4600 5900 50  0000 L CNN
+F 2 "Woodchuck:M3_MOUNT" H 4550 5900 50  0001 C CNN
+F 3 "" H 4550 5900 50  0001 C CNN
+	1    4550 5900
+	1    0    0    -1  
+$EndComp
+$Comp
+L PART X?
+U 1 1 56D64AF9
+P 4550 5550
+F 0 "X?" H 4600 5650 50  0000 L CNN
+F 1 "Mounting hole" H 4600 5550 50  0000 L CNN
+F 2 "Woodchuck:M3_MOUNT" H 4550 5550 50  0001 C CNN
+F 3 "" H 4550 5550 50  0001 C CNN
+	1    4550 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L PART X?
+U 1 1 56D64B00
+P 5300 5550
+F 0 "X?" H 5350 5650 50  0000 L CNN
+F 1 "CUSF LOGO" H 5350 5550 50  0000 L CNN
+F 2 "Woodchuck:cusf_logo" H 5300 5550 50  0001 C CNN
+F 3 "" H 5300 5550 50  0001 C CNN
+	1    5300 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L PART X?
+U 1 1 56D64B07
+P 5300 5900
+F 0 "X?" H 5350 6000 50  0000 L CNN
+F 1 "CUSF LOGO BACK" H 5350 5900 50  0000 L CNN
+F 2 "Woodchuck:cusf_logo_full" H 5300 5900 50  0001 C CNN
+F 3 "" H 5300 5900 50  0001 C CNN
+	1    5300 5900
+	1    0    0    -1  
+$EndComp
+$Comp
+L MAX-7Q IC?
+U 1 1 56D62FFF
+P 10000 3250
+F 0 "IC?" H 9600 3750 50  0000 L CNN
+F 1 "MAX-7Q" H 9600 2550 50  0000 L CNN
+F 2 "agg-unchecked:MAX-7Q" H 9600 2450 50  0001 L CNN
+F 3 "" H 9950 3250 50  0001 C CNN
+F 4 "MAX-7Q" H 9600 2350 50  0001 L CNN "HabSupplies"
+	1    10000 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Si4460 IC?
+U 1 1 56D6309C
+P 10000 5200
+F 0 "IC?" H 9700 5900 50  0000 L CNN
+F 1 "Si4460" H 9700 4500 50  0000 L CNN
+F 2 "agg:QFN-20-EP-SI" H 9700 4400 50  0001 L CNN
+F 3 "" H 9600 5800 50  0001 C CNN
+F 4 "2462635" H 9700 4300 50  0001 L CNN "Farnell"
+	1    10000 5200
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
