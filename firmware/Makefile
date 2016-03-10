@@ -28,6 +28,6 @@ OBJS = $(SOURCES:.c=.o)
 
 CPPFLAGS += -I../common/
 CFLAGS += -std=c99
-LDSCRIPT = ../radio.ld
+LDSCRIPT = ../woodchuck.ld
 
 include ../Makefile.f0.include
