@@ -2,10 +2,10 @@
 /*
  * MS5611-01BA03 Driver
  * Woodchuck
- * 
+ *
  * Adapted from
  * M2FC - 2014 Adam Greig, Cambridge University Spaceflight
- * 
+ *
  * Woodchuck - Eivind Roson Eide 2016
  */
 
@@ -19,7 +19,7 @@ typedef struct {
 /* global variables of temperature and pressure for easy access */
 extern int32_t global_temperature;
 extern int32_t global_pressure;
-
+ 
 
 /* The main script. Run this. */
 void ms5611_run();
