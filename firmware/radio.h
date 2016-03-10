@@ -19,8 +19,8 @@
 
  void radio_transmit_sentence(char * sentence);
 
- void radio_chatter();
+ void radio_chatter(void);
 
- void radio_init();
+ void radio_init(void);
 
- #endif 
+#endif 

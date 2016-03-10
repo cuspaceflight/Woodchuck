@@ -1,28 +1,33 @@
-# Define project name here
-PROJECT = woodchuck
+##
+## This file is part of the libopencm3 project.
+##
+## Copyright (C) 2009 Uwe Hermann <uwe@hermann-uwe.de>
+##
+## This library is free software: you can redistribute it and/or modify
+## it under the terms of the GNU Lesser General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## This library is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU Lesser General Public License
+## along with this library.  If not, see <http://www.gnu.org/licenses/>.
+##
+## Modified for UKHAS 2014 Badge by Jon Sowman <jon@jonsowman.com>
+##
 
-IDIR =../libopencm3/include
-HDIR = ./
-CC=arm-none-eabi-gcc
+BINARY = radio
+LIBS = 
 
-CFLAGS=-I$(IDIR) -DSTM32F0 
-ODIR=./
+## SOURCES = $(filter-out $(BINARY).c, $(wildcard *.c)) ${LIBS}
+SOURCES = ${LIBS}
+OBJS = $(SOURCES:.c=.o)
 
-_DEPS = *.h
-DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
-HDEPS = $(patsubst %,$(HDIR)/%,$(_DEPS))
+CPPFLAGS += -I../common/
+CFLAGS += -std=c99
+LDSCRIPT = ../radio.ld
 
-_OBJ = radio.o 
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
-
-
-$(ODIR)/%.o: %.c $(DEPS) $(HDEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-all: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
-
-.PHONY: clean
-
-clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
+include ../Makefile.f0.include

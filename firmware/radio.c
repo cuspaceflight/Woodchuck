@@ -29,7 +29,7 @@
 #include <libopencm3/stm32/usart.h>
 #include <libopencm3/stm32/dac.h>
 
-#include "led.h"
+//#include "led.h"
 #include "radio.h"
 
 
@@ -83,7 +83,7 @@ static void radio_write(uint8_t channel, uint16_t val)
 /**
 * Initialise the peripheral clocks.
 */
-static void clock_setup()
+static void clock_setup(void)
 {
 	rcc_clock_setup_in_hsi_out_48mhz();
 	rcc_periph_clock_enable(RCC_GPIOA);
@@ -101,7 +101,7 @@ static void clock_setup()
 /**
 * Set up GPIOA for USART transmit.
 */
-static void gpio_setup()
+static void gpio_setup(void)
 {
 	gpio_mode_setup(RADIO_EN_GPIO, GPIO_MODE_AF, GPIO_PUPD_NONE, RADIO_EN_PIN);
 
@@ -113,7 +113,7 @@ static void gpio_setup()
 /**
 * Configure RADIO_USART (USART1) for Radiometrix MTX2.
 */
-static void usart_setup()
+static void usart_setup(void)
 {
 	usart_set_baudrate(RADIO_USART, RADIO_BAUD_RATE);
 	usart_set_databits(RADIO_USART, RADIO_NUM_DATA_BITS);
@@ -128,7 +128,7 @@ static void usart_setup()
 * Configure DAC- set RADIO_TX_DATA to be output of DAC
 * Triggered by software.
 */
-static void dac_setup()
+static void dac_setup(void)
 {
 	gpio_mode_setup(RADIO_TX_GPIO, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, RADIO_TX_DATA);
 	dac_disable(CHANNEL_1);
@@ -144,7 +144,7 @@ static void dac_setup()
 * Set up TIM2 for radio interrupts
 * TODO Check that we don't need to start the timer immediately
 */
-static void setup_TIM2()
+static void setup_TIM2(void)
 {
 	timer_reset(TIM2);
 	/* 48MHz / 12kHz -1. */
@@ -158,7 +158,7 @@ static void setup_TIM2()
 * Enable interrupts on TIM2 and start it.
 * TODO Check that we don't need to reset the timer
 */
-static void start_TIM2()
+static void start_TIM2(void)
 {
 	timer_disable_counter(TIM2);
 	timer_clear_flag(TIM2, TIM_SR_UIF);
@@ -173,7 +173,7 @@ static void start_TIM2()
 * Disable interrupts on TIM2 and stop it
 * TODO Check that we don't need to reset the timer
 */
-static void stop_TIM2()
+static void stop_TIM2(void)
 {
 	timer_clear_flag(TIM2, TIM_SR_UIF);
 	nvic_disable_irq(NVIC_TIM2_IRQ);
@@ -236,7 +236,7 @@ static void radio_transmit_string(char* string)
 /**
 * Some radio chatter so that Woodchuck can be located
 */
-void radio_chatter()
+void radio_chatter(void)
 {
 	radio_write(0,100);
 	delay(200);
@@ -293,7 +293,7 @@ static void _radio_transmit_bit(uint8_t data, uint8_t ptr)
  * Every time we get here, continue process of transmitting
  * a bit of data to the radio.
  */
-void tim2_isr()
+void tim2_isr(void)
 {
 	if( systicks < 1 )
     {
@@ -316,7 +316,7 @@ void tim2_isr()
     }
 }
 
-int main()
+int main(int argc, char* argv[])
 {
 	while(true)
 		;
