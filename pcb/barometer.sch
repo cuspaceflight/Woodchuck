@@ -82,27 +82,14 @@ F 6 "Value" H 3350 2050 60  0001 C CNN "Fieldname"
 	1    3350 2050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3700 1950 3850 1950
-Wire Wire Line
-	3700 2050 3850 2050
 Text HLabel 3850 1950 2    60   Input ~ 0
 BARO_SCK
 Text HLabel 3850 2050 2    60   Input ~ 0
 BARO_MOSI
 Text HLabel 3850 2150 2    60   Output ~ 0
 BARO_MISO
-Wire Wire Line
-	3700 2150 3850 2150
 Text HLabel 3850 2250 2    60   Input ~ 0
 BARO_CS
-Wire Wire Line
-	3700 2250 3850 2250
-Wire Wire Line
-	3800 2450 3900 2450
-Wire Wire Line
-	3800 2450 3800 2250
-Connection ~ 3800 2250
 $Comp
 L R R601
 U 1 1 565D7136
@@ -150,17 +137,6 @@ F 3 "" H 2500 2050 60  0000 C CNN
 	1    2500 2050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3000 1950 2850 1950
-Wire Wire Line
-	2850 1950 2850 1900
-Wire Wire Line
-	2750 2150 3000 2150
-Wire Wire Line
-	3000 2050 2900 2050
-Wire Wire Line
-	2900 2050 2900 2150
-Connection ~ 2900 2150
 $Comp
 L C C601
 U 1 1 565D7512
@@ -175,10 +151,6 @@ F 6 "Value" H 2500 1800 60  0001 C CNN "Fieldname"
 	1    2500 1800
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2500 1950 2500 2050
-Wire Wire Line
-	2500 1550 2500 1650
 $Comp
 L +3V3 #PWR036
 U 1 1 565D777C
@@ -190,8 +162,6 @@ F 3 "" H 4450 2400 60  0000 C CNN
 	1    4450 2400
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4200 2450 4450 2450
 $Comp
 L +3V3 #PWR037
 U 1 1 565D78F9
@@ -205,4 +175,36 @@ F 3 "" H 2500 1550 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	4450 2450 4450 2400
+Wire Wire Line
+	4200 2450 4450 2450
+Wire Wire Line
+	2500 1550 2500 1650
+Wire Wire Line
+	2500 1950 2500 2050
+Connection ~ 2900 2150
+Wire Wire Line
+	2900 2050 2900 2150
+Wire Wire Line
+	3000 2050 2900 2050
+Wire Wire Line
+	2750 2150 3000 2150
+Wire Wire Line
+	2850 1950 2850 1900
+Wire Wire Line
+	3000 1950 2850 1950
+Connection ~ 3800 2250
+Wire Wire Line
+	3800 2450 3800 2250
+Wire Wire Line
+	3800 2450 3900 2450
+Wire Wire Line
+	3700 2250 3850 2250
+Wire Wire Line
+	3700 2150 3850 2150
+Wire Wire Line
+	3700 2050 3850 2050
+Wire Wire Line
+	3700 1950 3850 1950
+NoConn ~ 3000 2250
+NoConn ~ 1900 2050
 $EndSCHEMATC
