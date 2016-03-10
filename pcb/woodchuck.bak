@@ -193,7 +193,7 @@ F 4 "Value" H 4000 6700 60  0001 C CNN "Digikey"
 F 5 "1830747" H 4000 6700 60  0001 C CNN "Farnell"
 F 6 "Value" H 4000 6700 60  0001 C CNN "Fieldname"
 	1    4000 6700
-	-1   0    0    1   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L +BATT #PWR101
