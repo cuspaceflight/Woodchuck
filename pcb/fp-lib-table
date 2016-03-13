@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name Woodchuck)(type KiCad)(uri "$(KIPRJMOD)/Woodchuck.pretty")(options "")(descr ""))
-)
