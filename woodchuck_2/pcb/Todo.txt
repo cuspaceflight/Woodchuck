@@ -1,5 +1,5 @@
 -Tidy up schematic (see David Turner's notes on slack)
 -Remove unnecessary components from woodchuck 1:
 	-Tidy up unused hierarchical pins
-	-Switching reg? Do we need the efficiency?
+-Go through all component values and farnell (especially for the radio circuit)
 
