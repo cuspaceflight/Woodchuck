@@ -1,5 +1,0 @@
--Tidy up schematic (see David Turner's notes on slack)
--Remove unnecessary components from woodchuck 1:
-	-Tidy up unused hierarchical pins
--Go through all component values,footprints and farnell (especially for the radio circuit: https://docs.google.com/document/d/1VejlfgXlPsSVar69A_397WxsVZdSfYFz36Eny0gD_NQ/edit#heading=h.oos42ld10xtu)
-
