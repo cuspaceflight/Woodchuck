@@ -52,15 +52,14 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
-LIBS:agg-kicad
 LIBS:woodchuck-cache
-EELAYER 25 0
+EELAYER 27 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 4 5
 Title ""
-Date ""
+Date "8 may 2016"
 Rev ""
 Comp ""
 Comment1 ""
@@ -588,6 +587,7 @@ F 0 "C406" H 3525 2100 50  0000 L CNN
 F 1 "4u7" H 3525 1900 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 3500 1700 50  0001 C CNN
 F 3 "" H 3500 2000 50  0000 C CNN
+F 4 "1535567" H 3500 2000 60  0001 C CNN "Farnell"
 	1    3500 2000
 	1    0    0    -1  
 $EndComp
@@ -599,6 +599,7 @@ F 0 "C405" H 2075 2100 50  0000 L CNN
 F 1 "1u" H 2075 1900 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 2050 1750 50  0001 C CNN
 F 3 "" H 2050 2000 50  0000 C CNN
+F 4 "2496935" H 2050 2000 60  0001 C CNN "Farnell"
 	1    2050 2000
 	1    0    0    -1  
 $EndComp

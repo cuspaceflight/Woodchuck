@@ -52,15 +52,14 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
-LIBS:agg-kicad
 LIBS:woodchuck-cache
-EELAYER 25 0
+EELAYER 27 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 2 5
 Title ""
-Date ""
+Date "8 may 2016"
 Rev ""
 Comp ""
 Comment1 ""
