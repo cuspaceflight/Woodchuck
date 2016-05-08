@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:woodchuck-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -52,8 +53,9 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
+LIBS:agg-kicad
 LIBS:woodchuck-cache
-EELAYER 27 0
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -76,13 +78,12 @@ F 1 "Radiometrix_MTX2" H 5150 2200 60  0000 C CNN
 F 2 "Woodchuck:MTX2" H 5550 2900 60  0001 C CNN
 F 3 "http://www.radiometrix.com/files/additional/mtx2.pdf" H 5550 2900 60  0001 C CNN
 F 4 "Value" H 5550 2900 60  0001 C CNN "Digikey"
-F 5 "Value" H 5550 2900 60  0001 C CNN "Farnell"
-F 6 "Value" H 5550 2900 60  0001 C CNN "Fieldname"
+F 5 "Value" H 5550 2900 60  0001 C CNN "Fieldname"
 	1    5550 2900
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR09
+L GND-RESCUE-woodchuck #PWR09
 U 1 1 565CEF3F
 P 5800 2850
 F 0 "#PWR09" H 5800 2600 50  0001 C CNN
@@ -93,7 +94,7 @@ F 3 "" H 5800 2850 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR010
+L GND-RESCUE-woodchuck #PWR010
 U 1 1 565CEF57
 P 4550 3550
 F 0 "#PWR010" H 4550 3300 50  0001 C CNN
@@ -120,7 +121,7 @@ $EndComp
 Text Notes 1300 3500 0    60   ~ 0
 Quarter wave ant library removed \n(no pins on the antenna components)\nas it kept placing that one instead of \nthis one now (which was used in avionics14)
 $Comp
-L GND #PWR011
+L GND-RESCUE-woodchuck #PWR011
 U 1 1 565D0220
 P 4050 3550
 F 0 "#PWR011" H 4050 3300 50  0001 C CNN
@@ -131,7 +132,7 @@ F 3 "" H 4050 3550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR012
+L GND-RESCUE-woodchuck #PWR012
 U 1 1 565D0231
 P 4050 3100
 F 0 "#PWR012" H 4050 2850 50  0001 C CNN
@@ -209,7 +210,7 @@ F 6 "Value" H 5650 3800 60  0001 C CNN "Fieldname"
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR014
+L GND-RESCUE-woodchuck #PWR014
 U 1 1 565D1392
 P 5650 4000
 F 0 "#PWR014" H 5650 3750 50  0001 C CNN
@@ -239,7 +240,7 @@ F 6 "Value" H 4250 3300 60  0001 C CNN "Fieldname"
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR015
+L GND-RESCUE-woodchuck #PWR015
 U 1 1 565D162B
 P 4250 3550
 F 0 "#PWR015" H 4250 3300 50  0001 C CNN

@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/eivind/Documents/GitHub/Woodchuck/pcb/woodchuck.sch</source>
+    <date>sø. 08. mai 2016 kl. 17.12 +0100</date>
+    <tool>Eeschema 4.0.2-4+6225~38~ubuntu14.04.1-stable</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date>8 may 2016</date>
+        <source>woodchuck.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/GPS/" tstamps="/56574088/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date>8 may 2016</date>
+        <source>GPS_Ublox.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="3" name="/Radio/" tstamps="/5657408B/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date>8 may 2016</date>
+        <source>Radio.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="4" name="/microcontroller/" tstamps="/56574098/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date>8 may 2016</date>
+        <source>microcontroller.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="5" name="/barometer/" tstamps="/5657409E/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date>8 may 2016</date>
+        <source>barometer.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="IC101">
+      <value>ADP3335</value>
+      <footprint>Woodchuck:MSOP8</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">2067775</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="adp3335" part="ADP3335"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565E3BA6</tstamp>
+    </comp>
+    <comp ref="C102">
+      <value>1n</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1759088</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565E4A3A</tstamp>
+    </comp>
+    <comp ref="C103">
+      <value>2u2</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">2211185</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565E50FD</tstamp>
+    </comp>
+    <comp ref="C101">
+      <value>2u2</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">2211185</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565E43E2</tstamp>
+    </comp>
+    <comp ref="P101">
+      <value>CONN_01X02</value>
+      <footprint>Woodchuck:S02B-PASK-2</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1830747</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="conn" part="CONN_01X02"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565EBDD9</tstamp>
+    </comp>
+    <comp ref="IC201">
+      <value>u-blox_CAM-M8Q</value>
+      <footprint>Woodchuck:UBLOX_CAM_M8Q</footprint>
+      <datasheet>https://www2.u-blox.com/images/downloads/Product_Docs/CAM-M8Q_DataSheet_%28UBX-13004081%29.pdf</datasheet>
+      <libsource lib="u-blox_cam-m8q" part="u-blox_CAM-M8Q"/>
+      <sheetpath names="/GPS/" tstamps="/56574088/"/>
+      <tstamp>565D0659</tstamp>
+    </comp>
+    <comp ref="C201">
+      <value>100n</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">9406140</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/GPS/" tstamps="/56574088/"/>
+      <tstamp>56ACB00C</tstamp>
+    </comp>
+    <comp ref="R202">
+      <value>220</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1652857</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="R-RESCUE-woodchuck"/>
+      <sheetpath names="/GPS/" tstamps="/56574088/"/>
+      <tstamp>56ACBA41</tstamp>
+    </comp>
+    <comp ref="R201">
+      <value>220</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1652857</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="R-RESCUE-woodchuck"/>
+      <sheetpath names="/GPS/" tstamps="/56574088/"/>
+      <tstamp>56ACBA86</tstamp>
+    </comp>
+    <comp ref="U301">
+      <value>Radiometrix_MTX2</value>
+      <footprint>Woodchuck:MTX2</footprint>
+      <datasheet>http://www.radiometrix.com/files/additional/mtx2.pdf</datasheet>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="radiometrix_mtx2" part="Radiometrix_MTX2"/>
+      <sheetpath names="/Radio/" tstamps="/5657408B/"/>
+      <tstamp>5658C80F</tstamp>
+    </comp>
+    <comp ref="A301">
+      <value>SMA</value>
+      <footprint>Woodchuck:SMA-142-0701-801</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1608592</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="sma" part="SMA"/>
+      <sheetpath names="/Radio/" tstamps="/5657408B/"/>
+      <tstamp>565CF9AA</tstamp>
+    </comp>
+    <comp ref="C301">
+      <value>100n</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1759037</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="device" part="C_Small"/>
+      <sheetpath names="/Radio/" tstamps="/5657408B/"/>
+      <tstamp>565D1347</tstamp>
+    </comp>
+    <comp ref="D301">
+      <value>CGA0402MLC-12G</value>
+      <footprint>Woodchuck:R0402</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">2368169</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="cga0402mlc-12g" part="CGA0402MLC-12G"/>
+      <sheetpath names="/Radio/" tstamps="/5657408B/"/>
+      <tstamp>565D14D2</tstamp>
+    </comp>
+    <comp ref="C403">
+      <value>0.1uF</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1759037</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565B2484</tstamp>
+    </comp>
+    <comp ref="C402">
+      <value>0.1uF</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1759037</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565B2D3B</tstamp>
+    </comp>
+    <comp ref="C401">
+      <value>10nF</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1907314</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565B339D</tstamp>
+    </comp>
+    <comp ref="C404">
+      <value>0.1uF</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1759037</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565B3429</tstamp>
+    </comp>
+    <comp ref="P401">
+      <value>SWD</value>
+      <footprint>Woodchuck:FTSH-105-01-F-D-K</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1865285</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="swd" part="SWD"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565B3F04</tstamp>
+    </comp>
+    <comp ref="J401">
+      <value>JSTA-4</value>
+      <footprint>Woodchuck:S04B-PASK-2</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1830749</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="jsta" part="JSTA-4"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565B5A63</tstamp>
+    </comp>
+    <comp ref="SW401">
+      <value>SPST</value>
+      <footprint>Woodchuck:B3U-1000P_switch</footprint>
+      <datasheet>http://www.farnell.com/datasheets/1685550.pdf</datasheet>
+      <fields>
+        <field name="Farnell">1333652</field>
+      </fields>
+      <libsource lib="device" part="SPST"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565B9D59</tstamp>
+    </comp>
+    <comp ref="R404">
+      <value>10K</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">9331700</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="resistor" part="RESISTOR"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565BA71B</tstamp>
+    </comp>
+    <comp ref="R401">
+      <value>510</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1469826</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="resistor" part="RESISTOR"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>569D2BC0</tstamp>
+    </comp>
+    <comp ref="R402">
+      <value>510</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1469826</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="resistor" part="RESISTOR"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>569D2C37</tstamp>
+    </comp>
+    <comp ref="R403">
+      <value>510</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1469826</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="resistor" part="RESISTOR"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>569D2C6E</tstamp>
+    </comp>
+    <comp ref="U401">
+      <value>STM32F072CBT6</value>
+      <footprint>Woodchuck:LQFP48</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2006534.pdf</datasheet>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">2432094</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="stm32f072cbt6" part="STM32F072CBT6"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>565B237E</tstamp>
+    </comp>
+    <comp ref="P402">
+      <value>USB_OTG</value>
+      <footprint>Woodchuck:MOLEX_67503_1020_MINI_USB</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1125348</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="conn" part="USB_OTG"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>569D56C3</tstamp>
+    </comp>
+    <comp ref="IC1">
+      <value>24AA01</value>
+      <footprint>agg:SOT-23-5</footprint>
+      <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/21711c.pdf</datasheet>
+      <fields>
+        <field name="Farnell">1331269</field>
+      </fields>
+      <libsource lib="agg-kicad" part="24AA01"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56BF54E5</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>0.1uF</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1759037</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56BF5C75</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>10K</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">9331700</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="resistor" part="RESISTOR"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56BF98C6</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10K</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">9331700</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="resistor" part="RESISTOR"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56BF9EA2</tstamp>
+    </comp>
+    <comp ref="C406">
+      <value>4u7</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Farnell">1535567</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56C45ED5</tstamp>
+    </comp>
+    <comp ref="C405">
+      <value>1u</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Farnell">2496935</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56C46154</tstamp>
+    </comp>
+    <comp ref="X402">
+      <value>Mounting hole</value>
+      <footprint>Woodchuck:M3_MOUNT</footprint>
+      <libsource lib="agg-kicad" part="PART"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56C48D82</tstamp>
+    </comp>
+    <comp ref="X401">
+      <value>Mounting hole</value>
+      <footprint>Woodchuck:M3_MOUNT</footprint>
+      <libsource lib="agg-kicad" part="PART"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56C48F80</tstamp>
+    </comp>
+    <comp ref="X403">
+      <value>CUSF LOGO</value>
+      <footprint>Woodchuck:cusf_logo</footprint>
+      <libsource lib="agg-kicad" part="PART"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56C4AB59</tstamp>
+    </comp>
+    <comp ref="X404">
+      <value>CUSF LOGO BACK</value>
+      <footprint>Woodchuck:cusf_logo_full</footprint>
+      <libsource lib="agg-kicad" part="PART"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>56C4ABE4</tstamp>
+    </comp>
+    <comp ref="D401">
+      <value>LED_RABG</value>
+      <footprint>Woodchuck:CREE_RGB_LED</footprint>
+      <datasheet>http://www.farnell.com/datasheets/1965387.pdf</datasheet>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">2093940</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/microcontroller/" tstamps="/56574098/"/>
+      <tstamp>569D292A</tstamp>
+    </comp>
+    <comp ref="IC601">
+      <value>MS5611-01BA03</value>
+      <footprint>Woodchuck:MS5611-01BA</footprint>
+      <datasheet>http://www.daedalus.ei.tum.de/attachments/article/61/MS5611-01BA01.pdf</datasheet>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">2362662</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="ms5611-01ba03" part="MS5611-01BA03"/>
+      <sheetpath names="/barometer/" tstamps="/5657409E/"/>
+      <tstamp>565CC16E</tstamp>
+    </comp>
+    <comp ref="R601">
+      <value>10k</value>
+      <footprint>Woodchuck:0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">9331700</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="R-RESCUE-woodchuck"/>
+      <sheetpath names="/barometer/" tstamps="/5657409E/"/>
+      <tstamp>565D7136</tstamp>
+    </comp>
+    <comp ref="C601">
+      <value>100n</value>
+      <footprint>Woodchuck:C0603</footprint>
+      <fields>
+        <field name="Digikey">Value</field>
+        <field name="Farnell">1759037</field>
+        <field name="Fieldname">Value</field>
+      </fields>
+      <libsource lib="woodchuck-rescue" part="C-RESCUE-woodchuck"/>
+      <sheetpath names="/barometer/" tstamps="/5657409E/"/>
+      <tstamp>565D7512</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="agg-kicad" part="24AA01">
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">24AA01</field>
+        <field name="Footprint">agg:SOT-23-5</field>
+        <field name="Datasheet">http://ww1.microchip.com/downloads/en/DeviceDoc/21711c.pdf</field>
+        <field name="Farnell">1331269</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SCL" type="3state"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="SDA" type="3state"/>
+        <pin num="4" name="VCC" type="power_in"/>
+        <pin num="5" name="WP" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="adp3335" part="ADP3335">
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">ADP3335</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="power_out"/>
+        <pin num="2" name="OUT" type="passive"/>
+        <pin num="3" name="OUT" type="passive"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="NR" type="power_out"/>
+        <pin num="6" name="SD" type="input"/>
+        <pin num="7" name="IN" type="power_in"/>
+        <pin num="8" name="IN" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="woodchuck-rescue" part="C-RESCUE-woodchuck">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C-RESCUE-woodchuck</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="cga0402mlc-12g" part="CGA0402MLC-12G">
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">CGA0402MLC-12G</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X02">
+      <description>Connector 01x02</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X02</fp>
+        <fp>Pin_Header_Angled_1X02</fp>
+        <fp>Socket_Strip_Straight_1X02</fp>
+        <fp>Socket_Strip_Angled_1X02</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="C_Small">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C?</fp>
+        <fp>C_????_*</fp>
+        <fp>C_????</fp>
+        <fp>SMD*_c</fp>
+        <fp>Capacitor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="jsta" part="JSTA-4">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">JSTA-4</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="BiDi"/>
+        <pin num="2" name="~" type="BiDi"/>
+        <pin num="3" name="~" type="BiDi"/>
+        <pin num="4" name="~" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="LED_RABG">
+      <description>Common Anode RGB LED</description>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED_RABG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RED_CATHODE" type="passive"/>
+        <pin num="2" name="COMMON_ANODE" type="passive"/>
+        <pin num="3" name="BLUE_CATHODE" type="passive"/>
+        <pin num="4" name="GREEN_CATHODE" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ms5611-01ba03" part="MS5611-01BA03">
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">MS5611-01BA03</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="PS" type="input"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="CSB" type="input"/>
+        <pin num="5" name="CSB" type="input"/>
+        <pin num="6" name="SDO" type="output"/>
+        <pin num="7" name="SDI" type="input"/>
+        <pin num="8" name="SCLK" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="agg-kicad" part="PART">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">PART</field>
+      </fields>
+    </libpart>
+    <libpart lib="woodchuck-rescue" part="R-RESCUE-woodchuck">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+        <fp>R?-*</fp>
+        <fp>SM1206</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R-RESCUE-woodchuck</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="resistor" part="RESISTOR">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">RESISTOR</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="radiometrix_mtx2" part="Radiometrix_MTX2">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Radiometrix_MTX2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RF" type="output"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="VCC" type="power_in"/>
+        <pin num="4" name="EN/PGM" type="input"/>
+        <pin num="5" name="TXD" type="input"/>
+        <pin num="6" name="P1" type="input"/>
+        <pin num="7" name="P0" type="input"/>
+        <pin num="8" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="sma" part="SMA">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">SMA</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RF" type="BiDi"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="SPST">
+      <description>Interrupteur simple</description>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SPST</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="input"/>
+        <pin num="2" name="2" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="stm32f072cbt6" part="STM32F072CBT6">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">STM32F072CBT6</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBAT" type="power_in"/>
+        <pin num="2" name="PC13" type="BiDi"/>
+        <pin num="3" name="PC14/OSC32_IN" type="BiDi"/>
+        <pin num="4" name="PC15/OSC32_OUT" type="BiDi"/>
+        <pin num="5" name="PF0/OSC_IN" type="BiDi"/>
+        <pin num="6" name="PF1/OSC_OUT" type="BiDi"/>
+        <pin num="7" name="nRST" type="BiDi"/>
+        <pin num="8" name="VSSA" type="power_in"/>
+        <pin num="9" name="VDDA" type="power_in"/>
+        <pin num="10" name="PA0" type="BiDi"/>
+        <pin num="11" name="PA1" type="BiDi"/>
+        <pin num="12" name="PA2/USART2_TX" type="BiDi"/>
+        <pin num="13" name="PA3/USART2_RX" type="BiDi"/>
+        <pin num="14" name="PA4" type="BiDi"/>
+        <pin num="15" name="PA5" type="BiDi"/>
+        <pin num="16" name="PA6" type="BiDi"/>
+        <pin num="17" name="PA7" type="BiDi"/>
+        <pin num="18" name="PB0" type="BiDi"/>
+        <pin num="19" name="PB1" type="BiDi"/>
+        <pin num="20" name="PB2" type="BiDi"/>
+        <pin num="21" name="PB10/USART3_TX" type="BiDi"/>
+        <pin num="22" name="PB11/USART3_RX" type="BiDi"/>
+        <pin num="23" name="VSS" type="power_in"/>
+        <pin num="24" name="VDD" type="power_in"/>
+        <pin num="25" name="PB12" type="BiDi"/>
+        <pin num="26" name="PB13" type="BiDi"/>
+        <pin num="27" name="PB14" type="BiDi"/>
+        <pin num="28" name="PB15" type="BiDi"/>
+        <pin num="29" name="PA8" type="BiDi"/>
+        <pin num="30" name="PA9/USART1_TX" type="BiDi"/>
+        <pin num="31" name="PA10/USART1_RX" type="BiDi"/>
+        <pin num="32" name="PA11/USB_D-" type="BiDi"/>
+        <pin num="33" name="PA12/USB_D+" type="BiDi"/>
+        <pin num="34" name="PA13/SWDIO" type="BiDi"/>
+        <pin num="35" name="VSS" type="power_in"/>
+        <pin num="36" name="VDDIO2" type="power_in"/>
+        <pin num="37" name="PA14/SWCLK" type="BiDi"/>
+        <pin num="38" name="PA15/SPI1_CS_N" type="BiDi"/>
+        <pin num="39" name="PB3/SPI1_CLK" type="BiDi"/>
+        <pin num="40" name="PB4/SPI1_MISO" type="BiDi"/>
+        <pin num="41" name="PB5/SPI1_MOSI" type="BiDi"/>
+        <pin num="42" name="PB6/I2C1_SCL" type="BiDi"/>
+        <pin num="43" name="PB7/I2C1_SDA" type="BiDi"/>
+        <pin num="44" name="BOOT0" type="input"/>
+        <pin num="45" name="PB8" type="BiDi"/>
+        <pin num="46" name="PB9" type="BiDi"/>
+        <pin num="47" name="VSS" type="power_in"/>
+        <pin num="48" name="VDD" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="swd" part="SWD">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">SWD</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VTref" type="power_in"/>
+        <pin num="2" name="SWDIO/TMS" type="BiDi"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="SWDCLK/TCK" type="BiDi"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="SWO/TDO" type="BiDi"/>
+        <pin num="7" name="KEY" type="NotConnected"/>
+        <pin num="8" name="TDI" type="BiDi"/>
+        <pin num="9" name="GND" type="power_in"/>
+        <pin num="10" name="nRESET" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="USB_OTG">
+      <description>micro/mini connector</description>
+      <footprints>
+        <fp>USB*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">USB_OTG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="power_out"/>
+        <pin num="2" name="D-" type="passive"/>
+        <pin num="3" name="D+" type="passive"/>
+        <pin num="4" name="ID" type="power_in"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="shield" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="u-blox_cam-m8q" part="u-blox_CAM-M8Q">
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">u-blox_CAM-M8Q</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC_IO" type="power_in"/>
+        <pin num="2" name="Reserved" type="NotConnected"/>
+        <pin num="3" name="SDA/SPI_CS_N" type="BiDi"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="SCL/SPI_CLK" type="input"/>
+        <pin num="7" name="EXTINT" type="input"/>
+        <pin num="8" name="V_BCKP" type="power_in"/>
+        <pin num="9" name="VCC" type="power_in"/>
+        <pin num="10" name="GND" type="power_in"/>
+        <pin num="11" name="GND" type="power_in"/>
+        <pin num="12" name="GND" type="power_in"/>
+        <pin num="13" name="GND" type="power_in"/>
+        <pin num="14" name="GND" type="power_in"/>
+        <pin num="15" name="GND" type="power_in"/>
+        <pin num="16" name="ANT" type="output"/>
+        <pin num="17" name="RF_IN" type="input"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="GND" type="power_in"/>
+        <pin num="20" name="DSEL" type="input"/>
+        <pin num="21" name="GND" type="power_in"/>
+        <pin num="22" name="GND" type="power_in"/>
+        <pin num="23" name="RESET_N" type="input"/>
+        <pin num="24" name="Reserved" type="NotConnected"/>
+        <pin num="25" name="TXD/SPI_MISO" type="output"/>
+        <pin num="26" name="RXD/SPI_MOSI" type="input"/>
+        <pin num="27" name="GND" type="power_in"/>
+        <pin num="28" name="Reserved" type="NotConnected"/>
+        <pin num="29" name="TIMEPULSE" type="output"/>
+        <pin num="30" name="ANT_ON" type="output"/>
+        <pin num="31" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
+    </library>
+    <library logical="adp3335">
+      <uri>library/adp3335.lib</uri>
+    </library>
+    <library logical="ms5611-01ba03">
+      <uri>library/ms5611-01ba03.lib</uri>
+    </library>
+    <library logical="resistor">
+      <uri>library/resistor.lib</uri>
+    </library>
+    <library logical="swd">
+      <uri>library/swd.lib</uri>
+    </library>
+    <library logical="u-blox_cam-m8q">
+      <uri>library/u-blox_cam-m8q.lib</uri>
+    </library>
+    <library logical="stm32f072cbt6">
+      <uri>library/stm32f072cbt6.lib</uri>
+    </library>
+    <library logical="radiometrix_mtx2">
+      <uri>library/radiometrix_mtx2.lib</uri>
+    </library>
+    <library logical="jsta">
+      <uri>library/jsta.lib</uri>
+    </library>
+    <library logical="sma">
+      <uri>library/sma.lib</uri>
+    </library>
+    <library logical="cga0402mlc-12g">
+      <uri>library/cga0402mlc-12g.lib</uri>
+    </library>
+    <library logical="agg-kicad">
+      <uri>/home/eivind/Documents/GitHub/Woodchuck/agg-kicad/agg-kicad.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>/usr/share/kicad/library/conn.lib</uri>
+    </library>
+    <library logical="woodchuck-rescue">
+      <uri>woodchuck-rescue.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/GPS/GPS_FROM_MCU">
+      <node ref="U401" pin="12"/>
+    </net>
+    <net code="2" name="GND">
+      <node ref="U301" pin="8"/>
+      <node ref="A301" pin="3"/>
+      <node ref="A301" pin="4"/>
+      <node ref="A301" pin="2"/>
+      <node ref="U301" pin="2"/>
+      <node ref="U401" pin="47"/>
+      <node ref="D301" pin="2"/>
+      <node ref="A301" pin="5"/>
+      <node ref="IC201" pin="4"/>
+      <node ref="IC201" pin="5"/>
+      <node ref="IC201" pin="10"/>
+      <node ref="IC201" pin="11"/>
+      <node ref="IC201" pin="21"/>
+      <node ref="IC201" pin="31"/>
+      <node ref="IC201" pin="12"/>
+      <node ref="IC201" pin="22"/>
+      <node ref="IC201" pin="13"/>
+      <node ref="IC201" pin="14"/>
+      <node ref="IC201" pin="15"/>
+      <node ref="IC201" pin="18"/>
+      <node ref="C301" pin="2"/>
+      <node ref="IC201" pin="19"/>
+      <node ref="IC201" pin="27"/>
+      <node ref="P401" pin="9"/>
+      <node ref="R404" pin="2"/>
+      <node ref="U401" pin="23"/>
+      <node ref="P401" pin="5"/>
+      <node ref="C401" pin="2"/>
+      <node ref="P401" pin="3"/>
+      <node ref="J401" pin="4"/>
+      <node ref="U401" pin="8"/>
+      <node ref="P402" pin="6"/>
+      <node ref="IC1" pin="2"/>
+      <node ref="IC1" pin="5"/>
+      <node ref="P402" pin="5"/>
+      <node ref="U401" pin="35"/>
+      <node ref="IC601" pin="2"/>
+      <node ref="IC601" pin="3"/>
+      <node ref="C405" pin="2"/>
+      <node ref="P101" pin="2"/>
+      <node ref="IC101" pin="4"/>
+    </net>
+    <net code="3" name="/GPS/GPS_TO_MCU">
+      <node ref="U401" pin="13"/>
+    </net>
+    <net code="4" name="Net-(IC101-Pad5)">
+      <node ref="IC101" pin="5"/>
+    </net>
+    <net code="5" name="+3V3">
+      <node ref="D401" pin="2"/>
+      <node ref="IC101" pin="1"/>
+      <node ref="IC101" pin="2"/>
+      <node ref="IC101" pin="3"/>
+      <node ref="R1" pin="1"/>
+      <node ref="C405" pin="1"/>
+      <node ref="IC601" pin="1"/>
+      <node ref="R2" pin="1"/>
+      <node ref="IC1" pin="4"/>
+      <node ref="C301" pin="1"/>
+      <node ref="U401" pin="36"/>
+      <node ref="C401" pin="1"/>
+      <node ref="P401" pin="1"/>
+      <node ref="U401" pin="24"/>
+      <node ref="U301" pin="3"/>
+      <node ref="U401" pin="9"/>
+      <node ref="SW401" pin="2"/>
+      <node ref="IC201" pin="9"/>
+      <node ref="IC201" pin="8"/>
+      <node ref="J401" pin="1"/>
+      <node ref="U401" pin="48"/>
+      <node ref="IC201" pin="1"/>
+    </net>
+    <net code="6" name="/barometer/BARO_CS">
+      <node ref="IC601" pin="5"/>
+      <node ref="R601" pin="2"/>
+      <node ref="U401" pin="38"/>
+    </net>
+    <net code="7" name="/barometer/BARO_MISO">
+      <node ref="U401" pin="40"/>
+      <node ref="IC601" pin="6"/>
+    </net>
+    <net code="8" name="/barometer/BARO_MOSI">
+      <node ref="IC601" pin="7"/>
+      <node ref="U401" pin="41"/>
+    </net>
+    <net code="9" name="/microcontroller/BARO_CLK">
+      <node ref="IC601" pin="8"/>
+      <node ref="U401" pin="39"/>
+    </net>
+    <net code="10" name="+BATT">
+      <node ref="P101" pin="1"/>
+      <node ref="IC101" pin="6"/>
+      <node ref="IC101" pin="7"/>
+      <node ref="IC101" pin="8"/>
+    </net>
+    <net code="11" name="/Radio/MTX2_P1">
+      <node ref="U401" pin="27"/>
+      <node ref="U301" pin="6"/>
+    </net>
+    <net code="12" name="/Radio/MTX2_P0">
+      <node ref="U301" pin="7"/>
+      <node ref="U401" pin="26"/>
+    </net>
+    <net code="13" name="/Radio/MTX2_EN/PGM">
+      <node ref="U301" pin="4"/>
+      <node ref="U401" pin="30"/>
+    </net>
+    <net code="14" name="/Radio/MTX2_TXD">
+      <node ref="U401" pin="14"/>
+      <node ref="U301" pin="5"/>
+    </net>
+    <net code="15" name="Net-(C102-Pad2)">
+      <node ref="C102" pin="2"/>
+    </net>
+    <net code="16" name="Net-(C102-Pad1)">
+      <node ref="C102" pin="1"/>
+    </net>
+    <net code="17" name="Net-(C103-Pad1)">
+      <node ref="C103" pin="1"/>
+    </net>
+    <net code="18" name="Net-(C103-Pad2)">
+      <node ref="C103" pin="2"/>
+    </net>
+    <net code="19" name="Net-(C101-Pad1)">
+      <node ref="C101" pin="1"/>
+    </net>
+    <net code="20" name="Net-(C101-Pad2)">
+      <node ref="C101" pin="2"/>
+    </net>
+    <net code="21" name="Net-(C201-Pad1)">
+      <node ref="C201" pin="1"/>
+    </net>
+    <net code="22" name="Net-(C201-Pad2)">
+      <node ref="C201" pin="2"/>
+    </net>
+    <net code="23" name="Net-(IC201-Pad7)">
+      <node ref="IC201" pin="7"/>
+    </net>
+    <net code="24" name="Net-(IC201-Pad16)">
+      <node ref="IC201" pin="16"/>
+      <node ref="IC201" pin="17"/>
+    </net>
+    <net code="25" name="Net-(IC201-Pad20)">
+      <node ref="IC201" pin="20"/>
+    </net>
+    <net code="26" name="Net-(IC201-Pad23)">
+      <node ref="IC201" pin="23"/>
+    </net>
+    <net code="27" name="Net-(IC201-Pad29)">
+      <node ref="IC201" pin="29"/>
+    </net>
+    <net code="28" name="Net-(IC201-Pad3)">
+      <node ref="IC201" pin="3"/>
+    </net>
+    <net code="29" name="Net-(IC201-Pad6)">
+      <node ref="IC201" pin="6"/>
+    </net>
+    <net code="30" name="Net-(IC201-Pad26)">
+      <node ref="R202" pin="2"/>
+      <node ref="IC201" pin="26"/>
+    </net>
+    <net code="31" name="Net-(IC201-Pad25)">
+      <node ref="IC201" pin="25"/>
+      <node ref="R201" pin="2"/>
+    </net>
+    <net code="32" name="Net-(R201-Pad1)">
+      <node ref="R201" pin="1"/>
+    </net>
+    <net code="33" name="Net-(R202-Pad1)">
+      <node ref="R202" pin="1"/>
+    </net>
+    <net code="34" name="Net-(IC201-Pad30)">
+      <node ref="IC201" pin="30"/>
+    </net>
+    <net code="35" name="Net-(IC201-Pad24)">
+      <node ref="IC201" pin="24"/>
+    </net>
+    <net code="36" name="Net-(IC201-Pad2)">
+      <node ref="IC201" pin="2"/>
+    </net>
+    <net code="37" name="Net-(IC201-Pad28)">
+      <node ref="IC201" pin="28"/>
+    </net>
+    <net code="38" name="Net-(A301-Pad1)">
+      <node ref="D301" pin="1"/>
+      <node ref="U301" pin="1"/>
+      <node ref="A301" pin="1"/>
+    </net>
+    <net code="39" name="/microcontroller/SWCLK">
+      <node ref="U401" pin="37"/>
+      <node ref="P401" pin="4"/>
+    </net>
+    <net code="40" name="/microcontroller/SWDIO">
+      <node ref="U401" pin="34"/>
+      <node ref="P401" pin="2"/>
+    </net>
+    <net code="41" name="/microcontroller/nRST">
+      <node ref="U401" pin="7"/>
+      <node ref="P401" pin="10"/>
+    </net>
+    <net code="42" name="/microcontroller/USB_D+">
+      <node ref="U401" pin="33"/>
+      <node ref="P402" pin="3"/>
+    </net>
+    <net code="43" name="/microcontroller/BOOT0">
+      <node ref="U401" pin="44"/>
+      <node ref="R404" pin="1"/>
+      <node ref="SW401" pin="1"/>
+    </net>
+    <net code="44" name="Net-(P402-Pad4)">
+      <node ref="P402" pin="4"/>
+    </net>
+    <net code="45" name="/microcontroller/EXT_RX">
+      <node ref="J401" pin="3"/>
+      <node ref="U401" pin="22"/>
+    </net>
+    <net code="46" name="/microcontroller/EXT_TX">
+      <node ref="J401" pin="2"/>
+      <node ref="U401" pin="21"/>
+    </net>
+    <net code="47" name="Net-(C1-Pad2)">
+      <node ref="C1" pin="2"/>
+    </net>
+    <net code="48" name="Net-(C1-Pad1)">
+      <node ref="C1" pin="1"/>
+    </net>
+    <net code="49" name="Net-(P402-Pad1)">
+      <node ref="P402" pin="1"/>
+    </net>
+    <net code="50" name="Net-(C406-Pad2)">
+      <node ref="C406" pin="2"/>
+    </net>
+    <net code="51" name="Net-(C406-Pad1)">
+      <node ref="C406" pin="1"/>
+    </net>
+    <net code="52" name="Net-(U401-Pad28)">
+      <node ref="U401" pin="28"/>
+    </net>
+    <net code="53" name="Net-(IC1-Pad1)">
+      <node ref="R1" pin="2"/>
+      <node ref="U401" pin="42"/>
+      <node ref="IC1" pin="1"/>
+    </net>
+    <net code="54" name="Net-(D401-Pad3)">
+      <node ref="R403" pin="1"/>
+      <node ref="D401" pin="3"/>
+    </net>
+    <net code="55" name="Net-(D401-Pad1)">
+      <node ref="D401" pin="1"/>
+      <node ref="R401" pin="1"/>
+    </net>
+    <net code="56" name="Net-(R401-Pad2)">
+      <node ref="U401" pin="11"/>
+      <node ref="R401" pin="2"/>
+    </net>
+    <net code="57" name="Net-(D401-Pad4)">
+      <node ref="R402" pin="1"/>
+      <node ref="D401" pin="4"/>
+    </net>
+    <net code="58" name="Net-(R402-Pad2)">
+      <node ref="U401" pin="15"/>
+      <node ref="R402" pin="2"/>
+    </net>
+    <net code="59" name="Net-(IC1-Pad3)">
+      <node ref="U401" pin="43"/>
+      <node ref="R2" pin="2"/>
+      <node ref="IC1" pin="3"/>
+    </net>
+    <net code="60" name="Net-(R403-Pad2)">
+      <node ref="R403" pin="2"/>
+      <node ref="U401" pin="16"/>
+    </net>
+    <net code="61" name="/microcontroller/USB_D-">
+      <node ref="P402" pin="2"/>
+      <node ref="U401" pin="32"/>
+    </net>
+    <net code="62" name="Net-(C404-Pad2)">
+      <node ref="C404" pin="2"/>
+    </net>
+    <net code="63" name="Net-(C404-Pad1)">
+      <node ref="C404" pin="1"/>
+    </net>
+    <net code="64" name="Net-(C402-Pad2)">
+      <node ref="C402" pin="2"/>
+    </net>
+    <net code="65" name="Net-(C402-Pad1)">
+      <node ref="C402" pin="1"/>
+    </net>
+    <net code="66" name="Net-(C403-Pad2)">
+      <node ref="C403" pin="2"/>
+    </net>
+    <net code="67" name="Net-(C403-Pad1)">
+      <node ref="C403" pin="1"/>
+    </net>
+    <net code="68" name="Net-(P401-Pad8)">
+      <node ref="P401" pin="8"/>
+    </net>
+    <net code="69" name="Net-(P401-Pad6)">
+      <node ref="P401" pin="6"/>
+    </net>
+    <net code="70" name="Net-(P401-Pad7)">
+      <node ref="P401" pin="7"/>
+    </net>
+    <net code="71" name="Net-(U401-Pad25)">
+      <node ref="U401" pin="25"/>
+    </net>
+    <net code="72" name="Net-(U401-Pad31)">
+      <node ref="U401" pin="31"/>
+    </net>
+    <net code="73" name="Net-(U401-Pad29)">
+      <node ref="U401" pin="29"/>
+    </net>
+    <net code="74" name="Net-(U401-Pad19)">
+      <node ref="U401" pin="19"/>
+    </net>
+    <net code="75" name="Net-(U401-Pad18)">
+      <node ref="U401" pin="18"/>
+    </net>
+    <net code="76" name="Net-(U401-Pad17)">
+      <node ref="U401" pin="17"/>
+    </net>
+    <net code="77" name="Net-(U401-Pad46)">
+      <node ref="U401" pin="46"/>
+    </net>
+    <net code="78" name="Net-(U401-Pad45)">
+      <node ref="U401" pin="45"/>
+    </net>
+    <net code="79" name="Net-(U401-Pad2)">
+      <node ref="U401" pin="2"/>
+    </net>
+    <net code="80" name="Net-(U401-Pad3)">
+      <node ref="U401" pin="3"/>
+    </net>
+    <net code="81" name="Net-(U401-Pad4)">
+      <node ref="U401" pin="4"/>
+    </net>
+    <net code="82" name="Net-(U401-Pad5)">
+      <node ref="U401" pin="5"/>
+    </net>
+    <net code="83" name="Net-(U401-Pad6)">
+      <node ref="U401" pin="6"/>
+    </net>
+    <net code="84" name="Net-(U401-Pad10)">
+      <node ref="U401" pin="10"/>
+    </net>
+    <net code="85" name="Net-(U401-Pad20)">
+      <node ref="U401" pin="20"/>
+    </net>
+    <net code="86" name="Net-(U401-Pad1)">
+      <node ref="U401" pin="1"/>
+    </net>
+    <net code="87" name="Net-(IC601-Pad4)">
+      <node ref="IC601" pin="4"/>
+    </net>
+    <net code="89" name="Net-(R601-Pad1)">
+      <node ref="R601" pin="1"/>
+    </net>
+    <net code="90" name="Net-(C601-Pad1)">
+      <node ref="C601" pin="1"/>
+    </net>
+    <net code="91" name="Net-(C601-Pad2)">
+      <node ref="C601" pin="2"/>
+    </net>
+  </nets>
+</export>

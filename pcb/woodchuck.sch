@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:woodchuck-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -52,8 +53,9 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
+LIBS:agg-kicad
 LIBS:woodchuck-cache
-EELAYER 27 0
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -128,7 +130,7 @@ $EndComp
 Text Notes 5450 5850 0    60   ~ 0
 Power regulator
 $Comp
-L C C102
+L C-RESCUE-woodchuck C102
 U 1 1 565E4A3A
 P 5850 6700
 F 0 "C102" H 5875 6800 50  0000 L CNN
@@ -142,7 +144,7 @@ F 6 "Value" H 5850 6700 60  0001 C CNN "Fieldname"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C103
+L C-RESCUE-woodchuck C103
 U 1 1 565E50FD
 P 6100 6700
 F 0 "C103" H 6125 6800 50  0000 L CNN
@@ -156,7 +158,7 @@ F 6 "Value" H 6100 6700 60  0001 C CNN "Fieldname"
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR01
+L GND-RESCUE-woodchuck #PWR01
 U 1 1 565E565A
 P 6100 6850
 F 0 "#PWR01" H 6100 6600 50  0001 C CNN
@@ -167,7 +169,7 @@ F 3 "" H 6100 6850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C101
+L C-RESCUE-woodchuck C101
 U 1 1 565E43E2
 P 4400 6700
 F 0 "C101" V 4250 6600 50  0000 L CNN
@@ -344,7 +346,7 @@ Wire Wire Line
 Wire Wire Line
 	4750 6650 4850 6650
 $Comp
-L GND #PWR04
+L GND-RESCUE-woodchuck #PWR04
 U 1 1 56C23CD2
 P 4200 6900
 F 0 "#PWR04" H 4200 6650 50  0001 C CNN
