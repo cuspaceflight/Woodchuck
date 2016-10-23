@@ -40,7 +40,7 @@ Inconsistent Order Codes
       P401   SWD             Woodchuck:FTSH-105-01-F-D-K
       J401   JSTA-4          Woodchuck:S04B-PASK-2
       R404   10K             Woodchuck:0603
-      R401   510             Woodchuck:0603
+      R401   100             Woodchuck:0603
       R402   510             Woodchuck:0603
       R403   510             Woodchuck:0603
       U401   STM32F072CBT6   Woodchuck:LQFP48
@@ -74,7 +74,7 @@ Inconsistent Order Codes
       P401   SWD             Woodchuck:FTSH-105-01-F-D-K
       J401   JSTA-4          Woodchuck:S04B-PASK-2
       R404   10K             Woodchuck:0603
-      R401   510             Woodchuck:0603
+      R401   100             Woodchuck:0603
       R402   510             Woodchuck:0603
       R403   510             Woodchuck:0603
       U401   STM32F072CBT6   Woodchuck:LQFP48
@@ -160,5 +160,6 @@ Value                31  ADP3335,100n,MS5611-01BA03,STM32F072CBT6,10K,LED_RABG,1
 2362662              1   MS5611-01BA03   MS5611-01BA     IC601
 1759088              1   1n              C0603           C102
 1907314              1   10nF            C0603           C401
-1469826              3   510             0603            R401 R402 R403
+9330364              1   100             0603            R401
+9331000              2   30              0603            R402 R403
 2093940              1   LED_RABG        CREE_RGB_LED    D401
