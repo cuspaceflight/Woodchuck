@@ -41,8 +41,8 @@ Inconsistent Order Codes
       J401   JSTA-4          Woodchuck:S04B-PASK-2
       R404   10K             Woodchuck:0603
       R401   100             Woodchuck:0603
-      R402   510             Woodchuck:0603
-      R403   510             Woodchuck:0603
+      R402   30              Woodchuck:0603
+      R403   30              Woodchuck:0603
       U401   STM32F072CBT6   Woodchuck:LQFP48
       P402   USB_OTG         Woodchuck:MOLEX_67503_1020_MINI_USB
       C1     0.1uF           Woodchuck:C0603
@@ -75,8 +75,8 @@ Inconsistent Order Codes
       J401   JSTA-4          Woodchuck:S04B-PASK-2
       R404   10K             Woodchuck:0603
       R401   100             Woodchuck:0603
-      R402   510             Woodchuck:0603
-      R403   510             Woodchuck:0603
+      R402   30              Woodchuck:0603
+      R403   30              Woodchuck:0603
       U401   STM32F072CBT6   Woodchuck:LQFP48
       P402   USB_OTG         Woodchuck:MOLEX_67503_1020_MINI_USB
       C1     0.1uF           Woodchuck:C0603
