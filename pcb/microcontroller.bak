@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:woodchuck-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -52,8 +53,9 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
+LIBS:agg-kicad
 LIBS:woodchuck-cache
-EELAYER 27 0
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -68,7 +70,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L GND #PWR016
+L GND-RESCUE-woodchuck #PWR016
 U 1 1 565B23CF
 P 5900 5600
 F 0 "#PWR016" H 5900 5350 50  0001 C CNN
@@ -79,9 +81,11 @@ F 3 "" H 5900 5600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C403
+L C-RESCUE-woodchuck C403
 U 1 1 565B2484
 P 3000 2000
+AR Path="/565B2484" Ref="C403"  Part="1" 
+AR Path="/56574098/565B2484" Ref="C403"  Part="1" 
 F 0 "C403" H 3025 2100 50  0000 L CNN
 F 1 "0.1uF" H 3025 1900 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 3050 1800 30  0001 C CNN
@@ -93,7 +97,7 @@ F 6 "Value" H 3000 2000 60  0001 C CNN "Fieldname"
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR017
+L GND-RESCUE-woodchuck #PWR017
 U 1 1 565B2D06
 P 3000 2350
 F 0 "#PWR017" H 3000 2100 50  0001 C CNN
@@ -104,9 +108,11 @@ F 3 "" H 3000 2350 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C402
+L C-RESCUE-woodchuck C402
 U 1 1 565B2D3B
 P 2750 2000
+AR Path="/565B2D3B" Ref="C402"  Part="1" 
+AR Path="/56574098/565B2D3B" Ref="C402"  Part="1" 
 F 0 "C402" H 2775 2100 50  0000 L CNN
 F 1 "0.1uF" H 2775 1900 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 2788 1850 30  0001 C CNN
@@ -120,9 +126,11 @@ $EndComp
 Text Notes 3500 1450 2    60   ~ 0
 NOTE: Place one near each\nVDD pin (24, 48) and one\nnear VDDIO2 (36)
 $Comp
-L C C401
+L C-RESCUE-woodchuck C401
 U 1 1 565B339D
 P 1650 2000
+AR Path="/565B339D" Ref="C401"  Part="1" 
+AR Path="/56574098/565B339D" Ref="C401"  Part="1" 
 F 0 "C401" H 1675 2100 50  0000 L CNN
 F 1 "10nF" H 1675 1900 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 1688 1850 30  0001 C CNN
@@ -134,7 +142,7 @@ F 6 "Value" H 1650 2000 60  0001 C CNN "Fieldname"
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR018
+L GND-RESCUE-woodchuck #PWR018
 U 1 1 565B33AB
 P 1650 2250
 F 0 "#PWR018" H 1650 2000 50  0001 C CNN
@@ -147,9 +155,11 @@ $EndComp
 Text Notes 1450 2500 1    60   ~ 0
 NOTE: Place near VDDA (9)
 $Comp
-L C C404
+L C-RESCUE-woodchuck C404
 U 1 1 565B3429
 P 3250 2000
+AR Path="/565B3429" Ref="C404"  Part="1" 
+AR Path="/56574098/565B3429" Ref="C404"  Part="1" 
 F 0 "C404" H 3275 2100 50  0000 L CNN
 F 1 "0.1uF" H 3275 1900 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 3288 1850 30  0001 C CNN
@@ -191,7 +201,7 @@ SWDIO
 Text Label 4650 5000 2    60   ~ 0
 SWCLK
 $Comp
-L GND #PWR019
+L GND-RESCUE-woodchuck #PWR019
 U 1 1 565B4620
 P 1700 3750
 F 0 "#PWR019" H 1700 3500 50  0001 C CNN
@@ -224,7 +234,7 @@ EXT_TX
 Text Label 2200 4800 2    60   ~ 0
 EXT_RX
 $Comp
-L GND #PWR020
+L GND-RESCUE-woodchuck #PWR020
 U 1 1 565B6C28
 P 2200 5000
 F 0 "#PWR020" H 2200 4750 50  0001 C CNN
@@ -237,7 +247,7 @@ $EndComp
 Text Notes 2750 5250 2    60   ~ 0
 EXT PORT
 $Comp
-L GND #PWR021
+L GND-RESCUE-woodchuck #PWR021
 U 1 1 565B80EF
 P 2400 6100
 F 0 "#PWR021" H 2400 5850 50  0001 C CNN
@@ -248,7 +258,7 @@ F 3 "" H 2400 6100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR022
+L GND-RESCUE-woodchuck #PWR022
 U 1 1 565B8112
 P 2800 6300
 F 0 "#PWR022" H 2800 6050 50  0001 C CNN
@@ -299,7 +309,7 @@ F 6 "Value" H 7950 5100 60  0001 C CNN "Fieldname"
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR023
+L GND-RESCUE-woodchuck #PWR023
 U 1 1 565BAC22
 P 7950 5450
 F 0 "#PWR023" H 7950 5200 50  0001 C CNN
@@ -478,7 +488,7 @@ F 1 "USB_OTG" H 2700 6050 50  0000 C CNN
 F 2 "Woodchuck:MOLEX_67503_1020_MINI_USB" V 2650 5750 60  0001 C CNN
 F 3 "" V 2650 5750 60  0000 C CNN
 F 4 "Value" H 2700 5850 60  0001 C CNN "Digikey"
-F 5 "2426381" H 2700 5850 60  0001 C CNN "Farnell"
+F 5 "1125348" H 2700 5850 60  0001 C CNN "Farnell"
 F 6 "Value" H 2700 5850 60  0001 C CNN "Fieldname"
 	1    2700 5850
 	0    1    1    0   
@@ -502,9 +512,11 @@ F 4 "1331269" H 8000 3000 50  0001 L CNN "Farnell"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L C C1
+L C-RESCUE-woodchuck C1
 U 1 1 56BF5C75
 P 8850 3500
+AR Path="/56BF5C75" Ref="C1"  Part="1" 
+AR Path="/56574098/56BF5C75" Ref="C1"  Part="1" 
 F 0 "C1" H 8875 3600 50  0000 L CNN
 F 1 "0.1uF" H 8875 3400 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 8888 3350 30  0001 C CNN
@@ -516,7 +528,7 @@ F 6 "Value" H 8850 3500 60  0001 C CNN "Fieldname"
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR030
+L GND-RESCUE-woodchuck #PWR030
 U 1 1 56BF61FD
 P 8850 3800
 F 0 "#PWR030" H 8850 3550 50  0001 C CNN
@@ -580,9 +592,11 @@ F 3 "" H 7650 2750 50  0000 C CNN
 $EndComp
 NoConn ~ 6700 5100
 $Comp
-L C C406
+L C-RESCUE-woodchuck C406
 U 1 1 56C45ED5
 P 3500 2000
+AR Path="/56C45ED5" Ref="C406"  Part="1" 
+AR Path="/56574098/56C45ED5" Ref="C406"  Part="1" 
 F 0 "C406" H 3525 2100 50  0000 L CNN
 F 1 "4u7" H 3525 1900 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 3500 1700 50  0001 C CNN
@@ -592,9 +606,11 @@ F 4 "1535567" H 3500 2000 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C405
+L C-RESCUE-woodchuck C405
 U 1 1 56C46154
 P 2050 2000
+AR Path="/56C46154" Ref="C405"  Part="1" 
+AR Path="/56574098/56C46154" Ref="C405"  Part="1" 
 F 0 "C405" H 2075 2100 50  0000 L CNN
 F 1 "1u" H 2075 1900 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 2050 1750 50  0001 C CNN

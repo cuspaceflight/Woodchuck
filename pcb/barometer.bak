@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:woodchuck-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -52,8 +53,9 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
+LIBS:agg-kicad
 LIBS:woodchuck-cache
-EELAYER 27 0
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -90,7 +92,7 @@ BARO_MISO
 Text HLabel 3850 2250 2    60   Input ~ 0
 BARO_CS
 $Comp
-L R R601
+L R-RESCUE-woodchuck R601
 U 1 1 565D7136
 P 4050 2450
 F 0 "R601" V 4130 2450 47  0000 C CNN
@@ -115,7 +117,7 @@ F 3 "" H 2850 1900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR035
+L GND-RESCUE-woodchuck #PWR035
 U 1 1 565D746E
 P 2750 2150
 F 0 "#PWR035" H 2750 1900 50  0001 C CNN
@@ -126,7 +128,7 @@ F 3 "" H 2750 2150 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR036
+L GND-RESCUE-woodchuck #PWR036
 U 1 1 565D7486
 P 2500 2050
 F 0 "#PWR036" H 2500 1800 50  0001 C CNN
@@ -137,9 +139,11 @@ F 3 "" H 2500 2050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C601
+L C-RESCUE-woodchuck C601
 U 1 1 565D7512
 P 2500 1800
+AR Path="/565D7512" Ref="C601"  Part="1" 
+AR Path="/5657409E/565D7512" Ref="C601"  Part="1" 
 F 0 "C601" H 2525 1900 50  0000 L CNN
 F 1 "100n" H 2525 1700 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 2200 1800 30  0001 C CNN

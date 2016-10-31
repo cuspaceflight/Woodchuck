@@ -77,6 +77,7 @@ F 0 "IC201" H 4900 3450 60  0000 C CNN
 F 1 "u-blox_CAM-M8Q" H 5250 1400 60  0000 C CNN
 F 2 "Woodchuck:UBLOX_CAM_M8Q" H 5400 3550 60  0001 C CNN
 F 3 "https://www2.u-blox.com/images/downloads/Product_Docs/CAM-M8Q_DataSheet_%28UBX-13004081%29.pdf" H 5550 2000 60  0001 C CNN
+F 4 "not_listed" H 5350 2900 60  0001 C CNN "uputronics"
 	1    5350 2900
 	1    0    0    -1  
 $EndComp
@@ -166,9 +167,7 @@ F 0 "C201" H 4325 2600 50  0000 L CNN
 F 1 "100n" H 4325 2400 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 4338 2350 30  0001 C CNN
 F 3 "" H 4300 2500 60  0000 C CNN
-F 4 "Value" H 4300 2500 60  0001 C CNN "Digikey"
-F 5 "9406140" H 4300 2500 60  0001 C CNN "Farnell"
-F 6 "Value" H 4300 2500 60  0001 C CNN "Fieldname"
+F 4 "9406140" H 4300 2500 60  0001 C CNN "Farnell"
 	1    4300 2500
 	0    -1   -1   0   
 $EndComp
@@ -196,9 +195,7 @@ F 0 "R202" V 6400 3000 50  0000 C CNN
 F 1 "220" V 6300 3000 50  0000 C CNN
 F 2 "Woodchuck:0603" V 6230 3000 30  0001 C CNN
 F 3 "" H 6300 3000 30  0000 C CNN
-F 4 "Value" H 6300 3000 60  0001 C CNN "Digikey"
-F 5 "1652857" H 6300 3000 60  0001 C CNN "Farnell"
-F 6 "Value" H 6300 3000 60  0001 C CNN "Fieldname"
+F 4 "1652857" H 6300 3000 60  0001 C CNN "Farnell"
 	1    6300 3000
 	0    1    1    0   
 $EndComp
@@ -210,9 +207,7 @@ F 0 "R201" V 6150 2900 50  0000 C CNN
 F 1 "220" V 6300 2900 50  0000 C CNN
 F 2 "Woodchuck:0603" V 6230 2900 30  0001 C CNN
 F 3 "" H 6300 2900 30  0000 C CNN
-F 4 "Value" H 6300 2900 60  0001 C CNN "Digikey"
-F 5 "1652857" H 6300 2900 60  0001 C CNN "Farnell"
-F 6 "Value" H 6300 2900 60  0001 C CNN "Fieldname"
+F 4 "1652857" H 6300 2900 60  0001 C CNN "Farnell"
 	1    6300 2900
 	0    1    1    0   
 $EndComp

@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:woodchuck-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -52,8 +53,9 @@ LIBS:stm32f072cbt6
 LIBS:jsta
 LIBS:sma
 LIBS:cga0402mlc-12g
+LIBS:agg-kicad
 LIBS:woodchuck-cache
-EELAYER 27 0
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -79,7 +81,7 @@ F 3 "https://www2.u-blox.com/images/downloads/Product_Docs/CAM-M8Q_DataSheet_%28
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR06
+L GND-RESCUE-woodchuck #PWR06
 U 1 1 56AAB217
 P 4550 4300
 F 0 "#PWR06" H 4550 4050 50  0001 C CNN
@@ -155,9 +157,11 @@ GPS_TO_MCU
 Text Notes 3950 1800 0    60   ~ 0
 -How are we interfacing to the MCU? DSEL may have to be grounded\n-Embedded antenna?
 $Comp
-L C C201
+L C-RESCUE-woodchuck C201
 U 1 1 56ACB00C
 P 4300 2500
+AR Path="/56ACB00C" Ref="C201"  Part="1" 
+AR Path="/56574088/56ACB00C" Ref="C201"  Part="1" 
 F 0 "C201" H 4325 2600 50  0000 L CNN
 F 1 "100n" H 4325 2400 50  0000 L CNN
 F 2 "Woodchuck:C0603" H 4338 2350 30  0001 C CNN
@@ -173,7 +177,7 @@ Wire Wire Line
 Wire Wire Line
 	4050 2500 4050 2650
 $Comp
-L GND #PWR08
+L GND-RESCUE-woodchuck #PWR08
 U 1 1 56ACB0DE
 P 4050 2650
 F 0 "#PWR08" H 4050 2400 50  0001 C CNN
@@ -185,7 +189,7 @@ F 3 "" H 4050 2650 60  0000 C CNN
 $EndComp
 NoConn ~ 6050 2700
 $Comp
-L R R202
+L R-RESCUE-woodchuck R202
 U 1 1 56ACBA41
 P 6300 3000
 F 0 "R202" V 6400 3000 50  0000 C CNN
@@ -199,7 +203,7 @@ F 6 "Value" H 6300 3000 60  0001 C CNN "Fieldname"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R201
+L R-RESCUE-woodchuck R201
 U 1 1 56ACBA86
 P 6300 2900
 F 0 "R201" V 6150 2900 50  0000 C CNN
