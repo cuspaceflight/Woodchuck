@@ -1,46 +1,27 @@
+##
+## This file is part of the libopencm3 project.
+##
+## Copyright (C) 2009 Uwe Hermann <uwe@hermann-uwe.de>
+##
+## This library is free software: you can redistribute it and/or modify
+## it under the terms of the GNU Lesser General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## This library is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU Lesser General Public License
+## along with this library.  If not, see <http://www.gnu.org/licenses/>.
+##
+
 BINARY = woodchuck
 
-DEVICE = stm32f072cbt6
+LDSCRIPT = stm32f072cbt6.ld
 
-# common Makefile.include from examples directory unpacked and stripped
-#include ../../Makefile.include
+include libopencm3.target.mk
 
-CC		= arm-none-eabi-gcc
-LD		= arm-none-eabi-gcc
-OBJCOPY		= arm-none-eabi-objcopy
-OBJDUMP		= arm-none-eabi-objdump
-GDB		= arm-none-eabi-gdb
-
-TOOLCHAIN_DIR	?= ../libopencm3
-
-CFLAGS		+= <...> 
-LDSCRIPT	?= $(BINARY).ld
-LDFLAGS		+= <..>
-OBJS		+= $(BINARY).o
-
-GENFILES	?= *.o
-
-all: images
-
-## This is the place where the translation DEVICE->LDSCRIPT will be executed
-include $(TOOLCHAIN_DIR)/ld/Makefile.linker
-
-images: $(BINARY).images
-flash: $(BINARY).flash
-
-<... comon makefile continues ...>
-
-clean:
-	$(Q)rm -f *.o
-	$(Q)rm -f *.d
-	$(Q)rm -f *.elf
-	$(Q)rm -f *.bin
-	$(Q)rm -f *.hex
-	$(Q)rm -f *.srec
-	$(Q)rm -f *.list
-	$(Q)rm -f $(GENFILES)
-
-.PHONY: images clean
-
--include $(OBJS:.o=.d)
-
+dfu: $(BINARY).bin
+	dfu-util -d '0483:df11' -a 0 -s 0x08000000 -D $(BINARY).bin
