@@ -18,8 +18,13 @@
 ##
 
 BINARY = main
+OBJS = eeprom.o gps.o led.o baro_ms5611.o
+
+CALLSIGN = WOODCHUCK1
 
 LDSCRIPT = stm32f072cbt6.ld
+
+CPPFLAGS += -DCALLSIGN=\"$(CALLSIGN)\"
 
 include libopencm3.target.mk
 

@@ -14,7 +14,7 @@
 */
 #include <libopencm3/stm32/gpio.h>
 #include "led.h"
-#include "clock.h"
+//#include "clock.h"
 
 #define PORT_LED GPIOA
 #define PIN_RED GPIO6
@@ -39,7 +39,7 @@ void led_init()
 	//Set led pins as output, no internal pullup/down
 	gpio_mode_setup(PORT_LED, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, PIN_RGB);
 	//set output options: open drain output,slow output (2MHz)
-	gpio_output_options(PORT_LED, GPIO_OTYPE_OD, GPIO_OSPEED_2MHZ, PIN_RGB);
+	gpio_set_output_options(PORT_LED, GPIO_OTYPE_OD, GPIO_OSPEED_2MHZ, PIN_RGB);
 	
 }
 
@@ -67,28 +67,30 @@ void led_set(led_colours led, int status) {
 	case LED_TOGGLE:
 		gpio_toggle(PORT_LED, pins[led]);//toggle
 		if (statuses[led] == LED_OFF) {
-			statuses[led] == LED_ON;
+			statuses[led] = LED_ON;
 		}
 		else if (statuses[led] == LED_ON) {
-			statuses[led] == LED_OFF;
+			statuses[led] = LED_OFF;
 		}
+                break;
 	default:
 		//do nothing
+                break;
 	}
 }
 
 void led_reset()//turn them all off incl. blinking
 {
 	gpio_set(PORT_LED, PIN_RGB);
-	for (int x = 0, x < COLOURS_SIZE; x++) {
-		statuses[x] = LED_OFF
+	for (int x = 0; x < COLOURS_SIZE; x++) {
+		statuses[x] = LED_OFF;
 	}
 }
 
 bool led_read(led_colours led)//check whether red, green or blue is illuminated
 {//true if illuminated, false if not
  //Output pin must be low to illuminate led
-	if (led == LED_RED || led == LED_GREEN || LED == LED_BLUE)
+	if (led == LED_RED || led == LED_GREEN || led == LED_BLUE)
 	{
 		uint16_t outputreg = gpio_get(PORT_LED, led);
 		if (outputreg == 0)
@@ -103,7 +105,7 @@ bool led_read(led_colours led)//check whether red, green or blue is illuminated
 	else
 	{//no led specified or wrong enum used, just check whether any leds are illuminated
 		uint16_t outputreg = gpio_port_read(PORT_LED);
-		if (outputreg | PIN_RGB == outputreg)//if all 3 led pins are high
+		if ((outputreg | PIN_RGB) == outputreg)//if all 3 led pins are high
 		{
 			return false;
 		}
@@ -126,7 +128,7 @@ void led_interrupt()
 	*/
 	if (status_index < COLOURS_SIZE) {//there is no pins[COLOURS_SIZE] variable
 		//blinking leds will just be off for status_index == COLOURS_SIZE
-		gpio_toggle(PORT_LED, pins(status_index));
+		gpio_toggle(PORT_LED, pins[status_index]);
 	}
 
 	do {
@@ -136,10 +138,10 @@ void led_interrupt()
 		{
 			break;//there is no statuses[COLOURS_SIZE] variable
 		}
-	} while (statuses[status_index] != LED_BLINKING)//only blink leds set to blink
+	} while (statuses[status_index] != LED_BLINKING);//only blink leds set to blink
 
 	if (status_index < COLOURS_SIZE) {//there is no pins[COLOURS_SIZE] variable
-		gpio_toggle(PORT_LED, pins(status_index));
+		gpio_toggle(PORT_LED, pins[status_index]);
 	}
 }
 
@@ -164,14 +166,15 @@ void error_response()
 				break;
 			case ERROR_GPS:
 				//do something e.g. blink blue
-				led_set(LED_BLUE, LED_BLINKING)
+				led_set(LED_BLUE, LED_BLINKING);
 				break;
 			case ERROR_BARO:
 				//do something e.g. blink cyan
-				led_set(LED_GB, LED_BLINKING)
+				led_set(LED_GB, LED_BLINKING);
 				break;
 			default:
 				//do nothing
+                                break;
 
 			}
 		}

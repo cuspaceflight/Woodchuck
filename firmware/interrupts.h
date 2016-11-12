@@ -12,12 +12,12 @@
 
 inline void enable_interrupts(void)
 {
-	asm volatile ("cpsie i");
+	__asm__ __volatile__ ("cpsie i");
 }
 
 inline void disable_interrupts(void)
 {
-	asm volatile ("cpsid i");
+	__asm__ __volatile__ ("cpsid i");
 }
 
 #endif /* __INTERRUPTS_H__ */

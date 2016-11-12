@@ -14,7 +14,7 @@
 #include <libopencm3/stm32/usart.h>
 #include "gps.h"
 #include "led.h"
-#include "radio.h"
+//#include "radio.h"
 
 // Choose which USART module to use
 #define USART       USART2

@@ -28,7 +28,7 @@ void gps_get_time(uint8_t* hour, uint8_t* min, uint8_t* second);
 void gps_check_lock(uint8_t* lock, uint8_t* sats);
 
 // Set the GPS to <1g airborne mode
-void gps_set_mode();
+void gps_set_mode(void);
 
 // Check the GPS is set to <1g airborne mode
 uint8_t gps_check_nav(void);

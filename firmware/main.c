@@ -11,7 +11,7 @@
 
 //#include <avr/io.h>
 #include <stdio.h>
-#include <util/delay.h>
+//#include <util/delay.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -22,7 +22,7 @@
 #include "eeprom.h"
 #include "interrupts.h"
 #include "led.h"
-#include "radio.h"
+//#include "radio.h"
 #include "gps.h"
 
 // 30kHz range on COARSE, 3kHz on FINE
@@ -30,7 +30,7 @@
 char s[100];
 uint8_t ticks_addr = 0x00;
 
-int main()
+int main(void)
 {
     // Disable, configure, and start the watchdog timer
     iwdg_reset();
@@ -40,21 +40,21 @@ int main()
     // Start and configure all hardware peripherals
     enable_interrupts();
     led_init();
-    radio_init();
+    //radio_init();
     gps_init();
     eeprom_init();
-    radio_enable();
+    //radio_enable();
 
     // Set the radio shift and baud rate
-    _radio_dac_write(RADIO_COARSE, RADIO_CENTER_FREQ);
-    _radio_dac_write(RADIO_FINE, 0);
-    radio_set_shift(RADIO_SHIFT_425);
-    radio_set_baud(RADIO_BAUD_50);
+    //_radio_dac_write(RADIO_COARSE, RADIO_CENTER_FREQ);
+    //_radio_dac_write(RADIO_FINE, 0);
+    //radio_set_shift(RADIO_SHIFT_425);
+    //radio_set_baud(RADIO_BAUD_50);
 
     // Radio chatter
     for(uint8_t i = 0; i < 5; i++)
     {
-        radio_chatter();
+        //radio_chatter();
         iwdg_reset();
     }
     
@@ -91,14 +91,14 @@ int main()
         sprintf(s, "$$" CALLSIGN ",%lu,%02u:%02u:%02u,%02.7f,%03.7f,%ld,%u,%x",
             tick, hour, minute, second, lat_fmt, lon_fmt, alt,
             sats, lock);
-        radio_chatter();
-        radio_transmit_sentence(s);
-        radio_chatter();
+        //radio_chatter();
+        //radio_transmit_sentence(s);
+        //radio_chatter();
 
         led_set(LED_RED, 0);
-        eeprom_write_dword(tick_addr, tick);
+        eeprom_write_dword(ticks_addr, tick);
         iwdg_reset();
-        _delay_ms(500);
+        //_delay_ms(500);
     }
 
     return 0;
