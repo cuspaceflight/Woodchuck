@@ -1,0 +1,10 @@
+name: Woodchuck
+lsefreq: 0
+hsefreq: 0
+voltage: 3.3
+mcutype: STM32F072xB
+default: input, pushpull, starthigh, pullup, highspeed
+pins:
+    LED_RED: pa1, output
+    LED_GREEN: pa5, output
+    LED_BLUE: pa6, output
