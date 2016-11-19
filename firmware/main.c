@@ -16,8 +16,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include <libopencm3/stm32/usart.h>
-#include <libopencm3/stm32/iwdg.h>
+#include "ch.h"
+#include "hal.h"
 
 #include "eeprom.h"
 #include "interrupts.h"
@@ -33,9 +33,11 @@ uint8_t ticks_addr = 0x00;
 int main(void)
 {
     // Disable, configure, and start the watchdog timer
+    /*
     iwdg_reset();
     iwdg_set_period_ms(8000);
     iwdg_start();
+    */
 
     // Start and configure all hardware peripherals
     enable_interrupts();
@@ -52,11 +54,13 @@ int main(void)
     //radio_set_baud(RADIO_BAUD_50);
 
     // Radio chatter
+    /*
     for(uint8_t i = 0; i < 5; i++)
     {
         //radio_chatter();
         iwdg_reset();
     }
+    */
     
     int32_t lat = 0, lon = 0, alt = 0;
     uint8_t hour = 0, minute = 0, second = 0, lock = 0, sats = 0;
@@ -97,7 +101,7 @@ int main(void)
 
         led_set(LED_RED, 0);
         eeprom_write_dword(ticks_addr, tick);
-        iwdg_reset();
+        //iwdg_reset();
         //_delay_ms(500);
     }
 

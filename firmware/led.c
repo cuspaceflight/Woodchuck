@@ -12,18 +12,19 @@
 *
 #include <avr/io.h>
 */
-#include <libopencm3/stm32/gpio.h>
+#include "ch.h"
+#include "hal.h"
 #include "led.h"
 //#include "clock.h"
 
 #define PORT_LED GPIOA
-#define PIN_RED GPIO6
-#define PIN_GREEN GPIO5
-#define PIN_BLUE GPIO4
-#define PIN_RG PIN_RED | PIN_GREEN
-#define PIN_RB PIN_RED | PIN_BLUE
-#define PIN_GB PIN_GREEN | PIN_BLUE
-#define PIN_RGB PIN_RED | PIN_GREEN | PIN_BLUE
+#define PIN_RED (1 << GPIOA_LED_RED)
+#define PIN_GREEN (1 << GPIOA_LED_GREEN)
+#define PIN_BLUE (1 << GPIOA_LED_BLUE)
+#define PIN_RG (PIN_RED | PIN_GREEN)
+#define PIN_RB (PIN_RED | PIN_BLUE)
+#define PIN_GB (PIN_GREEN | PIN_BLUE)
+#define PIN_RGB (PIN_RED | PIN_GREEN | PIN_BLUE)
 uint16_t pins[COLOURS_SIZE] = {PIN_RED, PIN_GREEN, PIN_BLUE, 
 PIN_RG, PIN_RB, PIN_GB, PIN_RGB};
 
@@ -33,11 +34,14 @@ int status_index = COLOURS_SIZE; //use this to record the current position in th
 //must start as COLOURS_SIZE(index after index of last led) for blink queue to work
 
 void led_init()
-{   
+{
     //LED_DDR |= _BV(LED_RED) | _BV(LED_GREEN);
 
 	//Set led pins as output, no internal pullup/down
-	gpio_mode_setup(PORT_LED, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, PIN_RGB);
+	//gpio_mode_setup(PORT_LED, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, PIN_RGB);
+	palSetPadMode(PORT_LED, PIN_RED, GPIO_MODE_OUTPUT);
+	palSetPadMode(PORT_LED, PIN_GREEN, GPIO_MODE_OUTPUT);
+	palSetPadMode(PORT_LED, PIN_BLUE, GPIO_MODE_OUTPUT);
 	//set output options: open drain output,slow output (2MHz)
 	gpio_set_output_options(PORT_LED, GPIO_OTYPE_OD, GPIO_OSPEED_2MHZ, PIN_RGB);
 	
@@ -52,11 +56,11 @@ void led_set(led_colours led, int status) {
 	switch (status)
 	{
 	case LED_OFF:
-		gpio_set(PORT_LED, pins[led]);//high on current sink output = led off
+		palSetPort(PORT_LED, pins[led]); //high on current sink output = led off
 		statuses[led] = LED_OFF;
 		break;
 	case LED_ON:
-		gpio_clear(PORT_LED, pins[led]);//low on current sink output = led off
+		palSetPort(PORT_LED, pins[led]);//low on current sink output = led off
 		statuses[led] = LED_ON;
 		break;
 	case LED_BLINKING:
