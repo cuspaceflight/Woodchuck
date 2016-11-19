@@ -8,4 +8,6 @@ _autosave*
 *.elf
 *.bin
 *.o
+*.d
+*.map
 build/
