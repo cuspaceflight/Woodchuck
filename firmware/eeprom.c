@@ -7,40 +7,40 @@
  * Jamie Wood 2016
  */
 
-#include <libopencm3/stm32/i2c.h>
-#include <libopencm3/stm32/rcc.h>
 #include "eeprom.h"
 
 // Choose which I2C peripheral to use
 #define I2C     I2C1
 
-// 24AA01 device address and read/n-write bit
+// 24AA01 device address
 #define EEPROM_ADDR     0b1010000
-#define EEPROM_READ     1
-#define EEPROM_WRITE    0
 
-// Needed by _i2c_set_speed (added by same pull request)
-#define I2C_CR2_FREQ_MASK   0x3ff
-#define I2C_CCR_CCRMASK     0xfff
-#define I2C_TRISE_MASK      0x3f
-// Should be included by i2c.h (found in i2c_common_all.h), but aren't :(
-#define I2C_CCR(i2c_base)       MMIO32((i2c_base) + 0x1c)
-#define I2C_TRISE(i2c_base)     MMIO32((i2c_base) + 0x20)
-#define I2C_CCR_FS              (1<<15)
+static const I2CConfig i2ccfg = {OPMODE_I2C, 400000, STD_DUTY_CYCLE};
 
 /**
  * Set up I2C communication at 400kHz.
  */
 void eeprom_init(void)
 {
-    // Reset the peripheral
-    i2c_reset(I2C);
+    i2cStart(&I2C, &i2ccfg);
+}
 
-    // Set the clock registers to set the peripheral to 400kHz
-    _i2c_set_speed(I2C, 1);
+/**
+ * Perform an I2C transaction, and retry up to n times if it fails.
+ */
+msg_t i2c_transmit_retry_n(uint8_t *txdat, uint8_t txdatlen, uint8_t *rxdat, uint8_t rxdatlen, systime_t timeout, uint8_t retries){
+  static uint8_t i;
+  for(i=0; i<(retries+1); i++){
+    msg_t status = i2cMasterTransmitTimeout(&I2C, EEPROM_ADDR, txdat, txdatlen, rxdat, rxdatlen, timeout);
 
-    // Enable the peripheral
-    i2c_peripheral_enable(I2C);
+    if(status == MSG_TIMEOUT){
+      i2cStop(&I2C);
+      i2cStart(&I2C, &i2ccfg);
+    }else{
+      return status;
+    }
+  }
+  return MSG_TIMEOUT;
 }
 
 /**
@@ -48,17 +48,18 @@ void eeprom_init(void)
  */
 void eeprom_read(uint8_t addr, uint8_t *data)
 {
-    i2c_send_start(I2C); // Send START condition
+    static uint8_t txdat[1] __attribute__((section("DATA_RAM")));
+    static uint8_t rxdat[1] __attribute__((section("DATA_RAM")));
 
-    _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_WRITE); // send the address
-    _eeprom_send_blocking(addr); // send the read address
+    txdat[0] = addr;
 
-    i2c_send_start(I2C); // Send RESTART
+    i2cAcquireBus(&I2C);
+    i2c_transmit_retry_n(EEPROM_ADDR, txdat, 1, rxdat, 1, MS2ST(20), 5);
+    i2cReleaseBus(&I2C);
 
-    _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_READ); // send the address
-    *data = _eeprom_read_blocking(); // read the data
-
-    i2c_send_stop(I2C); // Send STOP condition
+    if(status == MSG_OK){
+        *data = rxdat[0];
+    }
 }
 
 
@@ -67,15 +68,14 @@ void eeprom_read(uint8_t addr, uint8_t *data)
  */
 void eeprom_write(uint8_t addr, uint8_t data)
 {
-    i2c_send_start(I2C); // Send START condition
+    static uint8_t txdat[2] __attribute__((section("DATA_RAM"))); // Can't DMA from Core-Coupled Memory (where the stack resides)
 
-    // send the address
-    _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_WRITE);
+    txdat[0] = addr;
+    txdat[1] = data;
 
-    _eeprom_send_blocking(addr); // send the write address
-    _eeprom_send_blocking(data); // send the data
-
-    i2c_send_stop(I2C); // Send STOP condition
+    i2cAcquireBus(&I2C);
+    i2c_transmit_retry_n(txdat, 2, NULL, 0, MS2ST(20), 5);
+    i2cReleaseBus(&I2C);
 }
 
 /**
@@ -87,17 +87,19 @@ void eeprom_write(uint8_t addr, uint8_t data)
  */
 void eeprom_read_dword(uint8_t addr, uint32_t *data)
 {
-    uint32_t tmp;
-    uint8_t tmp_byte;
-    eeprom_read(addr, &tmp_byte);
-    tmp = tmp_byte;
-    eeprom_read(addr+1, &tmp_byte);
-    tmp = (tmp << 8) | tmp_byte;
-    eeprom_read(addr+2, &tmp_byte);
-    tmp = (tmp << 8) | tmp_byte;
-    eeprom_read(addr+3, &tmp_byte);
-    tmp = (tmp << 8) | tmp_byte;
-    *data = tmp;
+    static uint8_t rxdat[4] __attribute__((section("DATA_RAM")));
+    static uint8_t txdat[1] __attribute__((section("DATA_RAM")));
+
+    txdat[0] = addr;
+
+    i2cAcquireBus(&I2C);
+    i2c_transmit_retry_n(txdat, 1, rxdat, 4, MS2ST(20), 5);
+    i2cReleaseBus(&I2C);
+
+    if(status == MSG_OK){
+        *result = ((rxdat[3] << 24) | (rxdat[2] << 16) |
+                   (rxdat[1] << 8) | rxdat[0]);
+    }
 }
 
 /**
@@ -108,75 +110,14 @@ void eeprom_read_dword(uint8_t addr, uint32_t *data)
  */
 void eeprom_write_dword(uint8_t addr, uint32_t data)
 {
-    i2c_send_start(I2C); // Send START condition
-
-    // send the address
-    _eeprom_send_7bit_address_blocking(EEPROM_ADDR, EEPROM_WRITE);
-
-    _eeprom_send_blocking(addr); // send the write address
-    _eeprom_send_blocking(data & 0xff); // send the data
-    _eeprom_send_blocking((data>>8) & 0xff);
-    _eeprom_send_blocking((data>>16) & 0xff);
-    _eeprom_send_blocking((data>>24) & 0xff);
-
-    i2c_send_stop(I2C); // Send STOP condition
-}
-
-/**
- * Send the address and read/n-write bit and wait for it to be sent.
- */
-void _eeprom_send_7bit_address_blocking(uint8_t addr, uint8_t readwrite)
-{
-    i2c_send_7bit_address(I2C, addr, readwrite);
-    while( (I2C_ISR(I2C) & I2C_ISR_TXIS) == 0 );
-}
-
-/**
- * Send a byte and wait for it to be sent.
- */
-void _eeprom_send_blocking(uint8_t data)
-{
-    i2c_send_data(I2C, data);
-    while( (I2C_ISR(I2C) & I2C_ISR_TXIS) == 0 );
-}
-
-/**
- * Wait for a byte to arrive and return it.
- */
-uint8_t _eeprom_read_blocking(void)
-{
-    while( (I2C_ISR(I2C) & I2C_ISR_RXNE) != 0 );
-    return i2c_get_data(I2C);
-}
-
-/**
- * Set the speed of the I2C peripheral to 400kHz
- * 
- * Taken from a pending (as of Feb 2016) pull request to libopencm3 (#470).
- * This may get merged in future, so this method might be obsolete.
- */
-void _i2c_set_speed(uint32_t i2c, uint8_t fast)
-{
-    int freq;
-    uint32_t reg;
-
-    /* force disable, to set clocks */
-    I2C_CR1(i2c) &= ~(I2C_CR1_PE);
-
-    /* frequency in megahertz */
-    freq = rcc_apb1_frequency / 1000000;
-    reg = (I2C_CR2(i2c) & ~(I2C_CR2_FREQ_MASK)) | (freq & I2C_CR2_FREQ_MASK);
-    I2C_CR2(i2c) = reg;
-
-    if (fast) {
-        I2C_CCR(i2c) = I2C_CCR_FS | (((freq * 5) / 6) & I2C_CCR_CCRMASK);
-    } else {
-        I2C_CCR(i2c) = (freq * 5) & I2C_CCR_CCRMASK;
-    }
-
-    /* set rise time to 1000ns */
-    reg = (I2C_TRISE(i2c) & ~(I2C_TRISE_MASK)) | ((freq + 1) & I2C_TRISE_MASK);
-    I2C_TRISE(i2c) = reg;
-    /* enable i2c device */
-    I2C_CR1(i2c) |= I2C_CR1_PE;
+    static uint8_t txdat[5] __attribute__((section("DATA_RAM")));
+    txdat[0] = addr;
+    txdat[1] = value & 0xff;
+    txdat[2] = (value >> 8) & 0xff;
+    txdat[3] = (value >> 16) & 0xff;
+    txdat[4] = (value >> 24) & 0xff;
+    
+    i2cAcquireBus(&I2C);
+    i2c_transmit_retry_n(txdat, 5, NULL, 0, MS2ST(20), 5);
+    i2cReleaseBus(&I2C);
 }
