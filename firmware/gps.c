@@ -7,17 +7,17 @@
  * Based on the gps driver from the JOEY-M project by Cambridge University
  * Spaceflight.
  * 
- * Jon Sowman 2012
- * Jamie Wood 2016
+ * Jon Sowman  2012
+ * Jamie Wood  2016
+ * Greg Brooks 2016
  */
 
-#include <libopencm3/stm32/usart.h>
 #include "gps.h"
 #include "led.h"
 //#include "radio.h"
 
 // Choose which USART module to use
-#define USART       USART2
+#define SDRV       SD2  // Also see mcuconf.h
 
 // Header sync bytes - no touching!
 #define UBX_SYNC_1  (0xB5)
@@ -37,6 +37,31 @@
 #define UBX_CFG_NAV5_ID     (0x24)
 
 /**
+ * Global serial config structure for GPS interface
+ * Best not to touch this directly, use getter/setter functions instead
+ * _serial_begin and _serial_get_baud
+ * 8N1, no flow control
+ */
+static SerialConfig uartGPS =
+{
+9600, // bit rate
+0, 
+USART_CR2_STOP1_BITS | USART_CR2_LINEN, 
+0
+};
+
+// Setter function for serial port
+void _serial_begin(uint32_t baud){
+    uartGPS.speed = baud;
+    sdStart(&SDRV, &uartGPS);
+}
+
+// Getter function to get current baud rate
+uint32_t _serial_get_baud(void){
+    return uartGPS.speed;
+}
+
+/**
  * Set up USART for communication with the uBlox GPS at 38400 baud.
  * 
  * We have to start at 9600, then tell the uBlox to change up to 38400 baud.
@@ -44,21 +69,7 @@
 void gps_init(void)
 {
     // 9600 baud rate
-    usart_set_baudrate(USART, 9600);
-    
-    // 8-N-1 data format
-    usart_set_databits(USART, 8);
-    usart_set_parity(USART, USART_PARITY_NONE);
-    usart_set_stopbits(USART, USART_CR2_STOP_1_0BIT);
-    
-    // No flow control
-    usart_set_flow_control(USART, USART_FLOWCONTROL_NONE);
-    
-    // Enable transmit and receive modes
-    usart_set_mode(USART, USART_MODE_TX_RX);
-    
-    // Enable the USART
-    usart_enable(USART);
+    _serial_begin(9600);
     
     // Try to upgrade to 38400 baud rate
     _gps_set_baud(38400);
@@ -76,12 +87,13 @@ void gps_get_position(int32_t* lat, int32_t* lon, int32_t* alt)
     // Request a NAV-POSLLH message from the GPS
     uint8_t request[8] = {UBX_SYNC_1, UBX_SYNC_2, UBX_NAV_CLASS,
         UBX_NAV_POSLLH_ID, 0x00, 0x00, 0x03, 0x0A};
-    _gps_send_msg(request, 8);
+    _gps_send_msg(request);
     
     uint8_t buf[36];
-    uint8_t i = 0;
-    for(i = 0; i < 36; i++)
-        buf[i] = _gps_get_byte();
+    //uint8_t i = 0;
+    //for(i = 0; i < 36; i++)
+    //    buf[i] = _gps_get_byte();
+    _gps_recv_msg(buf, 36);
 
     // Verify the sync and header bits
     if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
@@ -113,13 +125,14 @@ void gps_get_time(uint8_t* hour, uint8_t* minute, uint8_t* second)
     // Send a NAV-TIMEUTC message to the receiver
     uint8_t request[8] = {UBX_SYNC_1, UBX_SYNC_2, UBX_NAV_CLASS,
         UBX_NAV_TIMEUTC_ID, 0x00, 0x00, 0x22, 0x67};
-    _gps_send_msg(request, 8);
+    _gps_send_msg(request);
 
     // Get the message back from the GPS
     uint8_t buf[28];
-    uint8_t i = 0;
-    for(i = 0; i < 28; i++)
-        buf[i] = _gps_get_byte();
+    //uint8_t i = 0;
+    //for(i = 0; i < 28; i++)
+    //    buf[i] = _gps_get_byte();
+    _gps_recv_msg(buf, 28);
 
     // Verify the sync and header bits
     if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
@@ -143,13 +156,14 @@ void gps_check_lock(uint8_t* lock, uint8_t* numsats)
     // Construct the request to the GPS
     uint8_t request[8] = {UBX_SYNC_1, UBX_SYNC_2, UBX_NAV_CLASS, UBX_NAV_SOL_ID,
         0x00, 0x00, 0x07, 0x16};
-    _gps_send_msg(request, 8);
+    _gps_send_msg(request);
 
     // Get the message back from the GPS
     uint8_t buf[60];
-    uint8_t i;
-    for(i = 0; i < 60; i++)
-        buf[i] = _gps_get_byte();
+    //uint8_t i;
+    //for(i = 0; i < 60; i++)
+    //   buf[i] = _gps_get_byte();
+    _gps_recv_msg(buf, 60);
 
     // Verify the sync and header bits
     if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
@@ -186,13 +200,14 @@ void gps_set_mode(void)
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x55, 0x8f};
-    _gps_send_msg(request, 44);
+    _gps_send_msg(request);
     
     // Read the response from the GPS
     uint8_t buf[10];
-    uint8_t i = 0;
-    for(i = 0; i < 10; i++)
-        buf[i] = _gps_get_byte();
+    //uint8_t i = 0;
+    //for(i = 0; i < 10; i++)
+    //    buf[i] = _gps_get_byte();
+    _gps_recv_msg(buf, 10);
 
     // Verify sync and header bytes
     if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
@@ -217,13 +232,14 @@ uint8_t gps_check_nav(void)
 {
     uint8_t request[8] = {UBX_SYNC_1, UBX_SYNC_2, UBX_CFG_CLASS, UBX_CFG_NAV5_ID, 0x00, 0x00,
         0x2A, 0x84};
-    _gps_send_msg(request, 8);
+    _gps_send_msg(request);
 
     // Get the message back from the GPS
     uint8_t buf[44];
-    uint8_t i = 0;
-    for(i = 0; i < 44; i++)
-        buf[i] = _gps_get_byte();
+    //uint8_t i = 0;
+    //for(i = 0; i < 44; i++)
+    //    buf[i] = _gps_get_byte();
+    _gps_recv_msg(buf, 44);
 
     // Verify sync and header bytes
     if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
@@ -236,8 +252,9 @@ uint8_t gps_check_nav(void)
 
     // Clock in and verify the ACK/NACK
     uint8_t ack[10];
-    for(i = 0; i < 10; i++)
-        ack[i] = _gps_get_byte();
+    //for(i = 0; i < 10; i++)
+    //    ack[i] = _gps_get_byte();
+    _gps_recv_msg(ack, 10);
 
     // If we got a NACK, then return 0xFF
     if( ack[3] == 0x00 ) return 0xFF;
@@ -253,7 +270,7 @@ uint8_t gps_check_nav(void)
 void _gps_set_baud(uint32_t baudrate)
 {
     // Backup the old baudrate incase something goes wrong
-    uint32_t oldBRR = USART_BRR(USART);
+    uint32_t oldBRR = _serial_get_baud();
     
     /* Parameters:
      * portID:      0x01 (UART)
@@ -280,16 +297,17 @@ void _gps_set_baud(uint32_t baudrate)
     request[27] = ckb;
     
     // Transmit the request
-    _gps_send_msg(request, 27);
+    _gps_send_msg(request);
     
     // Change our baud rate to match the new speed
-    usart_set_baudrate(USART, baudrate);
+    _serial_begin(baudrate);
     
     // Read the response from the GPS
     uint8_t buf[9];
-    uint8_t i = 0;
-    for(i = 0; i < 9; i++)
-        buf[i] = _gps_get_byte();
+    //uint8_t i = 0;
+    //for(i = 0; i < 9; i++)
+    //    buf[i] = _gps_get_byte();
+    _gps_recv_msg(buf, 9);
 
     // Verify sync and header bytes
     if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
@@ -304,7 +322,7 @@ void _gps_set_baud(uint32_t baudrate)
     if(buf[3] != UBX_ACK_ACK_ID){ // If not an ACK
         led_set(LED_RED, 1);
         // Restore the old baud rate.
-        USART_BRR(USART) = oldBRR;
+        _serial_begin(oldBRR);
     }
 }
 
@@ -338,17 +356,23 @@ void _gps_ubx_checksum(uint8_t* data, uint8_t len, uint8_t* cka, uint8_t* ckb)
 }
 
 /**
- * Send a binary message to the GPS of length len.
+ * Send a binary message to the GPS.
  */
-void _gps_send_msg(uint8_t* data, uint8_t len)
+void _gps_send_msg(uint8_t* data)
 {
     _gps_flush_buffer();
-    uint8_t i = 0;
-    for(i = 0; i < len; i++)
-    {
-        usart_send_blocking(USART, *data);
-        data++;
-    }
+    // Length determined from message length field
+    uint8_t len = 8 + ((uint16_t*)data)[2];
+    sdWrite(&SDRV, data, len);
+}
+
+/**
+ * Receive bytes from GPS (up to specified number of bytes).
+ */ 
+void _gps_recv_msg(uint8_t* buf, size_t len){
+    sdReadTimeout(&SDRV, buf, len, MS2ST(50));  /** Time for GPS to finish transmitting
+                                                 *  Change to TIME_IMMEDIATE if necessary
+                                                 */
 }
 
 /**
@@ -356,7 +380,7 @@ void _gps_send_msg(uint8_t* data, uint8_t len)
  */
 uint8_t _gps_get_byte(void)
 {
-    return usart_recv_blocking(USART);
+    return sdGet(&SDRV); 
 }
 
 /**
@@ -364,10 +388,11 @@ uint8_t _gps_get_byte(void)
  */
 void _gps_flush_buffer(void)
 {
-    uint8_t dummy;
-    while ( USART_ISR(USART) & USART_ISR_RXNE )
-    {
-        dummy = usart_recv(USART);
-    };
+    msg_t dummy;
+    
+    do {
+        dummy = sdGetTimeOut(&SDRV, TIME_IMMEDIATE);
+    } while (dummy != Q_TIMEOUT);
+    
     (void)dummy;
 }
