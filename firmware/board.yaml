@@ -8,3 +8,10 @@ pins:
     LED_RED: pa1, output
     LED_GREEN: pa5, output
     LED_BLUE: pa6, output
+    GPS_TX: pa2, af1
+    GPS_RX: pa3, af1
+    BARO_NCS: pa15, af0
+    BARO_CLK: pb3, af0
+    BARO_MISO: pb4, af0
+    BARO_MOSI: pb5, af0
+

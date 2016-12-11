@@ -7,3 +7,6 @@
 [submodule "gen-board.h"]
 	path = gen-board.h
 	url = https://github.com/cuspaceflight/gen-board.h.git
+[submodule "firmware/gen-board.h"]
+	path = firmware/gen-board.h
+	url = https://github.com/cuspaceflight/gen-board.h.git

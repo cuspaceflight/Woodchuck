@@ -57,8 +57,8 @@
 
 #define GPIOA_PIN0                     0U
 #define GPIOA_LED_RED                  1U
-#define GPIOA_PIN2                     2U
-#define GPIOA_PIN3                     3U
+#define GPIOA_GPS_TX                   2U
+#define GPIOA_GPS_RX                   3U
 #define GPIOA_PIN4                     4U
 #define GPIOA_LED_GREEN                5U
 #define GPIOA_LED_BLUE                 6U
@@ -70,14 +70,14 @@
 #define GPIOA_PIN12                    12U
 #define GPIOA_PIN13                    13U
 #define GPIOA_PIN14                    14U
-#define GPIOA_PIN15                    15U
+#define GPIOA_BARO_NCS                 15U
 
 #define GPIOB_PIN0                     0U
 #define GPIOB_PIN1                     1U
 #define GPIOB_PIN2                     2U
-#define GPIOB_PIN3                     3U
-#define GPIOB_PIN4                     4U
-#define GPIOB_PIN5                     5U
+#define GPIOB_BARO_CLK                 3U
+#define GPIOB_BARO_MISO                4U
+#define GPIOB_BARO_MOSI                5U
 #define GPIOB_PIN6                     6U
 #define GPIOB_PIN7                     7U
 #define GPIOB_PIN8                     8U
@@ -144,6 +144,12 @@
     IO lines assignments.
 */
 
+#define LINE_BARO_CLK                  PAL_LINE(GPIOB, 3U)
+#define LINE_BARO_MISO                 PAL_LINE(GPIOB, 4U)
+#define LINE_BARO_MOSI                 PAL_LINE(GPIOB, 5U)
+#define LINE_BARO_NCS                  PAL_LINE(GPIOA, 15U)
+#define LINE_GPS_RX                    PAL_LINE(GPIOA, 3U)
+#define LINE_GPS_TX                    PAL_LINE(GPIOA, 2U)
 #define LINE_LED_BLUE                  PAL_LINE(GPIOA, 6U)
 #define LINE_LED_GREEN                 PAL_LINE(GPIOA, 5U)
 #define LINE_LED_RED                   PAL_LINE(GPIOA, 1U)
@@ -175,8 +181,8 @@
  *
  * PA0  - PIN0                         (unused).
  * PA1  - LED_RED                      (output).
- * PA2  - PIN2                         (unused).
- * PA3  - PIN3                         (unused).
+ * PA2  - GPS_TX                       (af1).
+ * PA3  - GPS_RX                       (af1).
  * PA4  - PIN4                         (unused).
  * PA5  - LED_GREEN                    (output).
  * PA6  - LED_BLUE                     (output).
@@ -188,12 +194,12 @@
  * PA12 - PIN12                        (unused).
  * PA13 - PIN13                        (unused).
  * PA14 - PIN14                        (unused).
- * PA15 - PIN15                        (unused).
+ * PA15 - BARO_NCS                     (af0).
 */
 #define VAL_GPIOA_MODER                (PIN_MODE_INPUT(GPIOA_PIN0) | \
                                         PIN_MODE_OUTPUT(GPIOA_LED_RED) | \
-                                        PIN_MODE_INPUT(GPIOA_PIN2) | \
-                                        PIN_MODE_INPUT(GPIOA_PIN3) | \
+                                        PIN_MODE_ALTERNATE(GPIOA_GPS_TX) | \
+                                        PIN_MODE_ALTERNATE(GPIOA_GPS_RX) | \
                                         PIN_MODE_INPUT(GPIOA_PIN4) | \
                                         PIN_MODE_OUTPUT(GPIOA_LED_GREEN) | \
                                         PIN_MODE_OUTPUT(GPIOA_LED_BLUE) | \
@@ -205,11 +211,11 @@
                                         PIN_MODE_INPUT(GPIOA_PIN12) | \
                                         PIN_MODE_INPUT(GPIOA_PIN13) | \
                                         PIN_MODE_INPUT(GPIOA_PIN14) | \
-                                        PIN_MODE_INPUT(GPIOA_PIN15))
+                                        PIN_MODE_ALTERNATE(GPIOA_BARO_NCS))
 #define VAL_GPIOA_OTYPER               (PIN_OTYPE_PUSHPULL(GPIOA_PIN0) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_LED_RED) | \
-                                        PIN_OTYPE_PUSHPULL(GPIOA_PIN2) | \
-                                        PIN_OTYPE_PUSHPULL(GPIOA_PIN3) | \
+                                        PIN_OTYPE_PUSHPULL(GPIOA_GPS_TX) | \
+                                        PIN_OTYPE_PUSHPULL(GPIOA_GPS_RX) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_PIN4) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_LED_GREEN) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_LED_BLUE) | \
@@ -221,11 +227,11 @@
                                         PIN_OTYPE_PUSHPULL(GPIOA_PIN12) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_PIN13) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_PIN14) | \
-                                        PIN_OTYPE_PUSHPULL(GPIOA_PIN15))
+                                        PIN_OTYPE_PUSHPULL(GPIOA_BARO_NCS))
 #define VAL_GPIOA_OSPEEDR              (PIN_OSPEED_HIGH(GPIOA_PIN0) | \
                                         PIN_OSPEED_HIGH(GPIOA_LED_RED) | \
-                                        PIN_OSPEED_HIGH(GPIOA_PIN2) | \
-                                        PIN_OSPEED_HIGH(GPIOA_PIN3) | \
+                                        PIN_OSPEED_HIGH(GPIOA_GPS_TX) | \
+                                        PIN_OSPEED_HIGH(GPIOA_GPS_RX) | \
                                         PIN_OSPEED_HIGH(GPIOA_PIN4) | \
                                         PIN_OSPEED_HIGH(GPIOA_LED_GREEN) | \
                                         PIN_OSPEED_HIGH(GPIOA_LED_BLUE) | \
@@ -237,11 +243,11 @@
                                         PIN_OSPEED_HIGH(GPIOA_PIN12) | \
                                         PIN_OSPEED_HIGH(GPIOA_PIN13) | \
                                         PIN_OSPEED_HIGH(GPIOA_PIN14) | \
-                                        PIN_OSPEED_HIGH(GPIOA_PIN15))
+                                        PIN_OSPEED_HIGH(GPIOA_BARO_NCS))
 #define VAL_GPIOA_PUPDR                (PIN_PUPD_PULLUP(GPIOA_PIN0) | \
                                         PIN_PUPD_PULLUP(GPIOA_LED_RED) | \
-                                        PIN_PUPD_PULLUP(GPIOA_PIN2) | \
-                                        PIN_PUPD_PULLUP(GPIOA_PIN3) | \
+                                        PIN_PUPD_PULLUP(GPIOA_GPS_TX) | \
+                                        PIN_PUPD_PULLUP(GPIOA_GPS_RX) | \
                                         PIN_PUPD_PULLUP(GPIOA_PIN4) | \
                                         PIN_PUPD_PULLUP(GPIOA_LED_GREEN) | \
                                         PIN_PUPD_PULLUP(GPIOA_LED_BLUE) | \
@@ -253,11 +259,11 @@
                                         PIN_PUPD_PULLUP(GPIOA_PIN12) | \
                                         PIN_PUPD_PULLUP(GPIOA_PIN13) | \
                                         PIN_PUPD_PULLUP(GPIOA_PIN14) | \
-                                        PIN_PUPD_PULLUP(GPIOA_PIN15))
+                                        PIN_PUPD_PULLUP(GPIOA_BARO_NCS))
 #define VAL_GPIOA_ODR                  (PIN_OD_HIGH(GPIOA_PIN0) | \
                                         PIN_OD_HIGH(GPIOA_LED_RED) | \
-                                        PIN_OD_HIGH(GPIOA_PIN2) | \
-                                        PIN_OD_HIGH(GPIOA_PIN3) | \
+                                        PIN_OD_HIGH(GPIOA_GPS_TX) | \
+                                        PIN_OD_HIGH(GPIOA_GPS_RX) | \
                                         PIN_OD_HIGH(GPIOA_PIN4) | \
                                         PIN_OD_HIGH(GPIOA_LED_GREEN) | \
                                         PIN_OD_HIGH(GPIOA_LED_BLUE) | \
@@ -269,11 +275,11 @@
                                         PIN_OD_HIGH(GPIOA_PIN12) | \
                                         PIN_OD_HIGH(GPIOA_PIN13) | \
                                         PIN_OD_HIGH(GPIOA_PIN14) | \
-                                        PIN_OD_HIGH(GPIOA_PIN15))
+                                        PIN_OD_HIGH(GPIOA_BARO_NCS))
 #define VAL_GPIOA_AFRL                 (PIN_AFIO_AF(GPIOA_PIN0, 0U) | \
                                         PIN_AFIO_AF(GPIOA_LED_RED, 0U) | \
-                                        PIN_AFIO_AF(GPIOA_PIN2, 0U) | \
-                                        PIN_AFIO_AF(GPIOA_PIN3, 0U) | \
+                                        PIN_AFIO_AF(GPIOA_GPS_TX, 1U) | \
+                                        PIN_AFIO_AF(GPIOA_GPS_RX, 1U) | \
                                         PIN_AFIO_AF(GPIOA_PIN4, 0U) | \
                                         PIN_AFIO_AF(GPIOA_LED_GREEN, 0U) | \
                                         PIN_AFIO_AF(GPIOA_LED_BLUE, 0U) | \
@@ -285,7 +291,7 @@
                                         PIN_AFIO_AF(GPIOA_PIN12, 0U) | \
                                         PIN_AFIO_AF(GPIOA_PIN13, 0U) | \
                                         PIN_AFIO_AF(GPIOA_PIN14, 0U) | \
-                                        PIN_AFIO_AF(GPIOA_PIN15, 0U))
+                                        PIN_AFIO_AF(GPIOA_BARO_NCS, 0U))
 
 /*
  *  GPIOB setup:
@@ -293,9 +299,9 @@
  * PB0  - PIN0                         (unused).
  * PB1  - PIN1                         (unused).
  * PB2  - PIN2                         (unused).
- * PB3  - PIN3                         (unused).
- * PB4  - PIN4                         (unused).
- * PB5  - PIN5                         (unused).
+ * PB3  - BARO_CLK                     (af0).
+ * PB4  - BARO_MISO                    (af0).
+ * PB5  - BARO_MOSI                    (af0).
  * PB6  - PIN6                         (unused).
  * PB7  - PIN7                         (unused).
  * PB8  - PIN8                         (unused).
@@ -310,9 +316,9 @@
 #define VAL_GPIOB_MODER                (PIN_MODE_INPUT(GPIOB_PIN0) | \
                                         PIN_MODE_INPUT(GPIOB_PIN1) | \
                                         PIN_MODE_INPUT(GPIOB_PIN2) | \
-                                        PIN_MODE_INPUT(GPIOB_PIN3) | \
-                                        PIN_MODE_INPUT(GPIOB_PIN4) | \
-                                        PIN_MODE_INPUT(GPIOB_PIN5) | \
+                                        PIN_MODE_ALTERNATE(GPIOB_BARO_CLK) | \
+                                        PIN_MODE_ALTERNATE(GPIOB_BARO_MISO) | \
+                                        PIN_MODE_ALTERNATE(GPIOB_BARO_MOSI) | \
                                         PIN_MODE_INPUT(GPIOB_PIN6) | \
                                         PIN_MODE_INPUT(GPIOB_PIN7) | \
                                         PIN_MODE_INPUT(GPIOB_PIN8) | \
@@ -326,9 +332,9 @@
 #define VAL_GPIOB_OTYPER               (PIN_OTYPE_PUSHPULL(GPIOB_PIN0) | \
                                         PIN_OTYPE_PUSHPULL(GPIOB_PIN1) | \
                                         PIN_OTYPE_PUSHPULL(GPIOB_PIN2) | \
-                                        PIN_OTYPE_PUSHPULL(GPIOB_PIN3) | \
-                                        PIN_OTYPE_PUSHPULL(GPIOB_PIN4) | \
-                                        PIN_OTYPE_PUSHPULL(GPIOB_PIN5) | \
+                                        PIN_OTYPE_PUSHPULL(GPIOB_BARO_CLK) | \
+                                        PIN_OTYPE_PUSHPULL(GPIOB_BARO_MISO) | \
+                                        PIN_OTYPE_PUSHPULL(GPIOB_BARO_MOSI) | \
                                         PIN_OTYPE_PUSHPULL(GPIOB_PIN6) | \
                                         PIN_OTYPE_PUSHPULL(GPIOB_PIN7) | \
                                         PIN_OTYPE_PUSHPULL(GPIOB_PIN8) | \
@@ -342,9 +348,9 @@
 #define VAL_GPIOB_OSPEEDR              (PIN_OSPEED_HIGH(GPIOB_PIN0) | \
                                         PIN_OSPEED_HIGH(GPIOB_PIN1) | \
                                         PIN_OSPEED_HIGH(GPIOB_PIN2) | \
-                                        PIN_OSPEED_HIGH(GPIOB_PIN3) | \
-                                        PIN_OSPEED_HIGH(GPIOB_PIN4) | \
-                                        PIN_OSPEED_HIGH(GPIOB_PIN5) | \
+                                        PIN_OSPEED_HIGH(GPIOB_BARO_CLK) | \
+                                        PIN_OSPEED_HIGH(GPIOB_BARO_MISO) | \
+                                        PIN_OSPEED_HIGH(GPIOB_BARO_MOSI) | \
                                         PIN_OSPEED_HIGH(GPIOB_PIN6) | \
                                         PIN_OSPEED_HIGH(GPIOB_PIN7) | \
                                         PIN_OSPEED_HIGH(GPIOB_PIN8) | \
@@ -358,9 +364,9 @@
 #define VAL_GPIOB_PUPDR                (PIN_PUPD_PULLUP(GPIOB_PIN0) | \
                                         PIN_PUPD_PULLUP(GPIOB_PIN1) | \
                                         PIN_PUPD_PULLUP(GPIOB_PIN2) | \
-                                        PIN_PUPD_PULLUP(GPIOB_PIN3) | \
-                                        PIN_PUPD_PULLUP(GPIOB_PIN4) | \
-                                        PIN_PUPD_PULLUP(GPIOB_PIN5) | \
+                                        PIN_PUPD_PULLUP(GPIOB_BARO_CLK) | \
+                                        PIN_PUPD_PULLUP(GPIOB_BARO_MISO) | \
+                                        PIN_PUPD_PULLUP(GPIOB_BARO_MOSI) | \
                                         PIN_PUPD_PULLUP(GPIOB_PIN6) | \
                                         PIN_PUPD_PULLUP(GPIOB_PIN7) | \
                                         PIN_PUPD_PULLUP(GPIOB_PIN8) | \
@@ -374,9 +380,9 @@
 #define VAL_GPIOB_ODR                  (PIN_OD_HIGH(GPIOB_PIN0) | \
                                         PIN_OD_HIGH(GPIOB_PIN1) | \
                                         PIN_OD_HIGH(GPIOB_PIN2) | \
-                                        PIN_OD_HIGH(GPIOB_PIN3) | \
-                                        PIN_OD_HIGH(GPIOB_PIN4) | \
-                                        PIN_OD_HIGH(GPIOB_PIN5) | \
+                                        PIN_OD_HIGH(GPIOB_BARO_CLK) | \
+                                        PIN_OD_HIGH(GPIOB_BARO_MISO) | \
+                                        PIN_OD_HIGH(GPIOB_BARO_MOSI) | \
                                         PIN_OD_HIGH(GPIOB_PIN6) | \
                                         PIN_OD_HIGH(GPIOB_PIN7) | \
                                         PIN_OD_HIGH(GPIOB_PIN8) | \
@@ -390,9 +396,9 @@
 #define VAL_GPIOB_AFRL                 (PIN_AFIO_AF(GPIOB_PIN0, 0U) | \
                                         PIN_AFIO_AF(GPIOB_PIN1, 0U) | \
                                         PIN_AFIO_AF(GPIOB_PIN2, 0U) | \
-                                        PIN_AFIO_AF(GPIOB_PIN3, 0U) | \
-                                        PIN_AFIO_AF(GPIOB_PIN4, 0U) | \
-                                        PIN_AFIO_AF(GPIOB_PIN5, 0U) | \
+                                        PIN_AFIO_AF(GPIOB_BARO_CLK, 0U) | \
+                                        PIN_AFIO_AF(GPIOB_BARO_MISO, 0U) | \
+                                        PIN_AFIO_AF(GPIOB_BARO_MOSI, 0U) | \
                                         PIN_AFIO_AF(GPIOB_PIN6, 0U) | \
                                         PIN_AFIO_AF(GPIOB_PIN7, 0U))
 #define VAL_GPIOB_AFRH                 (PIN_AFIO_AF(GPIOB_PIN8, 0U) | \
