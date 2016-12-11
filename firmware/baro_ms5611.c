@@ -6,6 +6,7 @@
  * M2FC - 2014 Adam Greig, Cambridge University Spaceflight
  * 
  * Woodchuck - 2016 Eivind Roson Eide, Cambridge University Spaceflight
+ *             2016 Greg Brooks, Cambridge University Spaceflight
  */
 
 /*
@@ -18,9 +19,9 @@
  * 
  */
  
-#include <libopencm3/stm32/spi.h>
-#include <libopencm3/stm32/gpio.h>
-#include <libopencm3/stm32/rcc.h>
+//#include <libopencm3/stm32/spi.h>
+//#include <libopencm3/stm32/gpio.h>
+//#include <libopencm3/stm32/rcc.h>
 
 #include "baro_ms5611.h"
 #include "gps.h"
@@ -29,29 +30,40 @@
 
 /*
  * The microcontroller talks to the barometer using SPI,
- * The driver uses libopemcm3/spi.h 
- * (documentation: http://libopencm3.github.io/docs/latest/stm32f0/html/group__spi__file.html)
  * Ports and pins are defined in: http://www.st.com/web/en/resource/technical/document/datasheet/DM00090510.pdf
  * SPI interface page 9
  */
 
-#define MS5611_SPID         SPI1        //Checked with datasheet 
+// defines presumably left over from libopencm3 port
+#define MS5611_SPID         SPID1       //Checked with datasheet, also see setting in mcuconf 
 #define MS5611_SPI_PORT     GPIOB       //Checked with datasheet
 #define MS5611_SPI_CLK      GPIO3       //Checked with datasheet PB3
 #define MS5611_SPI_MISO     GPIO4       //Checked with datasheet PB4
 #define MS5611_SPI_MOSI     GPIO5       //Checked with datasheet PB5
 #define GPIOB_SPI_AF_NUM    0           //Checked: Table 15: AF for GPIOB
+#define MS5611_SPI_NSS_PORT GPIOA       //Checked with datasheet
+
+#define MS5611_SPI_NSS      GPIOA_PIN15     //Checked with datasheet PA15
 
 //This definition appears to be missing in the header file:
- #define SPI_CR1_DFF_8BIT (0 << 11)
+// #define SPI_CR1_DFF_8BIT (0 << 11) // Libopencm3
 
 static void ms5611_reset(void);
 static void ms5611_read_u16(uint8_t adr, uint16_t* c);
 static void ms5611_read_s24(uint8_t adr, int32_t* d);
-static void ms5611_pin_setup();
+//static void ms5611_pin_setup();
 static void ms5611_read_cal(MS5611CalData* cal_data);
 static void ms5611_read(MS5611CalData* cal_data,
                         int32_t* temperature, int32_t* pressure);
+
+// SPI config structure
+
+static SPIConfig spi_cfg = {
+    .end_cb = NULL,
+    .ssport = 0,
+    .sspad  = 0,
+    .cr1    = SPI_CR1_BR_1 | SPI_CR1_BR_2 | SPI_CR1_CPOL | SPI_CR1_CPHA
+};
 
 int32_t global_temperature;
 int32_t global_pressure;
@@ -67,18 +79,11 @@ static int32_t temperature, pressure;
 static void ms5611_reset()
 {
     uint8_t adr = 0x1E;         // Wgat is stored here?
-    uint16_t i = 0;
-    spi_enable(MS5611_SPID);    // The SPI peripheral is enabled. // CHIBIOS spiSelect(&MS5611_SPID);
-    spi_send8(MS5611_SPID, adr); // Data is written to the SPI interface after the previous write transfer has finished.
-                                // Note that in chibios an adress is sent, while here the origenal data is sent?? 
-                                //    spiSend(&MS5611_SPID, 1, (void*)&adr);
-    //TODO: time this instead
-    for (i = 0; i < 10000; i++)
-    {
-        __asm__("nop");  //Not a pretty way of doing this, but will do for now //    chThdSleepMilliseconds(5);
-    }
-    
-    spi_disable(MS5611_SPID); //    spiUnselect(&MS5611_SPID);
+    spiSelect(&MS5611_SPID);  // Enable SPI peripheral // LIBOPENCM3 spi_enable(SPI?); where ? is SPI driver number
+    // LIBOPENCM3: spi_send8(MS5611_SPID, adr); // Data is written to the SPI interface after the previous write transfer has finished.
+    spiSend(&MS5611_SPID, 1, (void*)&adr);
+    chThdSleepMilliseconds(5);
+    spiUnselect(&MS5611_SPID);// LIBOPENCM3: spi_disable(MS5611_SPID);
 }
 
 /*
@@ -88,12 +93,13 @@ static void ms5611_read_u16(uint8_t adr, uint16_t* c)
 {
     /* adr must be 0xA0 to 0xAE */
     
-    uint16_t data_received; 
-    spi_enable(MS5611_SPID);    // The SPI peripheral is enabled. // CHIBIOS spiSelect(&MS5611_SPID);
-    spi_send8(MS5611_SPID, adr); // Data is written to the SPI interface after the previous write transfer has finished.
-    data_received = spi_read(MS5611_SPID); //A PROM read returns a 2 byte result
-    spi_disable(MS5611_SPID); //    spiUnselect(&MS5611_SPID);
-    *c = data_received;
+    uint8_t data_received[2]; 
+
+    spiSelect(&MS5611_SPID);  // The SPI peripheral is enabled.
+    spiSend(&MS5611_SPID, 1, (void*)&adr);
+    spiReceive(&MS5611_SPID, 2, (void*)data_received); //A PROM read returns a 2 byte result
+    spiUnselect(&MS5611_SPID);
+    *c = data_received[0] << 8 | data_received[1];
 }
 
 
@@ -102,26 +108,23 @@ static void ms5611_read_u16(uint8_t adr, uint16_t* c)
  */
 static void ms5611_read_s24(uint8_t adr, int32_t* d)
 {
-    uint32_t data_received; //To store result
+    uint8_t data[3]; //To store result
     uint8_t adc_adr = 0x00; //Command to read ADC from baro
 
-    spi_enable(MS5611_SPID);    // The SPI peripheral is enabled. // CHIBIOS spiSelect(&MS5611_SPID);
-    spi_send8(MS5611_SPID, adr); // Data is written to the SPI interface after the previous write transfer has finished.
+    spiSelect(&MS5611_SPID);
+    spiSend(&MS5611_SPID, 1, (void*)&adr);
     
-    //TODO: Sleep for 1 ms
     /*
-     * Wait for conversion to complete. There doesn't appear to be any way
-     * to do this without timing it, unfortunately.
-     *
-     * If we just watch the clock we'll consume enormous CPU time for little
-     * gain. Instead we'll sleep for "roughly" 1ms and then wait until at least
-     * the desired 0.6ms have passed.
-     */
-    
-    spi_send8(MS5611_SPID, adc_adr); // Asks the device to send the results from the ADC.
-    data_received = spi_read(MS5611_SPID); //A ADC_READ command returns a 3 byte result
+    * Wait for conversion to complete. There doesn't appear to be any way
+    * to do this without timing it, unfortunately.
+    */
+    chThdSleepMicroseconds(600);
+    // spiUnselect(&MS5611_SPID);  // Is this necessary?
+    //spiSelect(&MS5611_SPID);
+    spiSend(&MS5611_SPID, 1,(void*)&adc_adr); // Asks the device to send the results from the ADC.
+    spiReceive(&MS5611_SPID, 3, (void*)&data); //A ADC_READ command returns a 3 byte result
 
-    *d = data_received;
+    *d = data[0] << 16 | data[1] << 8 | data[2];
     
     /*
     //OLD CODE:
@@ -183,26 +186,26 @@ static void ms5611_read_cal(MS5611CalData* cal_data)
  * Sets the GPIO pins to SPI mode for the MS5611.
  * 
  */
-static void ms5611_pin_setup()
+/*static void ms5611_pin_setup()
 {
-    rcc_periph_clock_enable(RCC_SPI1); //Probably required
-    gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3 | GPIO4 | GPIO5);
+    LIBOPENCM3rcc_periph_clock_enable(RCC_SPI1); //Probably required
+    LIBOPENCM3gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3 | GPIO4 | GPIO5);
     //gpio_mode_setup (uint32_t gpioport, uint8_t mode, uint8_t pull_up_down, uint16_t gpios)
     gpio_set_af(GPIOB, GPIOB_SPI_AF_NUM ,GPIO3 | GPIO4 | GPIO5);
     //gpio_set_af (uint32_t gpioport, uint8_t alt_func_num, uint16_t gpios)
-    spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_8, SPI_CR1_CPOL, 
+    LIBOPENCM3spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_8, SPI_CR1_CPOL, 
                         SPI_CR1_CPHA, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST); 
                     //SHOULD EQUAL: SPI_CR1_BR_1 | SPI_CR1_CPOL | SPI_CR1_CPHA in CHiBIOS
     
-    // might require spi_enable_ss_output(SPI1); */ /* Required, see NSS, 25.3.1 section. */
-}
+    // might require spi_enable_ss_output(SPI1); // Required, see NSS, 25.3.1 section. 
+}*/
 
 
 /*
  * Initialise the MS5611.
  * (Public)
  * 
- * Sends a RESET and then reads in the calibration data.
+ * Configures SPI, sends a RESET and then reads in the calibration data.
  *
  * Call this once system startup, before attempting ms5611_read.
  *
@@ -210,9 +213,13 @@ static void ms5611_pin_setup()
  */
 void ms5611_init(MS5611CalData* cal_data)
 {
+    spi_cfg.ssport = MS5611_SPI_NSS_PORT;
+    spi_cfg.sspad  = MS5611_SPI_NSS;
+    spiStart(&MS5611_SPID, &spi_cfg);
     ms5611_reset();
     ms5611_read_cal(cal_data);
 }
+
 
 /*
  * Read and compensate a temperature and pressure from the MS5611.
@@ -220,7 +227,7 @@ void ms5611_init(MS5611CalData* cal_data)
  * `cal_data` is previously read calibration data.
  * `temperature` and `pressure` are written to.
  *
- * `temperature` is in centidegrees Celcius,
+ * `temperature` is in centidegrees Celsius,
  * `pressure` is in Pascals.
  */
 static void ms5611_read(MS5611CalData* cal_data,
@@ -260,7 +267,7 @@ static void ms5611_read(MS5611CalData* cal_data,
  * 
  * Calls state estimation function to convert reading to altitude
  */
-void ms5611_run()
+void ms5611_run(void)
 {
     ms5611_read(&cal_data, &temperature, &pressure);
     //TODO: Implement state estimator
