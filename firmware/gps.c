@@ -391,7 +391,7 @@ void _gps_flush_buffer(void)
     msg_t dummy;
     
     do {
-        dummy = sdGetTimeOut(&SDRV, TIME_IMMEDIATE);
+        dummy = sdGetTimeout(&SDRV, TIME_IMMEDIATE);
     } while (dummy != Q_TIMEOUT);
     
     (void)dummy;
