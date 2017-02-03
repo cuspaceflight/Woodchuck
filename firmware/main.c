@@ -20,7 +20,6 @@
 #include "hal.h"
 
 #include "eeprom.h"
-#include "interrupts.h"
 #include "led.h"
 //#include "radio.h"
 #include "gps.h"
@@ -40,7 +39,6 @@ int main(void)
     */
 
     // Start and configure all hardware peripherals
-    enable_interrupts();
     led_init();
     //radio_init();
     gps_init();
