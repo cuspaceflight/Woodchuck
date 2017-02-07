@@ -10,12 +10,21 @@
 #include "eeprom.h"
 
 // Choose which I2C peripheral to use
-#define I2C     I2C1
+#define I2C     I2CD1
 
 // 24AA01 device address
 #define EEPROM_ADDR     0b1010000
 
-static const I2CConfig i2ccfg = {OPMODE_I2C, 400000, STD_DUTY_CYCLE};
+//static const I2CConfig i2ccfg = {OPMODE_I2C, 400000, STD_DUTY_CYCLE};
+
+// Values taken from example in STM32F0 reference manual RM0091
+static const I2CConfig i2ccfg = {
+   STM32_TIMINGR_PRESC(5U) |
+   STM32_TIMINGR_SCLDEL(0x3U)  |  STM32_TIMINGR_SDADEL(0x3U) |
+   STM32_TIMINGR_SCLH(0x3U)    |  STM32_TIMINGR_SCLL(0x9U),
+   0,
+   0,
+};
 
 /**
  * Set up I2C communication at 400kHz.
@@ -54,7 +63,8 @@ void eeprom_read(uint8_t addr, uint8_t *data)
     txdat[0] = addr;
 
     i2cAcquireBus(&I2C);
-    i2c_transmit_retry_n(EEPROM_ADDR, txdat, 1, rxdat, 1, MS2ST(20), 5);
+    //i2c_transmit_retry_n(EEPROM_ADDR, txdat, 1, rxdat, 1, MS2ST(20), 5);
+    msg_t status = i2c_transmit_retry_n(txdat, 1, rxdat, 1, MS2ST(20), 5);
     i2cReleaseBus(&I2C);
 
     if(status == MSG_OK){
@@ -93,11 +103,11 @@ void eeprom_read_dword(uint8_t addr, uint32_t *data)
     txdat[0] = addr;
 
     i2cAcquireBus(&I2C);
-    i2c_transmit_retry_n(txdat, 1, rxdat, 4, MS2ST(20), 5);
+    msg_t status = i2c_transmit_retry_n(txdat, 1, rxdat, 4, MS2ST(20), 5);
     i2cReleaseBus(&I2C);
 
     if(status == MSG_OK){
-        *result = ((rxdat[3] << 24) | (rxdat[2] << 16) |
+        *data = ((rxdat[3] << 24) | (rxdat[2] << 16) |
                    (rxdat[1] << 8) | rxdat[0]);
     }
 }
@@ -108,7 +118,7 @@ void eeprom_read_dword(uint8_t addr, uint32_t *data)
  *
  * Note that the address must be a multiple of 4, to align to page boundaries.
  */
-void eeprom_write_dword(uint8_t addr, uint32_t data)
+void eeprom_write_dword(uint8_t addr, uint32_t value)
 {
     static uint8_t txdat[5] __attribute__((section("DATA_RAM")));
     txdat[0] = addr;

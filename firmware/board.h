@@ -70,6 +70,7 @@
 #define GPIOA_PIN12                    12U
 #define GPIOA_PIN13                    13U
 #define GPIOA_PIN14                    14U
+#define GPIOA_PIN15                    15U
 #define GPIOA_BARO_NCS                 15U
 
 #define GPIOB_PIN0                     0U

@@ -1,2 +1,4 @@
-- Implement IWDG
-- Interrupts
+- Implement IWDG (see chibios testhal examples?)
+- LEDs
+
+

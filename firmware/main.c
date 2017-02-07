@@ -56,7 +56,7 @@ int main(void)
     for(uint8_t i = 0; i < 5; i++)
     {
         //radio_chatter();
-        iwdg_reset();
+        //iwdg_reset();
     }
     */
     

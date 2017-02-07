@@ -43,7 +43,7 @@
 #define GPIOB_SPI_AF_NUM    0           //Checked: Table 15: AF for GPIOB
 #define MS5611_SPI_NSS_PORT GPIOA       //Checked with datasheet
 
-#define MS5611_SPI_NSS      GPIOA_PIN15     //Checked with datasheet PA15
+#define MS5611_SPI_NSS      GPIOA_BARO_NCS     //Checked with datasheet PA15
 
 //This definition appears to be missing in the header file:
 // #define SPI_CR1_DFF_8BIT (0 << 11) // Libopencm3
