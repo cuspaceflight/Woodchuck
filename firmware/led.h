@@ -65,7 +65,7 @@ extern volatile led_modes statuses[COLOURS_SIZE];
 
 
 void led_init(void);
-void led_set(led_colours led, int status);
+void led_set(led_colours led, led_modes status);
 void led_reset(void);//turn them all off incl. blink timers
 bool led_read(led_colours led);//check whether red, green or blue (or any) is illuminated
 //true if illuminated, false if not
