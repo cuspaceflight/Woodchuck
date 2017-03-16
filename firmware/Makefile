@@ -220,3 +220,5 @@ ULIBS =
 RULESPATH = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC
 include $(RULESPATH)/rules.mk
 
+dfu: $(BINARY).bin
+	dfu-util -d '0483:df11' -a 0 -s 0x08000000 -D $(BINARY).bin
