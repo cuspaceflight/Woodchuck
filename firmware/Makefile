@@ -222,3 +222,34 @@ include $(RULESPATH)/rules.mk
 
 dfu: $(BINARY).bin
 	dfu-util -d '0483:df11' -a 0 -s 0x08000000 -D $(BINARY).bin
+
+##############################################################################
+
+# Black Magic Probe flashing via GDB
+#
+flash: build/$(PROJECT).elf
+	arm-none-eabi-gdb --batch \
+		              -ex 'target extended-remote /dev/ttyACM0' \
+					  -ex 'monitor version' \
+					  -ex 'monitor swdp_scan' \
+					  -ex 'attach 1' \
+					  -ex 'load' \
+					  -ex 'compare-sections' build/$(PROJECT).elf
+
+debug: build/$(PROJECT).elf
+	arm-none-eabi-gdb -ex 'target extended-remote /dev/ttyACM0' \
+		              -ex 'monitor swdp_scan' \
+					  -ex 'attach 1' \
+					  -ex "file build/$(PROJECT).elf"
+power:
+	arm-none-eabi-gdb --batch \
+	                  -ex 'target extended-remote /dev/ttyACM0' \
+		              -ex 'monitor tpwr enable'
+unpower:
+	arm-none-eabi-gdb --batch \
+		              -ex 'target extended-remote /dev/ttyACM0' \
+		              -ex 'monitor tpwr disable'
+
+#
+# End BMP flashing
+##############################################################################
