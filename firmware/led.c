@@ -118,7 +118,7 @@ void led_set_error(error_enum err, bool set)
 
 /**
  * timer interrupt for led blink
- * cycle through the blink queue, this function runs once per second
+ * cycle through the blink queue, TODO: this function should run once per second
  */
 void led_interrupt()
 {

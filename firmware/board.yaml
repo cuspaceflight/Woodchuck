@@ -14,4 +14,10 @@ pins:
     BARO_CLK: pb3, af0
     BARO_MISO: pb4, af0
     BARO_MOSI: pb5, af0
+    RADIO_EN_PIN: pa9, af1
+    USART_1_RX: pa10, af1
+    RADIO_TX_DATA: pa4, analog
+    RADIO_CHANNEL_LSB: pb13, output
+    RADIO_CHANNEL_MSB: pb14, output
+    
 

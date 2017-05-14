@@ -19,8 +19,8 @@
 
 // Values taken from example in STM32F0 reference manual RM0091
 static const I2CConfig i2ccfg = {
-   STM32_TIMINGR_PRESC(5U) |
-   STM32_TIMINGR_SCLDEL(0x3U)  |  STM32_TIMINGR_SDADEL(0x3U) |
+   STM32_TIMINGR_PRESC(0U) |
+   STM32_TIMINGR_SCLDEL(0x3U)  |  STM32_TIMINGR_SDADEL(0x1U) |
    STM32_TIMINGR_SCLH(0x3U)    |  STM32_TIMINGR_SCLL(0x9U),
    0,
    0,

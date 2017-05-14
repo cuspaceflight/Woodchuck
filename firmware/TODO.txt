@@ -1,3 +1,2 @@
 -Implement IWDG
--Interrupt config
 -Update board.yaml/.h with various GPIO settings (e.g. alternative pin functions for communication ports)

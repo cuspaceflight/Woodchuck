@@ -116,7 +116,7 @@ CSRC = $(STARTUPSRC) \
        $(BOARDSRC) \
        $(TESTSRC) \
 	   $(CHIBIOS)/os/various/syscalls.c \
-       main.c baro_ms5611.c eeprom.c gps.c led.c
+       main.c baro_ms5611.c eeprom.c gps.c led.c radio.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.

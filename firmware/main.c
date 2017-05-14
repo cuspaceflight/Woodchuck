@@ -21,10 +21,8 @@
 
 #include "eeprom.h"
 #include "led.h"
-//#include "radio.h"
+#include "radio.h"
 #include "gps.h"
-
-// 30kHz range on COARSE, 3kHz on FINE
 
 char s[100];
 uint8_t ticks_addr = 0x00;
@@ -40,25 +38,16 @@ int main(void)
 
     // Start and configure all hardware peripherals
     led_init();
-    //radio_init();
+    radio_init();
     gps_init();
     eeprom_init();
-    //radio_enable();
-
-    // Set the radio shift and baud rate
-    //_radio_dac_write(RADIO_COARSE, RADIO_CENTER_FREQ);
-    //_radio_dac_write(RADIO_FINE, 0);
-    //radio_set_shift(RADIO_SHIFT_425);
-    //radio_set_baud(RADIO_BAUD_50);
 
     // Radio chatter
-    /*
     for(uint8_t i = 0; i < 5; i++)
     {
-        //radio_chatter();
+        radio_chatter();
         //iwdg_reset();
     }
-    */
     
     int32_t lat = 0, lon = 0, alt = 0;
     uint8_t hour = 0, minute = 0, second = 0, lock = 0, sats = 0;
@@ -93,14 +82,14 @@ int main(void)
         sprintf(s, "$$" CALLSIGN ",%lu,%02u:%02u:%02u,%02.7f,%03.7f,%ld,%u,%x",
             tick, hour, minute, second, lat_fmt, lon_fmt, alt,
             sats, lock);
-        //radio_chatter();
-        //radio_transmit_sentence(s);
-        //radio_chatter();
+        radio_chatter();
+        radio_transmit_sentence(s);
+        radio_chatter();
 
         led_set(LED_RED, 0);
         eeprom_write_dword(ticks_addr, tick);
         //iwdg_reset();
-        //_delay_ms(500);
+        delay(500);
     }
 
     return 0;
