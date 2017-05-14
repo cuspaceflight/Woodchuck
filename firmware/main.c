@@ -29,6 +29,8 @@ uint8_t ticks_addr = 0x00;
 
 int main(void)
 {
+	halInit();
+	chSysInit();
     // Disable, configure, and start the watchdog timer
     /*
     iwdg_reset();
@@ -89,7 +91,7 @@ int main(void)
         led_set(LED_RED, 0);
         eeprom_write_dword(ticks_addr, tick);
         //iwdg_reset();
-        delay(500);
+        chThdSleepMilliseconds(500);
     }
 
     return 0;

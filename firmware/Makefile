@@ -102,6 +102,9 @@ include $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/mk/port_v6m.mk
 # Other files (optional).
 include $(CHIBIOS)/test/rt/test.mk
 
+BOARDSRC = board.c
+BOARDINC = .
+
 # Define linker script file here
 LDSCRIPT= $(STARTUPLD)/STM32F072xB.ld
 
