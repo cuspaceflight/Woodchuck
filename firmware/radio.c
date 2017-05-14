@@ -49,6 +49,7 @@
 #define SDRV                    SD1  // Serial port for radio
 #define RADIO_BAUD_RATE			9600
 #define RADIO_NUM_DATA_BITS		8
+#define RADIO_DELAY				20  // ms delay between bits
 
 //Defines for what each bit is meant to mean. 
 //TODO check this adheres to the RTTY protocol properly!
@@ -65,6 +66,7 @@
 #define START_BIT                                LOGICAL_ZERO
 #define STOP_BIT                                 LOGICAL_ONE
 
+static void radio_transmit_string(char* string);
 static void _radio_transmit_bit(uint8_t data, uint8_t ptr);
 static uint16_t radio_calculate_checksum(char* data);
 
@@ -243,7 +245,7 @@ void radio_init(void)
 
 }
 
-static THD_FUNCTION(radio_transmit_string, arg){
+/*static THD_FUNCTION(radio_transmit_string, arg){
 	char* string = (char* )arg;
 	
 	while(*string){
@@ -256,6 +258,22 @@ static THD_FUNCTION(radio_transmit_string, arg){
 		string++;
 	}
 	chthdExit(0);
+}*/
+
+static void radio_transmit_string(char* string){
+	while(*string){
+		//Transmit byte
+		//Send 11 bits (1 start, 8 data, 2 stop)
+		for(int _txptr = 0; _txptr < 10; _txptr++){
+			systime_t startTime = chVTGetSystemTime();
+			systime_t endTime = startTime + MS2ST(RADIO_DELAY);
+			_radio_transmit_bit(*string, _txptr);
+			
+			while(chVTIsSystemTimeWithin(startTime, endTime)){
+			}
+		}
+		string++;
+	}
 }
 
 /**
@@ -271,11 +289,12 @@ void radio_transmit_sentence(char * message)
     char fullmsg[strlen(message) + strlen(cs)];
     strcpy(fullmsg, message);
     strcat(fullmsg, cs);
-    thread_t *tx = chThdCreateFromHeap(NULL, THD_WORKING_AREA_SIZE(128),NORMALPRIO, radio_transmit_string, (void *)fullmsg);
+    radio_transmit_string(fullmsg);
+    //thread_t *tx = chThdCreateFromHeap(NULL, THD_WORKING_AREA_SIZE(128),NORMALPRIO, radio_transmit_string, (void *)fullmsg);
     //thread_t *tx = chThdCreateFromHeap(NULL, THD_WORKING_AREA_SIZE(128), NORMALPRIO, radio_transmit_string, (void *)fullmsg);
     /*if (tp == NULL)
 		chSysHalt("out of memory");*/
-	msg_t msg = chThdWait(tx);  // Return thread memory to heap
+	//msg_t msg = chThdWait(tx);  // Return thread memory to heap
 }
 
 /*static THD_FUNCTION(_radio_transmit_byte, arg){
@@ -321,13 +340,13 @@ void radio_transmit_sentence(char * message)
 void radio_chatter(void)
 {
 	radio_write(0,100);
-	delay(200);
+	chThdSleepMilliseconds(200);
 	radio_write(0,200);
-	delay(200);
+	chThdSleepMilliseconds(200);
 	radio_write(0,100);
-	delay(200);
+	chThdSleepMilliseconds(200);
 	radio_write(0,200);
-	delay(200);
+	chThdSleepMilliseconds(200);
 }
 
 /**
@@ -336,11 +355,22 @@ void radio_chatter(void)
  */
 static uint16_t radio_calculate_checksum(char* data)
 {
+	//http://www.nongnu.org/avr-libc/user-manual/group__util__crc.html#gaca726c22a1900f9bad52594c8846115f
     uint16_t i;
     uint16_t crc = 0xFFFF;
 
     for (i = 0; i < strlen(data); i++) {
-        if (data[i] != '$') crc = _crc_xmodem_update(crc,(uint8_t)data[i]);
+        //if (data[i] != '$') crc = _crc_xmodem_update(crc,(uint8_t)data[i]);
+        if (data[i] != '$'){
+			int j;
+			crc = crc ^ ((uint16_t)data[i] << 8);
+			for (j = 0; j < 8; j++){
+				if(crc & 0x8000)
+					crc = (crc << 1) ^ 0x1021;
+				else
+					crc << 1;
+			}
+		}
     }
     return crc;
 }
