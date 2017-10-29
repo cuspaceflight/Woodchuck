@@ -40,10 +40,14 @@ typedef enum {
 
 void led_init(void);
 void led_exit(bool blocking);
+
 void led_set(led_colours led, led_modes status);
+void led_set_stat(led_modes arg[COLOURS_SIZE]);
+
 void led_toggle(led_colours led);
-void led_clear_all(void);  // Does not reset LED thread
-void led_reset(bool clear);
+void led_clear(void);
+
+void led_reset(void);
 led_modes led_read(led_colours led);  // Check LED status
 
 

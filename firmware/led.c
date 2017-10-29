@@ -33,11 +33,34 @@ static thread_t * led_tp;
 
 
 void led_out(led_colours colour){
-    // Invert because current is being sunk
-    uint16_t bits = pins[colour];
+    uint16_t bits;
+    if(colour==COLOURS_SIZE){
+        // Turn everything off
+        bits = PIN_RGB;
+    }
+    else{
+        bits = ~pins[colour];
+    }
     chSysLock();
-    palWritePort(PORT_LED, ~bits);
+    palWritePort(PORT_LED, bits);
     chSysUnlock();
+}
+
+
+void led_set_stat(led_modes arg[COLOURS_SIZE]){
+    bool ON_FLAG = false;
+    chMtxLock(&led_status_mtx);
+    for(int x = 0; x < COLOURS_SIZE; x++){
+        if(arg[x] == LED_ON && !ON_FLAG){
+            // Only one LED is fully 'ON'
+            statuses[x] = arg[x];
+        }
+        else if(arg[x] != LED_ON && arg[x] < MODES_SIZE){
+            statuses[x] = arg[x];
+        }
+    }
+    chMtxUnlock(&led_status_mtx);
+    led_reset();
 }
 
 
@@ -78,11 +101,11 @@ static THD_FUNCTION(led_thread, arg){
         uint8_t blink_time = 1;
 
         for(int x = 0; x < COLOURS_SIZE; x++){
-            if (statuses[x] == LED_BLINKING){
+            if (status_copy[x] == LED_BLINKING){
                 led_out(x);
                 if(checking_sleep(blink_time, 10)) chThdExit((msg_t)0);
             }
-            else if (statuses[x] == LED_ON){
+            else if (status_copy[x] == LED_ON){
                 on_led = x;
             }
         }
@@ -90,7 +113,7 @@ static THD_FUNCTION(led_thread, arg){
 
         // Show the 'on' colour for 3 seconds
         uint8_t on_time = 3;
-        if(on_led !=COLOURS_SIZE) led_out(on_led);
+        led_out(on_led);
         if(checking_sleep(on_time, 10)) chThdExit((msg_t)0);
 
     }
@@ -144,7 +167,7 @@ void led_set(led_colours led, led_modes status)
 	}
     chMtxUnlock(&led_status_mtx);
 
-    led_reset(false);
+    led_reset();
 }
 
 
@@ -163,22 +186,16 @@ void led_toggle(led_colours led){
 }
 
 
-void led_clear_all(void){
-    // Does not reset LED thread
-    chMtxLock(&led_status_mtx);
-    for (int x = 0; x < COLOURS_SIZE; x++) {
-        statuses[x] = LED_OFF;
-    }
-    chMtxUnlock(&led_status_mtx);
+void led_clear(void){
+    led_modes off[COLOURS_SIZE] = {LED_OFF, LED_OFF, LED_OFF, LED_OFF, LED_OFF, LED_OFF, LED_OFF};
+    led_set_stat(off);
 }
 
 
-void led_reset(bool clear)
+void led_reset(void)
 {
     // Terminate LED thread
     led_exit(true);
-
-    if(clear) led_clear_all();
 
     // Restart LED thread
     led_tp = chThdCreateStatic(led_thread_wa, sizeof(led_thread_wa), NORMALPRIO, led_thread, NULL);
