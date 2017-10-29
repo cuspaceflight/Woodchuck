@@ -40,8 +40,8 @@ void led_out(led_colours colour){
     chSysUnlock();
 }
 
-bool checking_sleep(uint8_t sec){
-    uint8_t freq_Hz = 5;
+
+bool checking_sleep(uint8_t sec, uint8_t freq_Hz){
     for(int y = 0; y < sec*freq_Hz; y++){
         if(chThdShouldTerminateX()){
             return true;
@@ -80,7 +80,7 @@ static THD_FUNCTION(led_thread, arg){
         for(int x = 0; x < COLOURS_SIZE; x++){
             if (statuses[x] == LED_BLINKING){
                 led_out(x);
-                if(checking_sleep(blink_time)) chThdExit((msg_t)0);
+                if(checking_sleep(blink_time, 10)) chThdExit((msg_t)0);
             }
             else if (statuses[x] == LED_ON){
                 on_led = x;
@@ -90,8 +90,8 @@ static THD_FUNCTION(led_thread, arg){
 
         // Show the 'on' colour for 3 seconds
         uint8_t on_time = 3;
-        led_out(on_led);
-        if(checking_sleep(on_time)) chThdExit((msg_t)0);
+        if(on_led !=COLOURS_SIZE) led_out(on_led);
+        if(checking_sleep(on_time, 10)) chThdExit((msg_t)0);
 
     }
 }
@@ -103,7 +103,7 @@ void led_init(void)
     led_tp = chThdCreateStatic(led_thread_wa, sizeof(led_thread_wa), NORMALPRIO, led_thread, NULL);
 }
 
-void led_off(bool blocking)
+void led_exit(bool blocking)
 {
     chThdTerminate(led_tp);
     if(blocking){
@@ -143,6 +143,8 @@ void led_set(led_colours led, led_modes status)
 		break;
 	}
     chMtxUnlock(&led_status_mtx);
+
+    led_reset(false);
 }
 
 
@@ -161,19 +163,22 @@ void led_toggle(led_colours led){
 }
 
 
-void led_reset(void)
-/**
- * Turn all LEDs off, incl. blinking
- */
+void led_clear_all(void){
+    // Does not reset LED thread
+    chMtxLock(&led_status_mtx);
+    for (int x = 0; x < COLOURS_SIZE; x++) {
+        statuses[x] = LED_OFF;
+    }
+    chMtxUnlock(&led_status_mtx);
+}
+
+
+void led_reset(bool clear)
 {
     // Terminate LED thread
-    led_off(true);
+    led_exit(true);
 
-    chMtxLock(&led_status_mtx);
-	for (int x = 0; x < COLOURS_SIZE; x++) {
-		statuses[x] = LED_OFF;
-	}
-    chMtxUnlock(&led_status_mtx);
+    if(clear) led_clear_all();
 
     // Restart LED thread
     led_tp = chThdCreateStatic(led_thread_wa, sizeof(led_thread_wa), NORMALPRIO, led_thread, NULL);
