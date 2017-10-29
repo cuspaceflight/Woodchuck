@@ -51,13 +51,16 @@ void led_set_stat(led_modes arg[COLOURS_SIZE]){
     bool ON_FLAG = false;
     chMtxLock(&led_status_mtx);
     for(int x = 0; x < COLOURS_SIZE; x++){
-        if(arg[x] == LED_ON && !ON_FLAG){
-            // Only one LED is fully 'ON'
-            statuses[x] = arg[x];
+        if(arg[x] == LED_ON){
+            if(!ON_FLAG){
+                statuses[x] = arg[x];
+                ON_FLAG = true;
+            }
+            else{
+                statuses[x] = LED_OFF;
+            }
         }
-        else if(arg[x] != LED_ON && arg[x] < MODES_SIZE){
-            statuses[x] = arg[x];
-        }
+        else if (arg[x] < MODES_SIZE) statuses[x] = arg[x];
     }
     chMtxUnlock(&led_status_mtx);
     led_reset();
