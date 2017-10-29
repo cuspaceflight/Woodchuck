@@ -5,9 +5,9 @@ voltage: 3.3
 mcutype: STM32F072xB
 default: input, pushpull, starthigh, pullup, highspeed
 pins:
-    LED_RED: pa1, output
-    LED_GREEN: pa5, output
-    LED_BLUE: pa6, output
+    LED_RED: pa1, output, opendrain
+    LED_GREEN: pa5, output, opendrain
+    LED_BLUE: pa6, output, opendrain
     GPS_TX: pa2, af1
     GPS_RX: pa3, af1
     BARO_NCS: pa15, af0
@@ -19,5 +19,3 @@ pins:
     RADIO_TX_DATA: pa4, analog
     RADIO_CHANNEL_LSB: pb13, output
     RADIO_CHANNEL_MSB: pb14, output
-    
-

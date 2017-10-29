@@ -13,7 +13,7 @@ endif
 
 # C specific options here (added to USE_OPT).
 ifeq ($(USE_COPT),)
-  USE_COPT = 
+  USE_COPT =
 endif
 
 # C++ specific options here (added to USE_OPT).
@@ -28,7 +28,7 @@ endif
 
 # Linker extra options here.
 ifeq ($(USE_LDOPT),)
-  USE_LDOPT = 
+  USE_LDOPT =
 endif
 
 # Enable this if you want link time optimizations (LTO)
@@ -119,7 +119,7 @@ CSRC = $(STARTUPSRC) \
        $(BOARDSRC) \
        $(TESTSRC) \
 	   $(CHIBIOS)/os/various/syscalls.c \
-       main.c baro_ms5611.c eeprom.c gps.c led.c radio.c
+       main.c baro_ms5611.c eeprom.c gps.c led.c radio.c error.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
