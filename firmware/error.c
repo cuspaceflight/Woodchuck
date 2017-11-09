@@ -32,7 +32,7 @@ void set_error(error_enum err){
         led_set(LED_RB, LED_BLINKING);
     default:
         //do something e.g. turn on red
-        led_set(LED_RB, LED_ON);
+        led_set(LED_RED, LED_ON);
         break;
     }
 }

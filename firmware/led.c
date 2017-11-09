@@ -155,7 +155,7 @@ void led_set(led_colours led, led_modes status)
          */
         for(int x = 0; x < COLOURS_SIZE; x++){
             if (statuses[x] == LED_ON){
-                led_toggle(x);
+                statuses[x] = LED_OFF;
             }
         }
 		statuses[led] = LED_ON;
