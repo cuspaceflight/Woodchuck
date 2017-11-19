@@ -68,8 +68,8 @@
 #define GPIOA_USART_1_RX               10U
 #define GPIOA_PIN11                    11U
 #define GPIOA_PIN12                    12U
-#define GPIOA_PIN13                    13U
-#define GPIOA_PIN14                    14U
+#define GPIOA_SWDIO                    13U
+#define GPIOA_SWCLK                    14U
 #define GPIOA_BARO_NCS                 15U
 
 #define GPIOB_PIN0                     0U
@@ -174,6 +174,8 @@
 #define LINE_RADIO_CHANNEL_MSB         PAL_LINE(GPIOB, 14U)
 #define LINE_RADIO_EN_PIN              PAL_LINE(GPIOA, 9U)
 #define LINE_RADIO_TX_DATA             PAL_LINE(GPIOA, 4U)
+#define LINE_SWCLK                     PAL_LINE(GPIOA, 14U)
+#define LINE_SWDIO                     PAL_LINE(GPIOA, 13U)
 #define LINE_USART_1_RX                PAL_LINE(GPIOA, 10U)
 
 /*
@@ -214,8 +216,8 @@
  * PA10 - USART_1_RX                   (af1).
  * PA11 - PIN11                        (unused).
  * PA12 - PIN12                        (unused).
- * PA13 - PIN13                        (unused).
- * PA14 - PIN14                        (unused).
+ * PA13 - SWDIO                        (af0).
+ * PA14 - SWCLK                        (af0).
  * PA15 - BARO_NCS                     (af0).
 */
 #define VAL_GPIOA_MODER                (PIN_MODE_INPUT(GPIOA_PIN0) | \
@@ -231,8 +233,8 @@
                                         PIN_MODE_ALTERNATE(GPIOA_USART_1_RX) | \
                                         PIN_MODE_INPUT(GPIOA_PIN11) | \
                                         PIN_MODE_INPUT(GPIOA_PIN12) | \
-                                        PIN_MODE_INPUT(GPIOA_PIN13) | \
-                                        PIN_MODE_INPUT(GPIOA_PIN14) | \
+                                        PIN_MODE_ALTERNATE(GPIOA_SWDIO) | \
+                                        PIN_MODE_ALTERNATE(GPIOA_SWCLK) | \
                                         PIN_MODE_ALTERNATE(GPIOA_BARO_NCS))
 #define VAL_GPIOA_OTYPER               (PIN_OTYPE_PUSHPULL(GPIOA_PIN0) | \
                                         PIN_OTYPE_OPENDRAIN(GPIOA_LED_RED) | \
@@ -247,8 +249,8 @@
                                         PIN_OTYPE_PUSHPULL(GPIOA_USART_1_RX) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_PIN11) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_PIN12) | \
-                                        PIN_OTYPE_PUSHPULL(GPIOA_PIN13) | \
-                                        PIN_OTYPE_PUSHPULL(GPIOA_PIN14) | \
+                                        PIN_OTYPE_PUSHPULL(GPIOA_SWDIO) | \
+                                        PIN_OTYPE_PUSHPULL(GPIOA_SWCLK) | \
                                         PIN_OTYPE_PUSHPULL(GPIOA_BARO_NCS))
 #define VAL_GPIOA_OSPEEDR              (PIN_OSPEED_HIGH(GPIOA_PIN0) | \
                                         PIN_OSPEED_HIGH(GPIOA_LED_RED) | \
@@ -263,8 +265,8 @@
                                         PIN_OSPEED_HIGH(GPIOA_USART_1_RX) | \
                                         PIN_OSPEED_HIGH(GPIOA_PIN11) | \
                                         PIN_OSPEED_HIGH(GPIOA_PIN12) | \
-                                        PIN_OSPEED_HIGH(GPIOA_PIN13) | \
-                                        PIN_OSPEED_HIGH(GPIOA_PIN14) | \
+                                        PIN_OSPEED_HIGH(GPIOA_SWDIO) | \
+                                        PIN_OSPEED_HIGH(GPIOA_SWCLK) | \
                                         PIN_OSPEED_HIGH(GPIOA_BARO_NCS))
 #define VAL_GPIOA_PUPDR                (PIN_PUPD_PULLUP(GPIOA_PIN0) | \
                                         PIN_PUPD_PULLUP(GPIOA_LED_RED) | \
@@ -279,8 +281,8 @@
                                         PIN_PUPD_PULLUP(GPIOA_USART_1_RX) | \
                                         PIN_PUPD_PULLUP(GPIOA_PIN11) | \
                                         PIN_PUPD_PULLUP(GPIOA_PIN12) | \
-                                        PIN_PUPD_PULLUP(GPIOA_PIN13) | \
-                                        PIN_PUPD_PULLUP(GPIOA_PIN14) | \
+                                        PIN_PUPD_PULLUP(GPIOA_SWDIO) | \
+                                        PIN_PUPD_PULLUP(GPIOA_SWCLK) | \
                                         PIN_PUPD_PULLUP(GPIOA_BARO_NCS))
 #define VAL_GPIOA_ODR                  (PIN_OD_HIGH(GPIOA_PIN0) | \
                                         PIN_OD_HIGH(GPIOA_LED_RED) | \
@@ -295,8 +297,8 @@
                                         PIN_OD_HIGH(GPIOA_USART_1_RX) | \
                                         PIN_OD_HIGH(GPIOA_PIN11) | \
                                         PIN_OD_HIGH(GPIOA_PIN12) | \
-                                        PIN_OD_HIGH(GPIOA_PIN13) | \
-                                        PIN_OD_HIGH(GPIOA_PIN14) | \
+                                        PIN_OD_HIGH(GPIOA_SWDIO) | \
+                                        PIN_OD_HIGH(GPIOA_SWCLK) | \
                                         PIN_OD_HIGH(GPIOA_BARO_NCS))
 #define VAL_GPIOA_AFRL                 (PIN_AFIO_AF(GPIOA_PIN0, 0U) | \
                                         PIN_AFIO_AF(GPIOA_LED_RED, 0U) | \
@@ -311,8 +313,8 @@
                                         PIN_AFIO_AF(GPIOA_USART_1_RX, 1U) | \
                                         PIN_AFIO_AF(GPIOA_PIN11, 0U) | \
                                         PIN_AFIO_AF(GPIOA_PIN12, 0U) | \
-                                        PIN_AFIO_AF(GPIOA_PIN13, 0U) | \
-                                        PIN_AFIO_AF(GPIOA_PIN14, 0U) | \
+                                        PIN_AFIO_AF(GPIOA_SWDIO, 0U) | \
+                                        PIN_AFIO_AF(GPIOA_SWCLK, 0U) | \
                                         PIN_AFIO_AF(GPIOA_BARO_NCS, 0U))
 
 /*

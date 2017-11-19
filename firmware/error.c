@@ -17,7 +17,7 @@ void set_error(error_enum err){
         break;
     case ERROR_RADIO:
         //do something e.g. blink green
-        led_set(LED_GREEN, LED_BLINKING);
+        led_set(LED_RG, LED_BLINKING);
         break;
     case ERROR_GPS:
         //do something e.g. blink blue
@@ -31,8 +31,8 @@ void set_error(error_enum err){
         //do something e.g. blink magenta
         led_set(LED_RB, LED_BLINKING);
     default:
-        //do something e.g. turn on red
-        led_set(LED_RED, LED_ON);
+        //do something e.g. blink white
+        led_set(LED_RGB, LED_BLINKING);
         break;
     }
 }

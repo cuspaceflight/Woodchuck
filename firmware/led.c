@@ -26,7 +26,7 @@
 
 
 static const uint16_t pins[COLOURS_SIZE] = {PIN_GREEN, PIN_RED, PIN_BLUE, PIN_GB, PIN_RG, PIN_RB, PIN_RGB};
-
+static binary_semaphore_t led_bsem;
 static led_modes statuses[COLOURS_SIZE] = {LED_OFF, LED_OFF, LED_OFF, LED_OFF, LED_OFF, LED_OFF, LED_OFF};
 static mutex_t led_status_mtx;
 static thread_t * led_tp;
@@ -63,19 +63,20 @@ void led_set_stat(led_modes arg[COLOURS_SIZE]){
         else if (arg[x] < MODES_SIZE) statuses[x] = arg[x];
     }
     chMtxUnlock(&led_status_mtx);
-    led_reset();
+    //led_reset();
+    chBSemSignal(&led_bsem);
 }
 
 
-bool checking_sleep(uint8_t sec, uint8_t freq_Hz){
-    for(int y = 0; y < sec*freq_Hz; y++){
-        if(chThdShouldTerminateX()){
-            return true;
-        }
-        chThdSleepMilliseconds(1000/freq_Hz);  // Argument is an integer
-    }
-    return false;
-}
+// bool checking_sleep(uint8_t sec, uint8_t freq_Hz){
+//     for(int y = 0; y < sec*freq_Hz; y++){
+//         if(chThdShouldTerminateX()){
+//             return true;
+//         }
+//         chThdSleepMilliseconds(1000/freq_Hz);  // Argument is an integer
+//     }
+//     return false;
+// }
 
 
 static THD_WORKING_AREA(led_thread_wa,128);
@@ -106,7 +107,13 @@ static THD_FUNCTION(led_thread, arg){
         for(int x = 0; x < COLOURS_SIZE; x++){
             if (status_copy[x] == LED_BLINKING){
                 led_out(x);
-                if(checking_sleep(blink_time, 10)) chThdExit((msg_t)0);
+                //if(checking_sleep(blink_time, 10)) chThdExit((msg_t)0);
+                msg_t result = chBSemWaitTimeout(&led_bsem,S2ST(blink_time));
+                if(result == MSG_OK){
+                    // Semaphore has been set, refresh statuses
+                    chBSemReset(&led_bsem, TRUE);
+                    break;
+                }
             }
             else if (status_copy[x] == LED_ON){
                 on_led = x;
@@ -114,10 +121,16 @@ static THD_FUNCTION(led_thread, arg){
         }
 
 
-        // Show the 'on' colour for 3 seconds
-        uint8_t on_time = 3;
+        // Show the 'on' colour for 5 seconds
+        uint8_t on_time = 5;
         led_out(on_led);
-        if(checking_sleep(on_time, 10)) chThdExit((msg_t)0);
+        // if(checking_sleep(on_time, 10)) chThdExit((msg_t)0);
+        msg_t result = chBSemWaitTimeout(&led_bsem,S2ST(on_time));
+        if(result == MSG_OK){
+            // Semaphore has been set, refresh statuses
+            chBSemReset(&led_bsem, TRUE);
+            continue;
+        }
 
     }
 }
@@ -126,6 +139,7 @@ static THD_FUNCTION(led_thread, arg){
 void led_init(void)
 {
     chMtxObjectInit(&led_status_mtx);
+    chBSemObjectInit(&led_bsem, true);
     led_tp = chThdCreateStatic(led_thread_wa, sizeof(led_thread_wa), NORMALPRIO, led_thread, NULL);
 }
 
@@ -170,22 +184,21 @@ void led_set(led_colours led, led_modes status)
 	}
     chMtxUnlock(&led_status_mtx);
 
-    led_reset();
+    //led_reset();
+    chBSemSignal(&led_bsem);
 }
 
 
 void led_toggle(led_colours led){
-    chMtxLock(&led_status_mtx);
-    if (statuses[led] == LED_OFF){
+    if (led_read(led) == LED_OFF){
         led_set(led, LED_ON);
     }
-    else if (statuses[led] == LED_ON){
+    else if (led_read(led) == LED_ON){
         led_set(led, LED_OFF);
     }
     else{
         // Do nothing
     }
-    chMtxUnlock(&led_status_mtx);
 }
 
 

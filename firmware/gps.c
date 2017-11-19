@@ -33,6 +33,7 @@
 #define UBX_NAV_SOL_ID      (0x06)
 #define UBX_NAV_TIMEUTC_ID  (0x21)
 #define UBX_ACK_ACK_ID      (0x01)
+#define UBX_ACK_NAK_ID      (0x00)
 #define UBX_CFG_PRT_ID      (0x00)
 #define UBX_CFG_MSG_ID      (0x01)
 #define UBX_CFG_NAV5_ID     (0x24)
@@ -45,15 +46,16 @@
  */
 static SerialConfig uartGPS =
 {
-    9600, // bit rate
-    0,
-    USART_CR2_STOP1_BITS, //| USART_CR2_LINEN,
-    0
+    .speed = 9600,
+    .cr1 = 0,
+    .cr2 = 0,
+    .cr3 = 0,
 };
 
 // Setter function for serial port
 void _serial_begin(uint32_t baud){
     uartGPS.speed = baud;
+    sdStop(&SDRV);
     sdStart(&SDRV, &uartGPS);
 }
 
@@ -72,8 +74,8 @@ void gps_init(void)
     // 9600 baud rate
     _serial_begin(9600);
 
-    // Try to upgrade to 38400 baud rate
-    _gps_set_baud(38400);
+    _gps_set_baud(9600);
+
 
     // Set the GPS into the correct mode (<1g airborne)
     gps_set_mode();
@@ -121,7 +123,7 @@ void gps_get_position(int32_t* lat, int32_t* lon, int32_t* alt)
  * Get the hour, minute and second from the GPS using the NAV-TIMEUTC
  * message.
  */
-void gps_get_time(uint8_t* hour, uint8_t* minute, uint8_t* second)
+ void gps_get_time(uint8_t* hour, uint8_t* minute, uint8_t* second)
 {
     // Send a NAV-TIMEUTC message to the receiver
     uint8_t request[8] = {UBX_SYNC_1, UBX_SYNC_2, UBX_NAV_CLASS,
@@ -197,32 +199,37 @@ void gps_set_mode(void)
      * Checksum bytes are pre-computed
      */
     uint8_t request[44] = {UBX_SYNC_1, UBX_SYNC_2, UBX_CFG_CLASS,
-        UBX_CFG_NAV5_ID, 0x00, 36, 0x00, 0x01, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00,
+        UBX_CFG_NAV5_ID, 36, 0x00, 0x00, 0x01, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x55, 0x8f};
     _gps_send_msg(request);
+    chThdSleepMilliseconds(300);
 
     // Read the response from the GPS
     uint8_t buf[10];
     //uint8_t i = 0;
     //for(i = 0; i < 10; i++)
     //    buf[i] = _gps_get_byte();
-    _gps_recv_msg(buf, 10);
+    uint8_t result = _gps_recv_ack(buf);
 
-    // Verify sync and header bytes
-    if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
-        set_error(ERROR_GPS);
-    if( buf[2] != UBX_ACK_CLASS)
-        set_error(ERROR_GPS);
+    if (result == 2) led_set(LED_RGB, LED_BLINKING);
+    else if (result == UBX_ACK_ACK_ID) led_set(LED_RB, LED_ON);
+    chThdSleepSeconds(9999);
 
-    // Check message checksum
-    if( !_gps_verify_checksum(&buf[2], 6) ) set_error(ERROR_GPS);
-
-    // Check if we received an ACK or NACK
-    if(buf[3] != UBX_ACK_ACK_ID){ // If not an ACK
-        set_error(ERROR_GPS);
-    }
+    // // Verify sync and header bytes
+    // if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
+    //     set_error(ERROR_GPS);
+    // if( buf[2] != UBX_ACK_CLASS)
+    //     set_error(ERROR_GPS);
+    //
+    // // Check message checksum
+    // if( !_gps_verify_checksum(&buf[2], 6) ) set_error(ERROR_GPS);
+    //
+    // // Check if we received an ACK or NACK
+    // if(buf[3] != UBX_ACK_ACK_ID){ // If not an ACK
+    //     set_error(ERROR_GPS);
+    // }
 }
 
 /**
@@ -255,7 +262,7 @@ uint8_t gps_check_nav(void)
     uint8_t ack[10];
     //for(i = 0; i < 10; i++)
     //    ack[i] = _gps_get_byte();
-    _gps_recv_msg(ack, 10);
+    _gps_recv_ack(ack);
 
     // If we got a NACK, then return 0xFF
     if( ack[3] == 0x00 ) return 0xFF;
@@ -271,60 +278,87 @@ uint8_t gps_check_nav(void)
 void _gps_set_baud(uint32_t baudrate)
 {
     // Backup the old baudrate incase something goes wrong
-    uint32_t oldBRR = _serial_get_baud();
+    //uint32_t oldBRR = _serial_get_baud();
 
-    /* Parameters:
+    /* First stop NMEA from clogging the buffer
+     * Parameters:
      * portID:      0x01 (UART)
      * reserved:    0x00
      * txReady:     0x0000 (disable txReady pin)
-     * mode:        0x000008C0 (1 stop bit, no parity, 8 data bits)
+     * mode:        0b00001000 11000000 = 0x08 0xC0 (1 stop bit, no parity, 8 data bits)
      * baudrate:    <baudrate> (little endian)
      * inProtoMask: 0x0001 (UBX input only)
-     * outProtoMask:0x0001 (UBX output only)
+     * outProtoMask:0x0000 (stop transmitting for now)
      * flags:       0x0000 (disable extended timeout)
      * reserved x2: 0x0000
      */
     uint8_t cka = 0;
     uint8_t ckb = 0;
-    uint8_t request[28] = {UBX_SYNC_1, UBX_SYNC_2, UBX_CFG_CLASS,
-        UBX_CFG_PRT_ID, 0x00, 20, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0xC0,
+    uint8_t pre_request[28] = {UBX_SYNC_1, UBX_SYNC_2, UBX_CFG_CLASS,
+        UBX_CFG_PRT_ID, 20, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0xC0,
         baudrate & 0xff, (baudrate >> 8) & 0xff, (baudrate >> 16) & 0xff,
-        (baudrate >> 24) & 0xff, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00,
+        (baudrate >> 24) & 0xff, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, cka, ckb};
 
     // Compute the checksum and fill it out
-    _gps_ubx_checksum(&request[2], 24, &cka, &ckb);
-    request[26] = cka;
-    request[27] = ckb;
+    _gps_ubx_checksum(&pre_request[2], 24, &cka, &ckb);
+    pre_request[26] = cka;
+    pre_request[27] = ckb;
 
     // Transmit the request
-    _gps_send_msg(request);
+    _gps_send_msg(pre_request);
 
-    // Change our baud rate to match the new speed
-    _serial_begin(baudrate);
+    chThdSleepMilliseconds(500);
+    _gps_flush_buffer();
 
-    // Read the response from the GPS
-    uint8_t buf[9];
-    //uint8_t i = 0;
-    //for(i = 0; i < 9; i++)
-    //    buf[i] = _gps_get_byte();
-    _gps_recv_msg(buf, 9);
+    // // TESTING
+    // while(1){
+    //     _gps_send_msg(pre_request);
+    // }
 
-    // Verify sync and header bytes
-    if( buf[0] != UBX_SYNC_1 || buf[1] != UBX_SYNC_2 )
-        set_error(ERROR_GPS);
-    if( buf[2] != UBX_ACK_CLASS)
-        set_error(ERROR_GPS);
-
-    // Check message checksum
-    if( !_gps_verify_checksum(&buf[2], 5) ) set_error(ERROR_GPS);
-
-    // Check if we received an ACK or NACK
-    if(buf[3] != UBX_ACK_ACK_ID){ // If not an ACK
-        set_error(ERROR_GPS);
-        // Restore the old baud rate.
-        _serial_begin(oldBRR);
-    }
+    // /* Now set new baudrate
+    //  * Parameters:
+    //  * portID:      0x01 (UART)
+    //  * reserved:    0x00
+    //  * txReady:     0x0000 (disable txReady pin)
+    //  * mode:        0b00001000 11000000 = 0x08 0xC0 (1 stop bit, no parity, 8 data bits)
+    //  * baudrate:    <baudrate> (little endian)
+    //  * inProtoMask: 0x0001 (UBX input only)
+    //  * outProtoMask:0x0001 (UBX output only)
+    //  * flags:       0x0000 (disable extended timeout)
+    //  * reserved x2: 0x0000
+    //  */
+    // cka = 0;
+    // ckb = 0;
+    // uint8_t request[28] = {UBX_SYNC_1, UBX_SYNC_2, UBX_CFG_CLASS,
+    //     UBX_CFG_PRT_ID, 0x00, 20, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0xC0,
+    //     baudrate & 0xff, (baudrate >> 8) & 0xff, (baudrate >> 16) & 0xff,
+    //     (baudrate >> 24) & 0xff, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00,
+    //     0x00, cka, ckb};
+    //
+    // // Compute the checksum and fill it out
+    // _gps_ubx_checksum(&request[2], 24, &cka, &ckb);
+    // request[26] = cka;
+    // request[27] = ckb;
+    //
+    // // Transmit the request
+    // _gps_send_msg(request);
+    //
+    // // Change our baud rate to match the new speed
+    // _serial_begin(baudrate);
+    //
+    // chThdSleepMilliseconds(300);
+    // // Read the response from the GPS
+    // uint8_t buf[10];
+    // //uint8_t i = 0;
+    // //for(i = 0; i < 9; i++)
+    // //    buf[i] = _gps_get_byte();
+    // uint8_t result = _gps_recv_ack(buf);
+    // if (result != UBX_ACK_ACK_ID){
+    //     if (result == 2) led_set(LED_RB, LED_BLINKING);
+    //     else set_error(ERROR_GPS);
+    //     _serial_begin(oldBRR);
+    // }
 }
 
 /**
@@ -363,8 +397,11 @@ void _gps_send_msg(uint8_t* data)
 {
     _gps_flush_buffer();
     // Length determined from message length field
-    uint8_t len = 8 + ((uint16_t*)data)[2];
-    sdWrite(&SDRV, data, len);
+    size_t len = 8 + ((uint16_t*)data)[2];
+    size_t nwritten;
+    nwritten = sdWrite(&SDRV, data, len);
+    if (nwritten==0) led_set(LED_RED,LED_ON);
+
 }
 
 /**
@@ -375,6 +412,36 @@ void _gps_recv_msg(uint8_t* buf, size_t len){
                                                  *  Change to TIME_IMMEDIATE if necessary
                                                  */
 }
+
+uint8_t _gps_recv_ack(uint8_t* buf){
+    // buf is 10 bytes long
+    // Returns ACK id, NAK id or other uint8_t (neither received)
+    msg_t dummy;
+
+    do {
+        dummy = sdGetTimeout(&SDRV, MS2ST(50));
+        if(dummy == Q_TIMEOUT) return 2;
+    } while ( dummy != 0xB5);
+
+    buf[0] = 0xB5;
+    _gps_recv_msg(&buf[1], 9);
+
+    // Verify header byte
+    if( buf[1] != UBX_SYNC_2 )
+        return 3;
+    if( buf[2] != UBX_ACK_CLASS)
+        return 4;
+
+    // Check message checksum
+    if( !_gps_verify_checksum(&buf[2], 5) ) return 5;
+
+    // Check if we received an ACK or NACK
+    if(buf[3] == UBX_ACK_ACK_ID || buf[3] == UBX_ACK_NAK_ID ){
+        return buf[3];
+    }
+    return 6;
+}
+
 
 /**
  * Receive a single byte from the GPS and return it.

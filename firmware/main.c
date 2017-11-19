@@ -1,7 +1,7 @@
 /**
  * Woodchuck by CU Spaceflight
- * 
- * This file is part of the Woodchuck project by Cambridge University Spaceflight. 
+ *
+ * This file is part of the Woodchuck project by Cambridge University Spaceflight.
  *
  * It is an adapted version of the JOEY-M version by Jon Sowman
  *
@@ -40,6 +40,7 @@ int main(void)
 
     // Start and configure all hardware peripherals
     led_init();
+
     radio_init();
     gps_init();
     eeprom_init();
@@ -50,13 +51,14 @@ int main(void)
         radio_chatter();
         //iwdg_reset();
     }
-    
+
     int32_t lat = 0, lon = 0, alt = 0;
     uint8_t hour = 0, minute = 0, second = 0, lock = 0, sats = 0;
 
     while(true)
     {
-        led_set(LED_GREEN, 1);
+        led_set(LED_GREEN, LED_BLINKING);
+		chThdSleepSeconds(1000);
 
         // Get the current system tick and increment
         uint32_t tick;
@@ -64,7 +66,7 @@ int main(void)
         tick += 1;
 
         // Check that we're in airborne <1g mode
-        if( gps_check_nav() != 0x06 ) led_set(LED_RED, 1);
+        if( gps_check_nav() != 0x06 ) led_set(LED_RGB, 1);
 
         // Get information from the GPS
         gps_check_lock(&lock, &sats);

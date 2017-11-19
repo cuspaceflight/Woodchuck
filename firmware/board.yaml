@@ -5,6 +5,8 @@ voltage: 3.3
 mcutype: STM32F072xB
 default: input, pushpull, starthigh, pullup, highspeed
 pins:
+    SWDIO: pa13, af0
+    SWCLK: pa14, af0
     LED_RED: pa1, output, opendrain
     LED_GREEN: pa5, output, opendrain
     LED_BLUE: pa6, output, opendrain

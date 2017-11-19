@@ -6,7 +6,7 @@
  *
  * Based on the gps driver from the JOEY-M project by Cambridge University
  * Spaceflight.
- * 
+ *
  * Jon Sowman  2012
  * Jamie Wood  2016
  * Greg Brooks 2016
@@ -26,7 +26,7 @@ void gps_init(void);
 
 // Poll for position and UTC time
 void gps_get_position(int32_t* lat, int32_t* lon, int32_t* alt);
-void gps_get_time(uint8_t* hour, uint8_t* min, uint8_t* second);
+void gps_get_time(uint8_t* hour, uint8_t* minute, uint8_t* second);
 
 // Poll for fix status, and check OK
 void gps_check_lock(uint8_t* lock, uint8_t* sats);
@@ -60,6 +60,9 @@ void _gps_send_msg(uint8_t* data);
 
 // Receive bytes from GPS (up to specified number of bytes)
 void _gps_recv_msg(uint8_t* buf, size_t len);
+
+// Receive ack message from GPS
+uint8_t _gps_recv_ack(uint8_t* buf);
 
 // Reads a single byte from the GPS
 uint8_t _gps_get_byte(void);
