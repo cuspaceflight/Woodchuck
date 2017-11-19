@@ -6,6 +6,7 @@
 
 #include "ch.h"
 #include "hal.h"
+#include "ubx.h"
 
 /* NAV-POSECEF Payload Data */
 typedef struct __attribute__((packed)) {
@@ -41,6 +42,16 @@ typedef struct __attribute__((packed)) {
     uint32_t reserved4;
 } ublox_pvt_t;
 
+typedef struct __attribute__((packed)){
+    enum ublox_result result;
+    union{
+        uint8_t no_pckt;  // No packet to return
+        ubx_cfg_nav5_t cfg_nav5;
+        ublox_posecef_t posecef;
+        ublox_pvt_t pvt;
+    };
+} state_return_t;
+
 
 // /* Timestamped NAV-PVT Data */
 // typedef struct __attribute__((packed)) {
@@ -64,9 +75,11 @@ typedef struct __attribute__((packed)) {
 /* Configure uBlox GPS */
 void gps_init(void);
 
-// Poll for position and UTC time
-void gps_get_position(int32_t* lat, int32_t* lon, int32_t* alt);
-void gps_get_time(uint8_t* hour, uint8_t* minute, uint8_t* second);
+// Poll for pvt messages
+bool gps_poll_pvt(ublox_pvt_t *pvt_message);
+bool gps_get_position(int32_t* lat, int32_t* lon, int32_t* alt);
+bool gps_get_time(uint8_t* hour, uint8_t* minute, uint8_t* second);
+bool gps_get_pos_time(int32_t* lat, int32_t* lon, int32_t* alt, uint8_t* hour, uint8_t* minute, uint8_t* second);
 
 #endif /*__GPS_H__*/
 

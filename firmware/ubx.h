@@ -326,4 +326,12 @@ typedef struct __attribute__((packed)) {
     uint8_t ck_a, ck_b;
 } ubx_nav_pvt_t;
 
+/* Poll a messsage by sending the ubx packet with no payload
+ */
+typedef struct __attribute__((packed)) {
+    uint8_t sync1, sync2, class, id;
+    uint16_t length;
+    uint8_t ck_a, ck_b;
+} ubx_poll_t;
+
 #endif // __UBX_H__

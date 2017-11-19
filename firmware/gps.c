@@ -10,16 +10,13 @@
 //  * Greg Brooks 2017
 //  */
 
-TODO:
-- Implement polling
-- Implement other functions from the old gps driver, or remove them if unnecessary
 
 #include <string.h>
 #include "gps.h"
 #include "led.h"
 #include "radio.h"
 #include "error.h"
-#include "ubx.h"
+
 
 // Choose which USART module to use
 #define SDRV       SD2  // Also see mcuconf.h
@@ -44,7 +41,8 @@ static bool gps_configured = false;
 static uint16_t gps_fletcher_8(uint16_t chk, uint8_t *buf, uint8_t n);
 static void gps_checksum(uint8_t *buf);
 static bool gps_transmit(uint8_t *buf);
-static enum ublox_result ublox_state_machine(uint8_t b);
+// static enum ublox_result ublox_state_machine(uint8_t b);
+static state_return_t ublox_state_machine(uint8_t b);
 static bool gps_configure(void);
 static bool gps_tx_ack(uint8_t *buf);
 void _serial_begin(uint32_t baud);
@@ -161,16 +159,21 @@ static bool gps_transmit(uint8_t *buf)
  */
 static bool gps_tx_ack(uint8_t *buf)
 {
+    /* Clear the read buffer */
+    while(sdGetTimeout(&SDRV, TIME_IMMEDIATE) != Q_TIMEOUT);
+
     if(!gps_transmit(buf)) {
         return false;
     }
 
-    enum ublox_result r;
+    chThdSleepMilliseconds(300);
+
+    state_return_t r;
     do {
         r = ublox_state_machine(sdGet(&SDRV));
-    } while( (r != UBLOX_ACK) && (r != UBLOX_NAK) );
+    } while( (r.result != UBLOX_ACK) && (r.result != UBLOX_NAK) );
 
-    if(r == UBLOX_NAK){
+    if(r.result == UBLOX_NAK){
         set_error(ERROR_GPS);
         return false;
     }
@@ -182,7 +185,8 @@ static bool gps_tx_ack(uint8_t *buf)
  * function preserves static state and processes new messages as appropriate
  * once received.
  */
-static enum ublox_result ublox_state_machine(uint8_t b)
+// static enum ublox_result ublox_state_machine(uint8_t b, )
+static state_return_t ublox_state_machine(uint8_t b)
 {
     static ubx_state state = STATE_IDLE;
 
@@ -193,10 +197,8 @@ static enum ublox_result ublox_state_machine(uint8_t b)
     static uint8_t ck_a, ck_b;
     static uint16_t ck;
 
-    static ubx_cfg_nav5_t cfg_nav5;
-    static ublox_posecef_t posecef;
-    static ublox_pvt_t pvt_latest;
-
+    state_return_t return_state;
+    return_state.no_pckt = 1;  // Default behaviour is to not return a packet
 
     switch(state) {
         case STATE_IDLE:
@@ -231,7 +233,10 @@ static enum ublox_result ublox_state_machine(uint8_t b)
             if(length >= 128) {
                 set_error(ERROR_GPS);
                 state = STATE_IDLE;
-                return UBLOX_RXLEN_TOO_LONG;
+                // return UBLOX_RXLEN_TOO_LONG;
+                return_state.result = UBLOX_RXLEN_TOO_LONG;
+                return return_state;
+
             }
             length_remaining = length;
             state = STATE_PAYLOAD;
@@ -258,7 +263,9 @@ static enum ublox_result ublox_state_machine(uint8_t b)
             if(ck_a != (ck&0xFF) || ck_b != (ck>>8)) {
                 set_error(ERROR_GPS);
                 state=STATE_IDLE;
-                return UBLOX_BAD_CHECKSUM;
+                // return UBLOX_BAD_CHECKSUM;
+                return_state.result = UBLOX_BAD_CHECKSUM;
+                return return_state;
             }
 
             /* Handle Payload */
@@ -269,13 +276,19 @@ static enum ublox_result ublox_state_machine(uint8_t b)
                     if(id == UBX_ACK_NAK) {
                         /* NAK */
                         set_error(ERROR_GPS);
-                        return UBLOX_NAK;
+                        // return UBLOX_NAK;
+                        return_state.result = UBLOX_NAK;
+                        return return_state;
                     } else if(id == UBX_ACK_ACK) {
                         /* ACK - Do Nothing */
-                        return UBLOX_ACK;
+                        // return UBLOX_ACK;
+                        return_state.result = UBLOX_ACK;
+                        return return_state;
                     } else {
                         set_error(ERROR_GPS);
-                        return UBLOX_UNHANDLED;
+                        // return UBLOX_UNHANDLED;
+                        return_state.result = UBLOX_UNHANDLED;
+                        return return_state;
                     }
                     break;
 
@@ -284,7 +297,7 @@ static enum ublox_result ublox_state_machine(uint8_t b)
                     if(id == UBX_NAV_PVT) {
 
                         /* Extract NAV-PVT Payload */
-                        memcpy(&pvt_latest, payload, length);
+                        memcpy(&return_state.pvt, payload, length);
                         //log_pvt(&pvt_latest);
 
                         // /* Check for FIX */
@@ -292,18 +305,24 @@ static enum ublox_result ublox_state_machine(uint8_t b)
                         //     set_error(ERROR_GPS);
 	                    // }
 
-                        return UBLOX_NAV_PVT;
+                        // return UBLOX_NAV_PVT;
+                        return_state.result = UBLOX_NAV_PVT;
+                        return return_state;
 
                     } else if(id == UBX_NAV_POSECEF){
 
                         /* Extract NAV-POSECEF Payload */
-                        memcpy(&posecef, payload, length);
+                        memcpy(&return_state.posecef, payload, length);
 
-                        return UBLOX_NAV_POSECEF;
+                        // return UBLOX_NAV_POSECEF;
+                        return_state.result = UBLOX_NAV_POSECEF;
+                        return return_state;
 
                     } else {
                         set_error(ERROR_GPS);
-                        return UBLOX_UNHANDLED;
+                        // return UBLOX_UNHANDLED;
+                        return_state.result = UBLOX_UNHANDLED;
+                        return return_state;
                     }
                     break;
 
@@ -312,20 +331,26 @@ static enum ublox_result ublox_state_machine(uint8_t b)
                     if(id == UBX_CFG_NAV5) {
 
                         /* NAV5 */
-                        memcpy(cfg_nav5.payload, payload, length);
-                        if(cfg_nav5.dyn_model != 6) {
+                        memcpy(return_state.cfg_nav5.payload, payload, length);
+                        if(return_state.cfg_nav5.dyn_model != 6) {
                             set_error(ERROR_GPS);
                         }
-                        return UBLOX_CFG_NAV5;
+                        // return UBLOX_CFG_NAV5;
+                        return_state.result = UBLOX_CFG_NAV5;
+                        return return_state;
                     } else {
                         set_error(ERROR_GPS);
-                        return UBLOX_UNHANDLED;
+                        // return UBLOX_UNHANDLED;
+                        return_state.result = UBLOX_UNHANDLED;
+                        return return_state;
                     }
                     break;
 
                 /* Unhandled */
                 default:
-                    return UBLOX_UNHANDLED;
+                    // return UBLOX_UNHANDLED;
+                    return_state.result = UBLOX_UNHANDLED;
+                    return return_state;
             }
             break;
 
@@ -333,9 +358,13 @@ static enum ublox_result ublox_state_machine(uint8_t b)
             state = STATE_IDLE;
 
             set_error(ERROR_GPS);
-            return UBLOX_ERROR;
+            // return UBLOX_ERROR;
+            return_state.result = UBLOX_ERROR;
+            return return_state;
     }
-    return UBLOX_WAIT;
+    // return UBLOX_WAIT;
+    return_state.result = UBLOX_WAIT;
+    return return_state;
 }
 
 
@@ -591,21 +620,87 @@ void gps_init(){
 
     while(!gps_configure()) {
         set_error(ERROR_GPS);
-        chThdSleepMilliseconds(1000);
+        chThdSleepMilliseconds(500);
     }
 
     return;
 }
 
-void gps_get_position(int32_t* lat, int32_t* lon, int32_t* alt){
-    if(gps_configured) {
-        enum ublox_result res;
-        do{
-            res = ublox_state_machine(sdGet(&SDRV));
-        } while (res == UBLOX_WAIT)
+bool gps_get_position(int32_t* lat, int32_t* lon, int32_t* alt){
+    ublox_pvt_t pvt_message;
+    bool worked = gps_poll_pvt(&pvt_message);
+    if (worked){
+        // Success
+        *lat = pvt_message.lat;
+        *lon = pvt_message.lon;
+        *alt = pvt_message.height;
+        return true;
     }
+    return false;
 }
-void gps_get_time(uint8_t* hour, uint8_t* minute, uint8_t* second);
+
+bool gps_get_time(uint8_t* hour, uint8_t* minute, uint8_t* second){
+    ublox_pvt_t pvt_message;
+    bool worked = gps_poll_pvt(&pvt_message);
+    if (worked){
+        // Success
+        *hour = pvt_message.hour;
+        *minute = pvt_message.minute;
+        *second = pvt_message.second;
+        return true;
+    }
+    return false;
+}
+
+bool gps_get_pos_time(int32_t* lat, int32_t* lon, int32_t* alt, uint8_t* hour, uint8_t* minute, uint8_t* second){
+    ublox_pvt_t pvt_message;
+    bool worked = gps_poll_pvt(&pvt_message);
+    if (worked){
+        // Success
+        *lat = pvt_message.lat;
+        *lon = pvt_message.lon;
+        *alt = pvt_message.height;
+        *hour = pvt_message.hour;
+        *minute = pvt_message.minute;
+        *second = pvt_message.second;
+        return true;
+    }
+    return false;
+}
+
+bool gps_poll_pvt(ublox_pvt_t *pvt_message){
+    if(gps_configured) {
+        // Send pvt request
+        ubx_poll_t poll;
+        poll.sync1 = UBX_SYNC1;
+        poll.sync2 = UBX_SYNC2;
+        poll.class = UBX_NAV;
+        poll.id = UBX_NAV_PVT;
+        poll.length = 0;
+
+        /* Clear the read buffer */
+        while(sdGetTimeout(&SDRV, TIME_IMMEDIATE) != Q_TIMEOUT);
+
+        gps_transmit((uint8_t*)&poll);
+        chThdSleepMilliseconds(300);
+
+        state_return_t res;
+        do{
+            do{
+                msg_t byte_in = sdGetTimeout(&SDRV, MS2ST(50));
+                if(byte_in == Q_TIMEOUT){
+                    set_error(ERROR_GPS);
+                    return false;
+                }
+                res = ublox_state_machine((uint8_t)byte_in);
+            } while (res.result == UBLOX_WAIT);
+        } while (res.result != UBLOX_NAV_PVT);
+        *pvt_message = res.pvt;
+        //memcpy(*pvt_message, &res.pvt, res.pvt.length + 8);
+        return true;
+    }
+    return false;
+}
 
 
 // /* Thread to Run State Machine */

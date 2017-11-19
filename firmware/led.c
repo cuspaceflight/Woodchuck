@@ -100,6 +100,31 @@ static THD_FUNCTION(led_thread, arg){
          */
         led_colours on_led = COLOURS_SIZE;
 
+        for (int x = 0; x < COLOURS_SIZE; x++){
+            if (status_copy[x] == LED_ON){
+                on_led = x;
+            }
+        }
+
+        led_out(on_led);
+        msg_t result;
+
+        if(on_led == COLOURS_SIZE){
+            // Time to wait between blinking runs
+            uint8_t blink_wait_time = 5;
+            result = chBSemWaitTimeout(&led_bsem,S2ST(blink_wait_time));
+        }
+        else{
+            // led on overrides blinking routine
+            result = chBSemWait(&led_bsem);
+        }
+
+        if(result == MSG_OK){
+            // Semaphore has been set, refresh statuses
+            chBSemReset(&led_bsem, TRUE);
+            continue;
+        }
+
 
         // Show each 'blinking' colour for 1 second
         uint8_t blink_time = 1;
@@ -115,21 +140,6 @@ static THD_FUNCTION(led_thread, arg){
                     break;
                 }
             }
-            else if (status_copy[x] == LED_ON){
-                on_led = x;
-            }
-        }
-
-
-        // Show the 'on' colour for 5 seconds
-        uint8_t on_time = 5;
-        led_out(on_led);
-        // if(checking_sleep(on_time, 10)) chThdExit((msg_t)0);
-        msg_t result = chBSemWaitTimeout(&led_bsem,S2ST(on_time));
-        if(result == MSG_OK){
-            // Semaphore has been set, refresh statuses
-            chBSemReset(&led_bsem, TRUE);
-            continue;
         }
 
     }
@@ -158,30 +168,32 @@ void led_set(led_colours led, led_modes status)
  */
 {
     chMtxLock(&led_status_mtx);
-	switch (status) {
-	case LED_OFF:
-		statuses[led] = LED_OFF;
-		break;
-	case LED_ON:
-        /*
-         * Only one colour can be fully 'ON' at a time
-         * Use blinking to cycle through colours
-         */
-        for(int x = 0; x < COLOURS_SIZE; x++){
-            if (statuses[x] == LED_ON){
-                statuses[x] = LED_OFF;
+    if(statuses[led] != status){
+    	switch (status) {
+    	case LED_OFF:
+    		statuses[led] = LED_OFF;
+    		break;
+    	case LED_ON:
+            /*
+             * Only one colour can be fully 'ON' at a time
+             * Use blinking to cycle through colours
+             */
+            for(int x = 0; x < COLOURS_SIZE; x++){
+                if (statuses[x] == LED_ON){
+                    statuses[x] = LED_OFF;
+                }
             }
-        }
-		statuses[led] = LED_ON;
-		break;
-	case LED_BLINKING:
-        // Blinking leds are queued and blinked sequentially
-		statuses[led] = LED_BLINKING;
-		break;
-	default:
-		// Do nothing
-		break;
-	}
+    		statuses[led] = LED_ON;
+    		break;
+    	case LED_BLINKING:
+            // Blinking leds are queued and blinked sequentially
+    		statuses[led] = LED_BLINKING;
+    		break;
+    	default:
+    		// Do nothing
+    		break;
+    	}
+    }
     chMtxUnlock(&led_status_mtx);
 
     //led_reset();

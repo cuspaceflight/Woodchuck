@@ -23,6 +23,7 @@
 #include "led.h"
 #include "radio.h"
 #include "gps.h"
+#include "error.h"
 
 char s[100];
 uint8_t ticks_addr = 0x00;
@@ -57,26 +58,36 @@ int main(void)
 
     while(true)
     {
-        led_set(LED_GREEN, LED_BLINKING);
-		chThdSleepSeconds(1000);
-
         // Get the current system tick and increment
         uint32_t tick;
         eeprom_read_dword(ticks_addr, &tick);
         tick += 1;
 
         // Check that we're in airborne <1g mode
-        if( gps_check_nav() != 0x06 ) led_set(LED_RGB, 1);
+        // if( gps_check_nav() != 0x06 ) led_set(LED_RGB, 1);
 
         // Get information from the GPS
-        gps_check_lock(&lock, &sats);
-        if( lock == 0x02 || lock == 0x03 || lock == 0x04 )
-        {
-            gps_get_position(&lat, &lon, &alt);
-            gps_get_time(&hour, &minute, &second);
-        }
-
-        led_set(LED_GREEN, 0);
+        // gps_check_lock(&lock, &sats);
+        // if( lock == 0x02 || lock == 0x03 || lock == 0x04 )
+        // {
+        //     gps_get_position(&lat, &lon, &alt);
+        //     gps_get_time(&hour, &minute, &second);
+        // }
+		ublox_pvt_t pvt_packet;
+	 	bool res = gps_poll_pvt(&pvt_packet);
+		if ( res && (pvt_packet.fix_type == 0x02 || pvt_packet.fix_type == 0x03 || pvt_packet.fix_type == 0x04) ) {
+			lat = pvt_packet.lat;
+			lon = pvt_packet.lon;
+			alt = pvt_packet.height;
+			hour = pvt_packet.hour;
+			minute = pvt_packet.minute;
+			second = pvt_packet.second;
+			lock = pvt_packet.fix_type;
+			sats = pvt_packet.num_sv;
+		}
+		else{
+			set_error(ERROR_GPS);
+		}
 
         // Format the telemetry string & transmit
         double lat_fmt = (double)lat / 10000000.0;
@@ -86,14 +97,19 @@ int main(void)
         sprintf(s, "$$" CALLSIGN ",%lu,%02u:%02u:%02u,%02.7f,%03.7f,%ld,%u,%x",
             tick, hour, minute, second, lat_fmt, lon_fmt, alt,
             sats, lock);
+
+		led_set(LED_GREEN, 1);
+
         radio_chatter();
         radio_transmit_sentence(s);
         radio_chatter();
 
-        led_set(LED_RED, 0);
+
+
         eeprom_write_dword(ticks_addr, tick);
         //iwdg_reset();
-        chThdSleepMilliseconds(500);
+		led_set(LED_GREEN, 0);
+        chThdSleepMilliseconds(20000);
     }
 
     return 0;
