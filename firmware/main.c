@@ -63,16 +63,7 @@ int main(void)
         eeprom_read_dword(ticks_addr, &tick);
         tick += 1;
 
-        // Check that we're in airborne <1g mode
-        // if( gps_check_nav() != 0x06 ) led_set(LED_RGB, 1);
 
-        // Get information from the GPS
-        // gps_check_lock(&lock, &sats);
-        // if( lock == 0x02 || lock == 0x03 || lock == 0x04 )
-        // {
-        //     gps_get_position(&lat, &lon, &alt);
-        //     gps_get_time(&hour, &minute, &second);
-        // }
 		ublox_pvt_t pvt_packet;
 	 	bool res = gps_poll_pvt(&pvt_packet);
 		if ( res && (pvt_packet.fix_type == 0x02 || pvt_packet.fix_type == 0x03 || pvt_packet.fix_type == 0x04) ) {
